@@ -54,13 +54,14 @@ public class SafetynetalertApplication implements CommandLineRunner {
 		System.out.println(jsonObject.get("medicalrecords"));
 		
 		// parser objet Json avec une méthode sans JSONParser pour afficher noms et prénoms au level 2 du Json.
-		JSONObject jsonObject2 = JsonReader.parseJsonNamesFromUrl(); // Fonctionne !
+		JSONObject jsonObject2 = JsonReader.parseJsonPersonsFromUrl(); // Fonctionne !
+		JSONObject jsonObject3 = JsonReader.parseJsonFirestationsFromUrl(); // Fonctionne !
+		JSONObject jsonObject4 = JsonReader.parseJsonMedicalRecordsFromUrl();
 		//JSONObject jsonGet = (JSONObject) jsonObject2.get("persons"); // Ecrit avec Raph. à mettre dans la couche controller (?) StackTrace : org.json.JSONArray and org.json.JSONObject are in unnamed module of loader 'app'
 		
 		Person person = new Person();
-		
 		person.setId(1); // set les paramètres
-		person.setFirstName(jsonObject2.getString("firstName")); // Ecriture avec Julien. Set un objet Json en paramètre pour un objet Java. StackTrace : JSONObject["firstName"] not found.
+		//person.setFirstName(jsonObject2.getString("firstName")); // Ecriture avec Julien. Set un objet Json en paramètre pour un objet Java. StackTrace : JSONObject["firstName"] not found.
 		//person.setFirstName((String) jsonObject2.get("firstName")); // Ecriture avec Raph. Correspondance entre objet java et JsonObject.
 		
 		

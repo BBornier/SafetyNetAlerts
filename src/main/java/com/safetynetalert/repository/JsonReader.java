@@ -8,8 +8,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import org.apache.tomcat.util.json.JSONParser;
-import org.apache.tomcat.util.json.ParseException;
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,31 +32,104 @@ public class JsonReader {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 			String jsonText = readAll(rd);
 			JSONObject json = new JSONObject(jsonText);
-			System.out.println("\nJSON data in string format from JsonReader2 class and persons data without parsing.");
+			System.out.println("\nJSON data in string format from JsonReader class with persons, firestations and medical records parsing");
+			System.out.print("\n");
 			return json;
 		} finally {
 			is.close();
 		}
 	}
 	
-	public static JSONObject parseJsonNamesFromUrl () throws JSONException, IOException, ParseException {
+	public static JSONObject parseJsonPersonsFromUrl () throws JSONException, IOException {
 		
 		JSONObject jsonObject = JsonReader.readJsonFromUrl("https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
 		
-		JSONArray jsonArray1 = (JSONArray) jsonObject.get("persons");
+		JSONArray jsonArray = jsonObject.getJSONArray("persons");
 		
-		for (int i = 0; i < jsonArray1.length(); i++) {
-			JSONObject jsonObj1 = (JSONObject) jsonArray1.get(i);
-			String firstNamesData = (String) jsonObj1.get("firstName");
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObj = jsonArray.getJSONObject(i);
+			String firstNamesData = jsonObj.getString("firstName");
 			System.out.print(firstNamesData);
 			System.out.print(" ");
-			String lastNamesData = (String) jsonObj1.get("lastName");
+			String lastNamesData = jsonObj.getString("lastName");
 			System.out.print(lastNamesData);
-			System.out.println("\n");
+			System.out.print(" - ");
+			String addressData = jsonObj.getString("address");
+			System.out.print(addressData);
+			System.out.print(" - ");
+			String cityData = jsonObj.getString("city");
+			System.out.print(cityData);
+			System.out.print(" - ");
+			String zipCodeData = jsonObj.getString("zip");
+			System.out.print(zipCodeData);
+			System.out.print(" - ");
+			String phoneData = jsonObj.getString("phone");
+			System.out.print(phoneData);
+			System.out.print(" - ");
+			String emailData = jsonObj.getString("email");
+			System.out.print(emailData);
+			System.out.print("\n");
 		}
 		
 		return jsonObject;
 		
+	}
+	
+public static JSONObject parseJsonFirestationsFromUrl () throws JSONException, IOException {
+		
+		JSONObject jsonObject = JsonReader.readJsonFromUrl("https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+		
+		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
+		
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObj = jsonArray.getJSONObject(i);
+			String adressData = jsonObj.getString("address");
+			System.out.print(adressData);
+			System.out.print(" - ");
+			String stationData = jsonObj.getString("station");
+			System.out.print(stationData);
+			System.out.print("\n");
+		}
+		
+		return jsonObject;
+		
+	}
+
+public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException, IOException {
+	
+	JSONObject jsonFromUrl = JsonReader.readJsonFromUrl("https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+	
+	JSONArray jsonArray1 = jsonFromUrl.getJSONArray("medicalrecords");
+	for (int i = 0; i < jsonArray1.length(); i++) {
+		JSONObject jsonObj1 = jsonArray1.getJSONObject(i);
+		
+		String firstNamesData = jsonObj1.getString("firstName");
+		System.out.print(firstNamesData);
+		System.out.print(" ");
+		String lastNamesData = jsonObj1.getString("lastName");
+		System.out.print(lastNamesData);
+		System.out.print(" - ");
+		String birthData = jsonObj1.getString("birthdate");
+		System.out.println(birthData);
+		System.out.println("Elements from medications array");
+		System.out.println("Medications: " +jsonObj1.get("medications"));
+		System.out.println("Elements from allergies array");
+		System.out.println("Allergies: " +jsonObj1.get("allergies"));
+		System.out.println("\n");
+		
+		
+		 JSONArray jsonArray2 = jsonObj1.getJSONArray("medications");
+		for (int j = 0; j < jsonArray2.length(); j++) {
+			JSONObject jsonObj2 = jsonArray2.getJSONObject(j);
+			
+			String medsData = jsonObj2.getString("aznol");
+			System.out.println(medsData);
+		}
+		
+	}
+	
+	return jsonFromUrl;
+	
 	}
 
 }
