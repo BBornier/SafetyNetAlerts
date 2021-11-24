@@ -4,9 +4,9 @@ public class Medications {
 	
 	int id;
 	
-	String medications;
+	String name;
 	
-	String allergies;
+	String drugDosage;
 
 	/**
 	 * @return the id
@@ -23,44 +23,42 @@ public class Medications {
 	}
 
 	/**
-	 * @return the medications
+	 * @return the name
 	 */
-	public String getMedications() {
-		return medications;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param medications the medications to set
+	 * @param name the name to set
 	 */
-	public void setMedications(String medications) {
-		this.medications = medications;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the allergies
+	 * @return the drugDosage
 	 */
-	public String getAllergies() {
-		return allergies;
+	public String getDrugDosage() {
+		return drugDosage;
 	}
 
 	/**
-	 * @param allergies the allergies to set
+	 * @param drugDosage the drugDosage to set
 	 */
-	public void setAllergies(String allergies) {
-		this.allergies = allergies;
+	public void setDrugDosage(String drugDosage) {
+		this.drugDosage = drugDosage;
 	}
 
 	public Medications() {
 		super();
 	}
 
-	public Medications(int id, String medications, String allergies) {
+	public Medications(int id, String name, String drugDosage) {
 		super();
 		this.id = id;
-		this.medications = medications;
-		this.allergies = allergies;
+		this.name = name;
+		this.drugDosage = drugDosage;
 	}
-
 	
-
 }
