@@ -1,6 +1,6 @@
 package com.safetynetalert.model;
 
-public class MedicalRecords extends Medications {
+public class MedicalRecords {
 	
 	private int id;
 	
