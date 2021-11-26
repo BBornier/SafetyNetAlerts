@@ -119,13 +119,13 @@ public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException,
 		System.out.println("\n");
 		
 		
-		 JSONArray jsonArray2 = jsonObj1.getJSONArray("medications");
+		 /*JSONArray jsonArray2 = jsonObj1.getJSONArray("medications");
 		for (int j = 0; j < jsonArray2.length(); j++) {
 			JSONObject jsonObj2 = jsonArray2.getJSONObject(j);
 			
 			String medsData = jsonObj2.getString("aznol");
 			System.out.println(medsData);
-		}
+		}*/
 		
 	}
 	

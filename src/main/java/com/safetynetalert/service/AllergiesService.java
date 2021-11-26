@@ -25,7 +25,7 @@ public class AllergiesService {
 		allergiesRepository.deleteById(id);
 	}
 	
-	public Allergies saveEmployee(Allergies allergies) {
+	public Allergies saveAllergies(Allergies allergies) {
 		Allergies savedAllergies = allergiesRepository.save(allergies);
 		return savedAllergies;
 	}
