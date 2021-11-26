@@ -32,59 +32,59 @@ public class PersonController {
 	
 	
 	/**
-	 * Read - Get one employee 
-	 * @param id The id of the employee
-	 * @return An Employee object full filled
+	 * Read - Get one person 
+	 * @param id The id of the person
+	 * @return A Person object full filled
 	 */
-	@GetMapping("/employee/{id}")
-	public Employee getEmployee(@PathVariable("id") final Long id) {
-		Optional<Employee> employee = employeeService.getEmployee(id);
-		if(employee.isPresent()) {
-			return employee.get();
+	@GetMapping("/person/{id}")
+	public Person getPerson(@PathVariable("id") final Long id) {
+		Optional<Person> person = personService.getPerson(id);
+		if(person.isPresent()) {
+			return person.get();
 		} else {
 			return null;
 		}
 	}
 	
 	/**
-	 * Read - Get all employees
-	 * @return - An Iterable object of Employee full filled
+	 * Read - Get all persons
+	 * @return - An Iterable object of Person full filled
 	 */
-	@GetMapping("/employees")
-	public Iterable<Employee> getEmployees() {
-		return employeeService.getEmployees();
+	@GetMapping("/persons")
+	public Iterable<Person> getPersons() {
+		return personService.getPersons();
 	}
 	
 	/**
-	 * Update - Update an existing employee
-	 * @param id - The id of the employee to update
-	 * @param employee - The employee object updated
+	 * Update - Update an existing person
+	 * @param id - The id of the person to update
+	 * @param person - The person object updated
 	 * @return
 	 */
-	@PutMapping("/employee/{id}")
-	public Employee updateEmployee(@PathVariable("id") final Long id, @RequestBody Employee employee) {
-		Optional<Employee> e = employeeService.getEmployee(id);
-		if(e.isPresent()) {
-			Employee currentEmployee = e.get();
+	@PutMapping("/person/{id}")
+	public Person updatePerson(@PathVariable("id") final Long id, @RequestBody Person person) {
+		Optional<Person> p = personService.getPerson(id);
+		if(p.isPresent()) {
+			Person currentPerson = p.get();
 			
-			String firstName = employee.getFirstName();
+			String firstName = person.getFirstName();
 			if(firstName != null) {
-				currentEmployee.setFirstName(firstName);
+				currentPerson.setFirstName(firstName);
 			}
-			String lastName = employee.getLastName();
+			String lastName = person.getLastName();
 			if(lastName != null) {
-				currentEmployee.setLastName(lastName);;
+				currentPerson.setLastName(lastName);;
 			}
-			String mail = employee.getMail();
+			String mail = person.getEmail();
 			if(mail != null) {
-				currentEmployee.setMail(mail);
+				currentPerson.setEmail(mail);
 			}
-			String password = employee.getPassword();
+			String password = person.getPassword();
 			if(password != null) {
-				currentEmployee.setPassword(password);;
+				currentPerson.setPassword(password);;
 			}
-			employeeService.saveEmployee(currentEmployee);
-			return currentEmployee;
+			personService.savePerson(currentPerson);
+			return currentPerson;
 		} else {
 			return null;
 		}
@@ -92,12 +92,12 @@ public class PersonController {
 	
 	
 	/**
-	 * Delete - Delete an employee
-	 * @param id - The id of the employee to delete
+	 * Delete - Delete a person
+	 * @param id - The id of the person to delete
 	 */
 	@DeleteMapping("/employee/{id}")
-	public void deleteEmployee(@PathVariable("id") final Long id) {
-		employeeService.deleteEmployee(id);
+	public void deletePerson(@PathVariable("id") final Long id) {
+		personService.deletePerson(id);
 	}
 
 }
