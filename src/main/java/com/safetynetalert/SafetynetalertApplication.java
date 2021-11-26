@@ -10,7 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.JsonReader;
-import com.safetynetalert.service.JsonReaderTest;
+
 
 @SpringBootApplication
 public class SafetynetalertApplication implements CommandLineRunner {
@@ -18,15 +18,9 @@ public class SafetynetalertApplication implements CommandLineRunner {
 	public static void main(String[] args) throws JSONException, IOException, ParseException {
 		SpringApplication.run(SafetynetalertApplication.class, args);
 
-		// afficher objet Json à partir d'une URL
-		JsonReaderTest js = new JsonReaderTest();
-		System.out.println(js.getJSonObjectFromUrl(
-				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json"));
-
 		// parser objet Json au level 1.
 		JSONObject jsonObject = JsonReader.readJsonFromUrl(
-				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json"); // Fonctionne
-																												// !
+				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json"); // Fonctionne !
 
 		System.out.println(jsonObject.get("persons"));
 		System.out.println(jsonObject.get("firestations"));

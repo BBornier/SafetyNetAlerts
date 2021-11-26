@@ -9,6 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.safetynetalert.service.JsonReaderTest;
+
 @SpringBootApplication
 public class EssaisSurJson implements CommandLineRunner {
 
@@ -38,6 +40,11 @@ public class EssaisSurJson implements CommandLineRunner {
 				"{ \"number_list\": [ 1.9, 2.9, 3.4, 3.5 ], \"extra_data\": {}, \"name\": \"Benoit\", \"last_name\": \"Bornier\", \"bank_account_balance\": 100000.1, \"age\": 40, \"is_developer\": true }");
 		System.out.println(myJson.get("name")); // Benoit
 		System.out.println(myJson.get("age")); // 40
+		
+		// afficher objet Json à partir d'une URL
+				JsonReaderTest js = new JsonReaderTest();
+				System.out.println(js.getJSonObjectFromUrl(
+						"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json"));
 
 	}
 
