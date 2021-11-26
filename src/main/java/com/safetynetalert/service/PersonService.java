@@ -14,11 +14,11 @@ public class PersonService {
 	@Autowired
 	private PersonRepository personRepository; 
 	
-	public Optional<Person> getEmployee(final Long id) {
+	public Optional<Person> getPerson(final Long id) {
 		return personRepository.findById(id);
 	}
 	
-	public Iterable<Person> getEmployees() {
+	public Iterable<Person> getPersons() {
 		return personRepository.findAll();
 	}
 	
@@ -26,7 +26,7 @@ public class PersonService {
 		personRepository.deleteById(id);
 	}
 	
-	public Person saveEmployee(Person person) {
+	public Person savePerson(Person person) {
 		Person savedPerson = personRepository.save(person);
 		return savedPerson;
 	}
