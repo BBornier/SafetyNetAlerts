@@ -1,4 +1,4 @@
-package com.safetynetalert.repository;
+package com.safetynetalert.service;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -11,8 +11,9 @@ import org.apache.tomcat.util.json.ParseException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Service
 public class JsonReaderTest {
 
 	public JSONObject getJSonObjectFromUrl(String urlJson) throws ParseException {

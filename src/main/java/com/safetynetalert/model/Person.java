@@ -2,24 +2,44 @@ package com.safetynetalert.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "person")
 public class Person {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name="first_name")
 	private String firstName;
 	
+	@Column(name="last_name")
 	private String lastName;
 	
+	@Column(name="birthdate")
 	private Date birthdate;
 	
-	private String adress;
+	@Column(name="address")
+	private String address;
 	
+	@Column(name="city")
 	private String city;
 	
-	private String zipCode;
+	@Column(name="zipCode")
+	private long zipCode;
 	
+	@Column(name="phone")
 	private String phone;
 	
+	@Column(name="email")
 	private String email;
 
 	/**
@@ -82,14 +102,14 @@ public class Person {
 	 * @return the adress
 	 */
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 
 	/**
 	 * @param adress the adress to set
 	 */
 	public void setAdress(String adress) {
-		this.adress = adress;
+		this.address = adress;
 	}
 
 	/**
@@ -109,14 +129,14 @@ public class Person {
 	/**
 	 * @return the zipCode
 	 */
-	public String getZipCode() {
+	public long getZipCode() {
 		return zipCode;
 	}
 
 	/**
 	 * @param zipCode the zipCode to set
 	 */
-	public void setZipCode(String zipCode) {
+	public void setZipCode(long zipCode) {
 		this.zipCode = zipCode;
 	}
 	
@@ -154,14 +174,14 @@ public class Person {
 		
 	}
 
-	public Person(int id, String firstName, String lastName, Date birthdate, String adress, String city,
-			String zipCode, String phone, String email) {
+	public Person(int id, String firstName, String lastName, Date birthdate, String address, String city,
+			long zipCode, String phone, String email) {
 		
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthdate = birthdate;
-		this.adress = adress;
+		this.address = address;
 		this.city = city;
 		this.zipCode = zipCode;
 		this.phone = phone;

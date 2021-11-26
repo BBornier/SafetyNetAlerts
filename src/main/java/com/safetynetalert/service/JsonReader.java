@@ -1,4 +1,4 @@
-package com.safetynetalert.repository;
+package com.safetynetalert.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,8 +13,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Service
 public class JsonReader {
 
 	private static String readAll(Reader rd) throws IOException {
