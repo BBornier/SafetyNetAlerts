@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -14,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import com.safetynetalert.model.Person;
 
 @Service
 public class JsonReader {
@@ -70,11 +74,21 @@ public class JsonReader {
 			String emailData = jsonObj.getString("email");
 			System.out.print(emailData);
 			System.out.print("\n");
+			
+			Person person = new Person();
+			person.setFirstName(firstNamesData);
+			
+			
+			
 		}
+		List<Person> persons = new ArrayList<>(); 
+		persons.add(null);
 		
 		return jsonObject;
 		
 	}
+	
+	
 	
 public static JSONObject parseJsonFirestationsFromUrl () throws JSONException, IOException {
 		
@@ -119,13 +133,13 @@ public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException,
 		System.out.println("\n");
 		
 		
-		 /*JSONArray jsonArray2 = jsonObj1.getJSONArray("medications");
+		JSONArray jsonArray2 = jsonObj1.getJSONArray("medications");
 		for (int j = 0; j < jsonArray2.length(); j++) {
 			JSONObject jsonObj2 = jsonArray2.getJSONObject(j);
 			
 			String medsData = jsonObj2.getString("aznol");
 			System.out.println(medsData);
-		}*/
+		}
 		
 	}
 	
@@ -134,3 +148,29 @@ public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException,
 	}
 
 }
+
+/*"medicalrecords": [
+                   { "firstName":"John", "lastName":"Boyd", "birthdate":"03/06/1984", "medications":["aznol:350mg", "hydrapermazol:100mg"], "allergies":["nillacilan"] },
+                   { "firstName":"Jacob", "lastName":"Boyd", "birthdate":"03/06/1989", "medications":["pharmacol:5000mg", "terazine:10mg", "noznazol:250mg"], "allergies":[] },
+                   { "firstName":"Tenley", "lastName":"Boyd", "birthdate":"02/18/2012", "medications":[], "allergies":["peanut"] },
+                   { "firstName":"Roger", "lastName":"Boyd", "birthdate":"09/06/2017", "medications":[], "allergies":[] },
+                   { "firstName":"Felicia", "lastName":"Boyd","birthdate":"01/08/1986", "medications":["tetracyclaz:650mg"], "allergies":["xilliathal"] },
+                   { "firstName":"Jonanathan", "lastName":"Marrack", "birthdate":"01/03/1989", "medications":[], "allergies":[] },
+                   { "firstName":"Tessa", "lastName":"Carman", "birthdate":"02/18/2012", "medications":[], "allergies":[] },
+                   { "firstName":"Peter", "lastName":"Duncan", "birthdate":"09/06/2000", "medications":[], "allergies":["shellfish"] },
+                   { "firstName":"Foster", "lastName":"Shepard", "birthdate":"01/08/1980", "medications":[], "allergies":[] },
+                   { "firstName":"Tony", "lastName":"Cooper", "birthdate":"03/06/1994", "medications":["hydrapermazol:300mg", "dodoxadin:30mg"], "allergies":["shellfish"] },
+                   { "firstName":"Lily", "lastName":"Cooper", "birthdate":"03/06/1994", "medications":[], "allergies":[] },
+                   { "firstName":"Sophia", "lastName":"Zemicks", "birthdate":"03/06/1988", "medications":["aznol:60mg", "hydrapermazol:900mg", "pharmacol:5000mg", "terazine:500mg"], "allergies":["peanut", "shellfish", "aznol"] },
+                   { "firstName":"Warren", "lastName":"Zemicks", "birthdate":"03/06/1985", "medications":[], "allergies":[] },
+                   { "firstName":"Zach", "lastName":"Zemicks", "birthdate":"03/06/2017", "medications":[], "allergies":[] },
+                   { "firstName":"Reginold", "lastName":"Walker", "birthdate":"08/30/1979", "medications":["thradox:700mg"], "allergies":["illisoxian"] },
+                   { "firstName":"Jamie", "lastName":"Peters", "birthdate":"03/06/1982", "medications":[], "allergies":[] },
+                   { "firstName":"Ron", "lastName":"Peters", "birthdate":"04/06/1965", "medications":[], "allergies":[] },
+                   { "firstName":"Allison", "lastName":"Boyd", "birthdate":"03/15/1965", "medications":["aznol:200mg"], "allergies":["nillacilan"] },
+                   { "firstName":"Brian", "lastName":"Stelzer", "birthdate":"12/06/1975", "medications":["ibupurin:200mg", "hydrapermazol:400mg"], "allergies":["nillacilan"] },
+                   { "firstName":"Shawna", "lastName":"Stelzer", "birthdate":"07/08/1980", "medications":[], "allergies":[] },
+                   { "firstName":"Kendrik", "lastName":"Stelzer", "birthdate":"03/06/2014", "medications":["noxidian:100mg", "pharmacol:2500mg"], "allergies":[] },
+                   { "firstName":"Clive", "lastName":"Ferguson", "birthdate":"03/06/1994", "medications":[], "allergies":[] },
+                   { "firstName":"Eric", "lastName":"Cadigan", "birthdate":"08/06/1945", "medications":["tradoxidine:400mg"], "allergies":[] }
+                   ] */
