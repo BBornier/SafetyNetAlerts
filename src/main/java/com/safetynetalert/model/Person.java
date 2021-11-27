@@ -18,6 +18,8 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	private int medicalRecordsId;
+	
 	@Column(name="first_name")
 	private String firstName;
 	
