@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +66,7 @@ public class JsonReader {
 			String cityData = jsonObj.getString("city");
 			System.out.print(cityData);
 			System.out.print(" - ");
-			String zipCodeData = jsonObj.getString("zip");
+			Long zipCodeData = jsonObj.getLong("zip");
 			System.out.print(zipCodeData);
 			System.out.print(" - ");
 			String phoneData = jsonObj.getString("phone");
@@ -75,14 +76,21 @@ public class JsonReader {
 			System.out.print(emailData);
 			System.out.print("\n");
 			
+			// Stocker les informations de l'itération dans une variable person.
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
-			
-			
+			person.setLastName(lastNamesData);
+			person.setAdress(addressData);
+			person.setCity(cityData);
+			person.setZipCode(zipCodeData);
+			person.setPhone(phoneData);
+			person.setEmail(emailData);
 			
 		}
-		List<Person> persons = new ArrayList<>(); 
-		persons.add(null);
+		// Stocker les informations dans une liste. Résoudre le problème de stack trace.
+		//List<Person> persons = new ArrayList<>(); 
+		//persons.add((Person) persons);
+
 		
 		return jsonObject;
 		
@@ -135,10 +143,12 @@ public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException,
 		
 		JSONArray jsonArray2 = jsonObj1.getJSONArray("medications");
 		for (int j = 0; j < jsonArray2.length(); j++) {
-			JSONObject jsonObj2 = jsonArray2.getJSONObject(j);
 			
-			String medsData = jsonObj2.getString("aznol");
-			System.out.println(medsData);
+			// Résoudre problème Stack Trace JASOArray [0] is not a JSONObject.
+			// JSONObject jsonObj2 = jsonArray2.getJSONObject(i);
+			
+			/*String medsData = jsonObj2.getString("aznol");
+			System.out.println(medsData);*/
 		}
 		
 	}

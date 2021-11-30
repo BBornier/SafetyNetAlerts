@@ -18,7 +18,7 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private int medicalRecordsId;
+	private int medicalRecordsId; // faire communiquer les tables entre elles.
 	
 	@Column(name="first_name")
 	private String firstName;

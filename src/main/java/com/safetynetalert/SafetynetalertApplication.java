@@ -32,7 +32,7 @@ public class SafetynetalertApplication implements CommandLineRunner {
 				System.out.println(jsonObject.get("firestations"));
 				System.out.println(jsonObject.get("medicalrecords"));
 
-				// parser objet Json avec une méthode sans JSONParser pour afficher noms et prénoms au level 2 du Json.
+				// parser objet Json avec une méthode sans JSONParser pour afficher noms et prénoms au level -1 du Json.
 				JSONObject jsonObject2 = JsonReader.parseJsonPersonsFromUrl(); // Fonctionne !
 				JSONObject jsonObject3 = JsonReader.parseJsonFirestationsFromUrl(); // Fonctionne !
 				JSONObject jsonObject4 = JsonReader.parseJsonMedicalRecordsFromUrl(); // ne fonctionne qu'au niveau 0 pas au niveau -1.

@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 
-
-
 @Service
 public class MedicalRecordsService {
 
