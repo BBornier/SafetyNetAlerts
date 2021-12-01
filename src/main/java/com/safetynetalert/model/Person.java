@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -29,6 +31,8 @@ public class Person {
 	@Column(name="birthdate")
 	private Date birthdate;
 	
+	//@ManyToOne
+	//@JoinColumn(name="address")
 	@Column(name="address")
 	private String address;
 	
@@ -110,8 +114,8 @@ public class Person {
 	/**
 	 * @param adress the adress to set
 	 */
-	public void setAdress(String adress) {
-		this.address = adress;
+	public void setAdress(String address) {
+		this.address = address;
 	}
 
 	/**
