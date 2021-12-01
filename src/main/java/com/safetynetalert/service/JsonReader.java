@@ -15,6 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.safetynetalert.model.Firestation;
+import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
 
 @Service
@@ -35,22 +37,24 @@ public class JsonReader {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 			String jsonText = readAll(rd);
 			JSONObject json = new JSONObject(jsonText);
-			System.out.println("\nJSON data in string format from JsonReader class with persons, firestations and medical records parsing");
+			System.out.println(
+					"\nJSON data in string format from JsonReader class with persons, firestations and medical records parsing");
 			System.out.print("\n");
 			return json;
 		} finally {
 			is.close();
 		}
 	}
-	
-	public static JSONObject parseJsonPersonsFromUrl () throws JSONException, IOException {
-		
-		JSONObject jsonObject = JsonReader.readJsonFromUrl("https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
-		
+
+	public static JSONObject parseJsonPersonsFromUrl() throws JSONException, IOException {
+
+		JSONObject jsonObject = JsonReader.readJsonFromUrl(
+				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+
 		JSONArray jsonArray = jsonObject.getJSONArray("persons");
-		
-		List<Person> personList = new ArrayList<>(); 
-		
+
+		List<Person> personList = new ArrayList<>();
+
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			String firstNamesData = jsonObj.getString("firstName");
@@ -74,7 +78,7 @@ public class JsonReader {
 			String emailData = jsonObj.getString("email");
 			System.out.print(emailData);
 			System.out.print("\n");
-			
+
 			// Stocker les informations de l'itération dans une variable person.
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
@@ -85,21 +89,22 @@ public class JsonReader {
 			person.setPhone(phoneData);
 			person.setEmail(emailData);
 			personList.add(person);
-			
+
 		}
-		
+
 		return jsonObject;
-		
+
 	}
-	
-	
-	
-public static JSONObject parseJsonFirestationsFromUrl () throws JSONException, IOException {
-		
-		JSONObject jsonObject = JsonReader.readJsonFromUrl("https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
-		
+
+	public static JSONObject parseJsonFirestationsFromUrl() throws JSONException, IOException {
+
+		JSONObject jsonObject = JsonReader.readJsonFromUrl(
+				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
-		
+
+		List<Firestation> firestationsList = new ArrayList<>();
+
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			String adressData = jsonObj.getString("address");
@@ -108,53 +113,70 @@ public static JSONObject parseJsonFirestationsFromUrl () throws JSONException, I
 			String stationData = jsonObj.getString("station");
 			System.out.print(stationData);
 			System.out.print("\n");
+
+			// Stocker les informations de l'itération dans une variable firestation.
+			Firestation firestation = new Firestation();
+			firestation.setAdress(adressData);
+			firestation.setStation(stationData);
+			firestationsList.add(firestation);
+
 		}
-		
+
 		return jsonObject;
-		
+
 	}
 
-public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException, IOException {
-	
-	JSONObject jsonFromUrl = JsonReader.readJsonFromUrl("https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
-	
-	JSONArray jsonArray1 = jsonFromUrl.getJSONArray("medicalrecords");
-	for (int i = 0; i < jsonArray1.length(); i++) {
-		JSONObject jsonObj1 = jsonArray1.getJSONObject(i);
-		
-		String firstNamesData = jsonObj1.getString("firstName");
-		System.out.print(firstNamesData);
-		System.out.print(" ");
-		String lastNamesData = jsonObj1.getString("lastName");
-		System.out.print(lastNamesData);
-		System.out.print(" - ");
-		String birthData = jsonObj1.getString("birthdate");
-		System.out.println(birthData);
-		System.out.println("Elements from medications array");
-		System.out.println("Medications: " +jsonObj1.get("medications"));
-		System.out.println("Elements from allergies array");
-		System.out.println("Allergies: " +jsonObj1.get("allergies"));
-		System.out.println("\n");
-		
-		JSONObject jsonObject5 = JsonReader.parseJsonMedicationsFromMedicalRecords(jsonObj1);
-		
-	}
-	
-	return jsonFromUrl;
-	
-	}
+	public static JSONObject parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {
 
-public static JSONObject parseJsonMedicationsFromMedicalRecords (JSONObject jsonObj1) throws JSONException, IOException {
-	
-	JSONObject jsonMedication = (JSONObject) jsonObj1.get("medications");
-	for (int j = 0; j < jsonMedication.length(); j++) {
-		String[] jsonObj2 = jsonMedication.getNames(j);
+		JSONObject jsonFromUrl = JsonReader.readJsonFromUrl(
+				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+
+		JSONArray jsonArray1 = jsonFromUrl.getJSONArray("medicalrecords");
 		
-		//String medic = jsonObj2.getString("aznol"); 
-		System.out.println(jsonObj2);
+		List<MedicalRecords> medicalRecordsList = new ArrayList<>();
 		
+		for (int i = 0; i < jsonArray1.length(); i++) {
+			JSONObject jsonObj1 = jsonArray1.getJSONObject(i);
+
+			String firstNamesData = jsonObj1.getString("firstName");
+			System.out.print(firstNamesData);
+			System.out.print(" ");
+			String lastNamesData = jsonObj1.getString("lastName");
+			System.out.print(lastNamesData);
+			System.out.print(" - ");
+			String birthData = jsonObj1.getString("birthdate");
+			System.out.println(birthData);
+			System.out.println("Elements from medications array");
+			System.out.println("Medications: " + jsonObj1.get("medications"));
+			System.out.println("Elements from allergies array");
+			System.out.println("Allergies: " + jsonObj1.get("allergies"));
+			System.out.println("\n");
+			
+			MedicalRecords medRec = new MedicalRecords();
+			medRec.getMedications();
+			medRec.getAllergies();
+			
+
+			JSONObject jsonObject5 = JsonReader.parseJsonMedicationsFromMedicalRecords(jsonObj1);
+
 		}
-	
-	return jsonObj1;
+
+		return jsonFromUrl;
+
+	}
+
+	public static JSONObject parseJsonMedicationsFromMedicalRecords(JSONObject jsonObj1)
+			throws JSONException, IOException {
+
+		JSONObject jsonMedication = (JSONObject) jsonObj1.get("medications");
+		for (int j = 0; j < jsonMedication.length(); j++) {
+			String[] jsonObj2 = jsonMedication.getNames(j);
+
+			// String medic = jsonObj2.getString("aznol");
+			System.out.println(jsonObj2);
+
+		}
+
+		return jsonObj1;
 	}
 }
