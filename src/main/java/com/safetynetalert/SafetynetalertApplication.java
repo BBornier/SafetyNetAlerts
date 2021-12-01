@@ -38,10 +38,10 @@ public class SafetynetalertApplication implements CommandLineRunner {
 				JSONObject jsonObject4 = JsonReader.parseJsonMedicalRecordsFromUrl(); // ne fonctionne qu'au niveau 0 pas au niveau -1.
 				// JSONObject jsonGet = (JSONObject) jsonObject2.get("persons"); // Ecrit avec Raph. à mettre dans la couche controller (?) StackTrace : org.json.JSONArray and org.json.JSONObject are in unnamed module of loader 'app'
 				
+				
 				Person person = new Person();
 				person.setId(1); // set les paramètres
-				//person.setFirstName(jsonObject2.getString("persons")); // Ecriture avec Julien. Set un objet Json en paramètre pour un objet Java. StackTrace : JSONObject["firstName"] not found.
-				System.out.println(person);
+				
 		
 	}
 
