@@ -1,6 +1,6 @@
 package com.safetynetalert.controller;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -72,7 +72,7 @@ public class PersonController {
 		if (p.isPresent()) {
 			Person currentPerson = p.get();
 
-			Date birthdate = person.getBirthdate();
+			LocalDate birthdate = person.getBirthdate();
 			if (birthdate != null) {
 				currentPerson.setBirthdate(birthdate);
 			}
