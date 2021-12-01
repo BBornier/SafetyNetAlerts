@@ -65,7 +65,7 @@ public class FirestationsController {
 	 * @return
 	 */
 	@PutMapping("/firestation/{id}")
-	public Firestation updatFirestation(@PathVariable("id") final Long id, @RequestBody Firestation firestation) {
+	public Firestation updateFirestation(@PathVariable("id") final Long id, @RequestBody Firestation firestation) {
 		Optional<Firestation> f = firestationService.getFirestation(id);
 		if (f.isPresent()) {
 			Firestation currentFirestation = f.get();
