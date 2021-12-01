@@ -54,7 +54,7 @@ public class PersonController {
 	 * 
 	 * @return - An Iterable object of Person full filled
 	 */
-	@GetMapping("/persons")
+	@GetMapping("/person")
 	public Iterable<Person> getPersons() {
 		return personService.getPersons();
 	}

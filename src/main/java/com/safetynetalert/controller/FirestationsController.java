@@ -52,8 +52,8 @@ public class FirestationsController {
 	 * 
 	 * @return - An Iterable object of Firestation full filled
 	 */
-	@GetMapping("/firestations")
-	public Iterable<Firestation> getFirestation() {
+	@GetMapping("/firestation")
+	public Iterable<Firestation> getFirestations() {
 		return firestationService.getFirestations();
 	}
 
