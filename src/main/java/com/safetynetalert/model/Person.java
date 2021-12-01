@@ -1,5 +1,6 @@
 package com.safetynetalert.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Person {
 	private String lastName;
 	
 	@Column(name="birthdate")
-	private Date birthdate;
+	private LocalDate birthdate;
 	
 	//@ManyToOne
 	//@JoinColumn(name="address")
@@ -93,14 +94,14 @@ public class Person {
 	/**
 	 * @return the birthdate
 	 */
-	public Date getBirthdate() {
+	public LocalDate getBirthdate() {
 		return birthdate;
 	}
 
 	/**
 	 * @param birthdate the birthdate to set
 	 */
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -180,7 +181,7 @@ public class Person {
 		
 	}
 
-	public Person(int id, String firstName, String lastName, Date birthdate, String address, String city,
+	public Person(int id, String firstName, String lastName, LocalDate birthdate, String address, String city,
 			long zipCode, String phone, String email) {
 		
 		this.id = id;

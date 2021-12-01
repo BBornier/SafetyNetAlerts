@@ -1,5 +1,6 @@
 package com.safetynetalert.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +72,11 @@ public class MedicalRecordsController {
 		if (mR.isPresent()) {
 			MedicalRecords currentMedicalRecord = mR.get();
 
-			String medications = medicalRecords.getMedications();
+			List<String> medications = medicalRecords.getMedications();
 			if (medications != null) {
 				currentMedicalRecord.setMedications(medications);
 			}
-			String allergies = medicalRecords.getAllergies();
+			List<String> allergies = medicalRecords.getAllergies();
 			if (allergies != null) {
 				currentMedicalRecord.setAllergies(allergies);
 				;
