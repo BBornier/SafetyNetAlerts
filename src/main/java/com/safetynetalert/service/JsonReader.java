@@ -10,12 +10,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Person;
@@ -52,6 +49,8 @@ public class JsonReader {
 		
 		JSONArray jsonArray = jsonObject.getJSONArray("persons");
 		
+		List<Person> personList = new ArrayList<>(); 
+		
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			String firstNamesData = jsonObj.getString("firstName");
@@ -85,12 +84,9 @@ public class JsonReader {
 			person.setZipCode(zipCodeData);
 			person.setPhone(phoneData);
 			person.setEmail(emailData);
+			personList.add(person);
 			
 		}
-		// Stocker les informations dans une liste. Résoudre le problème de stack trace.
-		//List<Person> persons = new ArrayList<>(); 
-		//persons.add((Person) persons);
-
 		
 		return jsonObject;
 		
@@ -140,16 +136,7 @@ public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException,
 		System.out.println("Allergies: " +jsonObj1.get("allergies"));
 		System.out.println("\n");
 		
-		
-		JSONArray jsonArray2 = jsonObj1.getJSONArray("medications");
-		for (int j = 0; j < jsonArray2.length(); j++) {
-			
-			// Résoudre problème Stack Trace JASOArray [0] is not a JSONObject.
-			// JSONObject jsonObj2 = jsonArray2.getJSONObject(i);
-			
-			/*String medsData = jsonObj2.getString("aznol");
-			System.out.println(medsData);*/
-		}
+		JSONObject jsonObject5 = JsonReader.parseJsonMedicationsFromMedicalRecords(jsonObj1);
 		
 	}
 	
@@ -157,4 +144,17 @@ public static JSONObject parseJsonMedicalRecordsFromUrl () throws JSONException,
 	
 	}
 
+public static JSONObject parseJsonMedicationsFromMedicalRecords (JSONObject jsonObj1) throws JSONException, IOException {
+	
+	JSONObject jsonMedication = (JSONObject) jsonObj1.get("medications");
+	for (int j = 0; j < jsonMedication.length(); j++) {
+		String[] jsonObj2 = jsonMedication.getNames(j);
+		
+		//String medic = jsonObj2.getString("aznol"); 
+		System.out.println(jsonObj2);
+		
+		}
+	
+	return jsonObj1;
+	}
 }
