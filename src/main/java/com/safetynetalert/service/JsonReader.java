@@ -119,10 +119,7 @@ public class JsonReader {
 		
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
-
-			String firstNamesData = jsonObj.getString("firstName");
-			String lastNamesData = jsonObj.getString("lastName");
-			String birthData = jsonObj.getString("birthdate");
+			
 			JSONArray medicationsData = (JSONArray) jsonObj.get("medications");
 			JSONArray allergiesData = (JSONArray) jsonObj.get("allergies");
 			
