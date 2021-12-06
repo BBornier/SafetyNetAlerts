@@ -10,26 +10,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "allergies")
 public class Allergies {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
-	
-	@Column(name="name")
+	private int allergiesId;
+
+
+	@Column(name = "name")
 	String name;
 
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return allergiesId;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.allergiesId = id;
 	}
 
 	/**
@@ -46,14 +47,17 @@ public class Allergies {
 		this.name = name;
 	}
 
+
 	public Allergies() {
 		super();
 	}
 
 	public Allergies(int id, String name) {
 		super();
-		this.id = id;
+		this.allergiesId = id;
 		this.name = name;
+
+		
 	}
 
 }

@@ -8,45 +8,44 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "firestation")
+@Table(name = "Firestation")
 public class Firestation {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(name="address")
+	private int firestationId;
 	private String address;
-	
-	@Column(name="station")
+
+	@Column(name = "station")
 	private String station;
 
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return firestationId;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.firestationId = id;
 	}
 
 	/**
 	 * @return the adress
 	 */
-	public String getAdress() {
+	
+	public String getAddress() {
 		return address;
 	}
 
 	/**
 	 * @param adress the adress to set
 	 */
-	public void setAdress(String adress) {
-		this.address = adress;
+	public void setAddress(String adressData) {
+		this.address = adressData;
 	}
 
 	/**
@@ -61,18 +60,18 @@ public class Firestation {
 	 */
 	public void setStation(String station) {
 		this.station = station;
-	} 
-	
-	public Firestation() {
-		
 	}
-	
-	public Firestation (int id, String address, String station) {
-	
-		this.id = id;
+
+	public Firestation() {
+
+	}
+
+	public Firestation(int id, String address, String station) {
+
+		this.firestationId = id;
 		this.address = address;
 		this.station = station;
-		
+
 	}
 
 }

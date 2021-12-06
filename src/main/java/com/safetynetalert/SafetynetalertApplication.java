@@ -1,19 +1,24 @@
 package com.safetynetalert;
 
 import java.io.IOException;
-
 import org.apache.tomcat.util.json.ParseException;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalert.service.JsonReader;
 
 
 @SpringBootApplication
 public class SafetynetalertApplication implements CommandLineRunner {
+	
+	@Autowired
+	private PersonRepository personRepository;
 
 	public static void main(String[] args) throws JSONException, IOException, ParseException {
 		SpringApplication.run(SafetynetalertApplication.class, args);
@@ -36,11 +41,10 @@ public class SafetynetalertApplication implements CommandLineRunner {
 				JSONObject jsonObject2 = JsonReader.parseJsonPersonsFromUrl(); // Fonctionne !
 				JSONObject jsonObject3 = JsonReader.parseJsonFirestationsFromUrl(); // Fonctionne !
 				JSONObject jsonObject4 = JsonReader.parseJsonMedicalRecordsFromUrl(); // ne fonctionne qu'au niveau 0 pas au niveau -1.
-				// JSONObject jsonGet = (JSONObject) jsonObject2.get("persons"); // Ecrit avec Raph. à mettre dans la couche controller (?) StackTrace : org.json.JSONArray and org.json.JSONObject are in unnamed module of loader 'app'
-				
 				
 				Person person = new Person();
-				person.setId(1); // set les paramètres
+				
+				personRepository.save(person);
 				
 		
 	}

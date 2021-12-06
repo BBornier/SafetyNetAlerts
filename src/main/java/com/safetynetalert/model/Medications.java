@@ -8,31 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "medications")
+@Table(name = "Medications")
 public class Medications {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
-	
-	@Column(name="name")
+	private int medicationsId;
+
+	@Column(name = "name")
 	String name;
-	
-	@Column(name="drug_dosage")
+
+	@Column(name = "drug_dosage")
 	String drugDosage;
 
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return medicationsId;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.medicationsId = id;
 	}
 
 	/**
@@ -63,15 +63,17 @@ public class Medications {
 		this.drugDosage = drugDosage;
 	}
 
+
 	public Medications() {
 		super();
 	}
 
 	public Medications(int id, String name, String drugDosage) {
 		super();
-		this.id = id;
+		this.medicationsId = id;
 		this.name = name;
 		this.drugDosage = drugDosage;
+		
 	}
-	
+
 }

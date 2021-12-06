@@ -74,9 +74,9 @@ public class FirestationsController {
 			if (station != null) {
 				currentFirestation.setStation(station);
 			}
-			String address = firestation.getAdress();
+			String address = firestation.getAddress();
 			if (address != null) {
-				currentFirestation.setAdress(address);
+				currentFirestation.setAddress(address);
 				;
 			}
 

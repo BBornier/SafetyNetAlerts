@@ -76,9 +76,9 @@ public class PersonController {
 			if (birthdate != null) {
 				currentPerson.setBirthdate(birthdate);
 			}
-			String address = person.getAdress();
+			String address = person.getAddress();
 			if (address != null) {
-				currentPerson.setAdress(address);
+				currentPerson.setAddress(address);
 				;
 			}
 			String city = person.getCity();
