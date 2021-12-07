@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.safetynetalert.model.Allergies;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
@@ -121,12 +122,15 @@ public class JsonReader {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			MedicalRecords medicalRecords = new MedicalRecords(); 
 			
-			List<String> stringList = parseJsonMedicationsFromMedicalRecords(jsonArray);
-			List<Medications> medsList = convertStringListToMedicationList(stringList);
+			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonArray);
+			List<Medications> medsList = convertStringListToMedicationJavaList(stringMedicationsList);
 			medicalRecords.setMedications(medsList);
+			medicalRecordsList.add(medicalRecords);
 			
-			//medicalRecords.setAllergies(medsList);
 			
+			List<String> stringAllergiesList = parseJsonAllergiesFromMedicalRecords(jsonArray);
+			List<Allergies> allergList = convertStringListToAllergiesJavaList(stringAllergiesList);
+			medicalRecords.setAllergies(allergList);
 			medicalRecordsList.add(medicalRecords);
 			
 		}
@@ -138,31 +142,31 @@ public class JsonReader {
 	public static List<String> parseJsonMedicationsFromMedicalRecords(JSONArray jsonArray)
 			throws JSONException, IOException {
 
-		List<String> medicationsList = new ArrayList<>();
+		List<String> medicationsListParsed = new ArrayList<>();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			medicationsList.add(jsonArray.getString(i));
+			medicationsListParsed.add(jsonArray.getString(i));
 
 		}
 	
-		return medicationsList;
+		return medicationsListParsed;
 
 	}
 
 	public static List<String> parseJsonAllergiesFromMedicalRecords(JSONArray jsonArray) {
 
-		List<String> allergiesList = new ArrayList<>();
+		List<String> allergiesListParsed = new ArrayList<>();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			allergiesList.add(jsonArray.getString(i));
+			allergiesListParsed.add(jsonArray.getString(i));
 
 		}
 		
-		return allergiesList;
+		return allergiesListParsed;
 
 	}
 	
-	public static List<Medications> convertStringListToMedicationList(List<String> stringList) {
+	public static List<Medications> convertStringListToMedicationJavaList(List<String> stringList) {
 		
 		List<Medications> medicationList = new ArrayList<>();
 		
@@ -174,6 +178,23 @@ public class JsonReader {
 		}
 		
 		return medicationList;
+		
+	}
+	
+	public static List<Allergies> convertStringListToAllergiesJavaList(List<String> stringList) {
+		
+		List<Allergies> allergiesList = new ArrayList<>();
+		
+		
+		for (String s : stringList) {
+			Allergies allergies = new Allergies();
+			allergies.setName(s);
+			
+			allergiesList.add(allergies);
+			
+		}
+		
+		return allergiesList;
 		
 	}
 
