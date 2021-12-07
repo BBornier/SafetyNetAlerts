@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
+import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
 
 @Service
@@ -44,7 +45,7 @@ public class JsonReader {
 		}
 	}
 
-	public static JSONObject parseJsonPersonsFromUrl() throws JSONException, IOException {
+	public static List<Person> parseJsonPersonsFromUrl() throws JSONException, IOException {
 
 		JSONObject jsonObject = JsonReader.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
@@ -74,10 +75,9 @@ public class JsonReader {
 			person.setEmail(emailData);
 			personList.add(person);
 
-			System.out.println(firstNamesData);
 			
 		}
-		return jsonObject;
+		return personList;
 
 	}
 
@@ -108,7 +108,7 @@ public class JsonReader {
 
 	}
 
-	public static JSONObject parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {
+	public static List<MedicalRecords> parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {
 
 		JSONObject jsonFromUrl = JsonReader.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
@@ -119,21 +119,20 @@ public class JsonReader {
 		
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
+			MedicalRecords medicalRecords = new MedicalRecords(); 
+			medicalRecords.setPerson(null);
 			
-			JSONArray medicationsData = (JSONArray) jsonObj.get("medications");
-			JSONArray allergiesData = (JSONArray) jsonObj.get("allergies");
+			List<String> stringList = parseJsonMedicationsFromMedicalRecords(jsonArray);
+			List<Medications> medsList = convertStringListToMedicationList(stringList);
+			medicalRecords.setMedications(medsList);
 			
-			// Stocker les informations de l'itération dans une variable MedicalRecords.
+			//medicalRecords.setAllergies(medsList);
 			
-			MedicalRecords medicalRecords = new MedicalRecords();
 			medicalRecordsList.add(medicalRecords);
-
-			System.out.println(medicationsData);
-			System.out.println(allergiesData);
-
+			
 		}
 
-		return jsonFromUrl;
+		return medicalRecordsList;
 
 	}
 
@@ -162,6 +161,21 @@ public class JsonReader {
 		
 		return allergiesList;
 
+	}
+	
+	public static List<Medications> convertStringListToMedicationList(List<String> stringList) {
+		
+		List<Medications> medicationList = new ArrayList<>();
+		
+		for (String s : stringList) {
+			Medications meds = new Medications();
+			meds.setName(s);
+			
+			medicationList.add(meds);
+		}
+		
+		return medicationList;
+		
 	}
 
 }

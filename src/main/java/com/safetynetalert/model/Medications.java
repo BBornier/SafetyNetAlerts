@@ -15,11 +15,9 @@ public class Medications {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int medicationsId;
 
-	@Column(name = "name")
-	String name;
+	@Column(name = "nameAndDosage")
+	String nameAndDosage;
 
-	@Column(name = "drug_dosage")
-	String drugDosage;
 
 	/**
 	 * @return the id
@@ -39,28 +37,14 @@ public class Medications {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return nameAndDosage;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the drugDosage
-	 */
-	public String getDrugDosage() {
-		return drugDosage;
-	}
-
-	/**
-	 * @param drugDosage the drugDosage to set
-	 */
-	public void setDrugDosage(String drugDosage) {
-		this.drugDosage = drugDosage;
+	public void setName(String nameAndDosage) {
+		this.nameAndDosage = nameAndDosage;
 	}
 
 
@@ -68,11 +52,11 @@ public class Medications {
 		super();
 	}
 
-	public Medications(int id, String name, String drugDosage) {
+	public Medications(int id, String nameAndDosage, String drugDosage) {
 		super();
 		this.medicationsId = id;
-		this.name = name;
-		this.drugDosage = drugDosage;
+		this.nameAndDosage = nameAndDosage;
+
 		
 	}
 

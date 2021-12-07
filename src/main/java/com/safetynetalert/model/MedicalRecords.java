@@ -1,5 +1,7 @@
 package com.safetynetalert.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,9 +15,9 @@ public class MedicalRecords {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int medicalRecordId;
-	private String person;
-	private String medications;
-	private String allergies;
+	private Person person;
+	private List<Medications> medications;
+	private List<Allergies> allergies;
 
 	/**
 	 * @return the id
@@ -34,42 +36,42 @@ public class MedicalRecords {
 	/**
 	 * @return the person
 	 */
-	public String getPerson() {
+	public Person getPerson() {
 		return person;
 	}
 
 	/**
 	 * @param person the person to set
 	 */
-	public void setPerson(String person) {
+	public void setPerson(Person person) {
 		this.person = person;
 	}
 
 	/**
 	 * @return the medications
 	 */
-	public String getMedications() {
+	public List<Medications> getMedications() {
 		return medications;
 	}
 
 	/**
 	 * @param medications the medications to set
 	 */
-	public void setMedications(String medications) {
+	public void setMedications(List<Medications> medications) {
 		this.medications = medications;
 	}
 
 	/**
 	 * @return the allergies
 	 */
-	public String getAllergies() {
+	public List<Allergies> getAllergies() {
 		return allergies;
 	}
 
 	/**
 	 * @param allergies the allergies to set
 	 */
-	public void setAllergies(String allergies) {
+	public void setAllergies(List<Allergies> allergies) {
 		this.allergies = allergies;
 	}
 
@@ -77,7 +79,7 @@ public class MedicalRecords {
 		super();
 	}
 
-	public MedicalRecords(int id, String person, String medications, String allergies) {
+	public MedicalRecords(int id, Person person, List<Medications> medications, List<Allergies> allergies) {
 		super();
 		this.medicalRecordId = id;
 		this.person = person;
