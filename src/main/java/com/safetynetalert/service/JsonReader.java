@@ -120,7 +120,6 @@ public class JsonReader {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			MedicalRecords medicalRecords = new MedicalRecords(); 
-			medicalRecords.setPerson(null);
 			
 			List<String> stringList = parseJsonMedicationsFromMedicalRecords(jsonArray);
 			List<Medications> medsList = convertStringListToMedicationList(stringList);
@@ -169,7 +168,7 @@ public class JsonReader {
 		
 		for (String s : stringList) {
 			Medications meds = new Medications();
-			meds.setName(s);
+			meds.setNameAndDosage(s);
 			
 			medicationList.add(meds);
 		}

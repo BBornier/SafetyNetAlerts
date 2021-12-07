@@ -1,10 +1,16 @@
 package com.safetynetalert.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,19 +23,21 @@ public class Allergies {
 
 
 	@Column(name = "name")
-	String name;
+	private String name;
+	
+	private List<Medications> medications = new ArrayList<Medications>();
 
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public int getAllergiesId() {
 		return allergiesId;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setAllergiesId(int id) {
 		this.allergiesId = id;
 	}
 
@@ -46,17 +54,32 @@ public class Allergies {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * @return the medications
+	 */
+	@ManyToMany
+	@JoinTable(name = "medical_records", joinColumns = {@JoinColumn(name = "allergiesId")}, inverseJoinColumns = {@JoinColumn(name = "medicationsId")})
+	public List<Medications> getMedications() {
+		return medications;
+	}
 
+	/**
+	 * @param medications the medications to set
+	 */
+	public void setMedications(List<Medications> medications) {
+		this.medications = medications;
+	}
 
 	public Allergies() {
 		super();
 	}
 
-	public Allergies(int id, String name) {
+	public Allergies(int id, String name, List<Medications> medications) {
 		super();
 		this.allergiesId = id;
 		this.name = name;
-
+		this.medications = medications;
 		
 	}
 

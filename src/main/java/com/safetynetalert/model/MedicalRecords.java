@@ -1,7 +1,9 @@
 package com.safetynetalert.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,15 +11,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "medical_records") // PAS DE MAJ !
+@Table(name = "medical_records")
 public class MedicalRecords {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int medicalRecordId;
-	private Person person;
+	
+	@Column(name = "medications")
 	private List<Medications> medications;
+	
+	@Column (name = "allergies")
 	private List<Allergies> allergies;
+	
+	@Column(name = "birthdate")
+	private LocalDate birthdate;
 
 	/**
 	 * @return the id
@@ -34,17 +42,17 @@ public class MedicalRecords {
 	}
 
 	/**
-	 * @return the person
+	 * @return the birthdate
 	 */
-	public Person getPerson() {
-		return person;
+	public LocalDate getBirthdate() {
+		return birthdate;
 	}
 
 	/**
-	 * @param person the person to set
+	 * @param birthdate the birthdate to set
 	 */
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setBirthdate(LocalDate birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	/**
@@ -79,10 +87,10 @@ public class MedicalRecords {
 		super();
 	}
 
-	public MedicalRecords(int id, Person person, List<Medications> medications, List<Allergies> allergies) {
+	public MedicalRecords(int id, LocalDate birthdate, List<Medications> medications, List<Allergies> allergies) {
 		super();
 		this.medicalRecordId = id;
-		this.person = person;
+		this.birthdate = birthdate;
 		this.medications = medications;
 		this.allergies = allergies;
 	}

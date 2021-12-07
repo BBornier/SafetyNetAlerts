@@ -72,10 +72,6 @@ public class PersonController {
 		if (p.isPresent()) {
 			Person currentPerson = p.get();
 
-			LocalDate birthdate = person.getBirthdate();
-			if (birthdate != null) {
-				currentPerson.setBirthdate(birthdate);
-			}
 			String address = person.getAddress();
 			if (address != null) {
 				currentPerson.setAddress(address);

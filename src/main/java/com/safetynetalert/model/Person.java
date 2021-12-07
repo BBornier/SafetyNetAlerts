@@ -1,7 +1,5 @@
 package com.safetynetalert.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Person")
+@Table(name = "person")
 public class Person {
 
 	@Id
@@ -23,9 +21,6 @@ public class Person {
 
 	@Column(name = "last_name")
 	private String lastName;
-
-	@Column(name = "birthdate")
-	private LocalDate birthdate;
 
 	@Column(name = "city")
 	private String city;
@@ -82,24 +77,8 @@ public class Person {
 	}
 
 	/**
-	 * @return the birthdate
-	 */
-	public LocalDate getBirthdate() {
-		return birthdate;
-	}
-
-	/**
-	 * @param birthdate the birthdate to set
-	 */
-	public void setBirthdate(LocalDate birthdate) {
-		this.birthdate = birthdate;
-	}
-
-	/**
 	 * @return the adress
 	 */
-	//@ManyToOne
-	//@JoinColumn(name="addressId")
 	public String getAddress() {
 		return address;
 	}
@@ -171,13 +150,12 @@ public class Person {
 
 	}
 
-	public Person(int id, String firstName, String lastName, LocalDate birthdate, String address, String city,
+	public Person(int id, String firstName, String lastName, String address, String city,
 			long zipCode, String phone, String email) {
 
 		this.personId = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.birthdate = birthdate;
 		this.address = address;
 		this.city = city;
 		this.zipCode = zipCode;

@@ -1,5 +1,6 @@
 package com.safetynetalert.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,10 @@ public class MedicalRecordsController {
 		if (mR.isPresent()) {
 			MedicalRecords currentMedicalRecord = mR.get();
 
+			LocalDate birthdate = medicalRecords.getBirthdate();
+			if (birthdate != null) {
+				currentMedicalRecord.setBirthdate(birthdate);
+			}
 			List<Medications> medications = medicalRecords.getMedications();
 			if (medications != null) {
 				currentMedicalRecord.setMedications(medications);
