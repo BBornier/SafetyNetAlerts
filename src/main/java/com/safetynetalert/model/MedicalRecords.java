@@ -73,7 +73,7 @@ public class MedicalRecords {
 	 * @return the allergies
 	 */
 	public List<Allergies> getAllergies() {
-		return allergies;
+	return allergies;
 	}
 
 	/**

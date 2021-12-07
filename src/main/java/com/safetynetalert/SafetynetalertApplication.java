@@ -1,18 +1,17 @@
 package com.safetynetalert;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.apache.tomcat.util.json.ParseException;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalert.service.JsonReader;
@@ -26,6 +25,10 @@ public class SafetynetalertApplication implements CommandLineRunner {
 	@Autowired
 	private MedicalRecordsRepository medicalRecordsRepository;
 
+	
+	@Autowired
+	private FirestationRepository firestationRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SafetynetalertApplication.class, args);
 
@@ -52,13 +55,15 @@ public class SafetynetalertApplication implements CommandLineRunner {
 			person.setCity("Villechenève");
 			person.setZipCode(69770);
 			personRepository.save(person);*/
+
 			
-			JsonReader js = new JsonReader();
-			List<Person> personList = js.parseJsonPersonsFromUrl();
+			List<Person> personList = JsonReader.parseJsonPersonsFromUrl();
 			personRepository.saveAll(personList);
 			
+			/*List<Firestation> fireStList = JsonReader.parseJsonFirestationsFromUrl();
+			firestationRepository.saveAll(fireStList);*/
 			
-			List<MedicalRecords> medsRec = js.parseJsonMedicalRecordsFromUrl();
+			List<MedicalRecords> medsRec = JsonReader.parseJsonMedicalRecordsFromUrl();
 			medicalRecordsRepository.saveAll(medsRec);
 
 	}

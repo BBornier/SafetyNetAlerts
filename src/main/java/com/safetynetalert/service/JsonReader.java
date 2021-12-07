@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Allergies;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
@@ -69,7 +70,7 @@ public class JsonReader {
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
 			person.setLastName(lastNamesData);
-			person.setAddress(addressData);
+			person.setAddress(addressData); // méthode de conversion String adressData en un objet address.
 			person.setCity(cityData);
 			person.setZipCode(zipCodeData);
 			person.setPhone(phoneData);

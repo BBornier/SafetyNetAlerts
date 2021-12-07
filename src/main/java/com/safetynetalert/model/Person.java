@@ -14,7 +14,8 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int personId;
-	private String address;
+	private Address address;
+	private MedicalRecords medicalRecords;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -79,14 +80,14 @@ public class Person {
 	/**
 	 * @return the adress
 	 */
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 	/**
 	 * @param adress the adress to set
 	 */
-	public void setAddress(String addressData) {
+	public void setAddress(Address addressData) {
 		this.address = addressData;
 	}
 
@@ -150,7 +151,7 @@ public class Person {
 
 	}
 
-	public Person(int id, String firstName, String lastName, String address, String city,
+	public Person(int id, String firstName, String lastName, Address address, String city,
 			long zipCode, String phone, String email) {
 
 		this.personId = id;

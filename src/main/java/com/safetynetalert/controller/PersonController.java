@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.PersonService;
 
@@ -72,7 +73,7 @@ public class PersonController {
 		if (p.isPresent()) {
 			Person currentPerson = p.get();
 
-			String address = person.getAddress();
+			Address address = person.getAddress();
 			if (address != null) {
 				currentPerson.setAddress(address);
 				;

@@ -1,5 +1,7 @@
 package com.safetynetalert.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,10 @@ public class Firestation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int firestationId;
-	private String address;
+	private List<Address> address;
 
 	@Column(name = "station")
-	private String station;
+	private int station;
 
 	/**
 	 * @return the id
@@ -37,28 +39,28 @@ public class Firestation {
 	 * @return the adress
 	 */
 	
-	public String getAddress() {
+	public List<Address> getAddress() {
 		return address;
 	}
 
 	/**
 	 * @param adress the adress to set
 	 */
-	public void setAddress(String adressData) {
+	public void setAddress(List<Address> adressData) {
 		this.address = adressData;
 	}
 
 	/**
 	 * @return the station
 	 */
-	public String getStation() {
+	public int getStation() {
 		return station;
 	}
 
 	/**
 	 * @param station the station to set
 	 */
-	public void setStation(String station) {
+	public void setStation(int station) {
 		this.station = station;
 	}
 
@@ -66,12 +68,14 @@ public class Firestation {
 
 	}
 
-	public Firestation(int id, String address, String station) {
+	public Firestation(int id, List<Address> address, int station) {
 
 		this.firestationId = id;
 		this.address = address;
 		this.station = station;
 
+		// Liste de String en List d'Adresses.
+		
 	}
 
 }
