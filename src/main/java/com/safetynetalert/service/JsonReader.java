@@ -83,7 +83,7 @@ public class JsonReader {
 
 	}
 
-	public static JSONObject parseJsonFirestationsFromUrl() throws JSONException, IOException {
+	public static List<Firestation> parseJsonFirestationsFromUrl() throws JSONException, IOException {
 
 		JSONObject jsonObject = JsonReader.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
@@ -106,7 +106,7 @@ public class JsonReader {
 
 		}
 
-		return jsonObject;
+		return firestationsList;
 
 	}
 
