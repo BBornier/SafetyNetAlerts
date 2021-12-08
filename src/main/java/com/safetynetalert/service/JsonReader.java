@@ -70,7 +70,7 @@ public class JsonReader {
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
 			person.setLastName(lastNamesData);
-			person.setAddress(addressData); // méthode de conversion String adressData en un objet address.
+			//person.setAddress(addressData); // Ecrire une méthode de conversion String adressData en un objet address.
 			person.setCity(cityData);
 			person.setZipCode(zipCodeData);
 			person.setPhone(phoneData);
@@ -96,12 +96,12 @@ public class JsonReader {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
 			String adressData = jsonObj.getString("address");
-			String stationData = jsonObj.getString("station");
+			String stationNumberData = jsonObj.getString("station");
 
 			// Stocker les informations de l'itération dans une variable firestation.
 			Firestation firestation = new Firestation();
-			firestation.setAddress(adressData);
-			firestation.setStationNumber(stationData);
+			//firestation.setAddress(adressData); // Ecrire une méthode de conversion String adressData en un objet address.
+			//firestation.setStationNumber(stationNumberData); // Ecrire une méthode de conversion String stationNumberData en un objet stationNumber.
 			firestationsList.add(firestation);
 
 		}
