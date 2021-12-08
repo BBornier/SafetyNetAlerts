@@ -21,24 +21,26 @@ public class Allergies {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int allergiesId;
 
-
 	@Column(name = "name")
 	private String name;
-	
-	private List<Medications> medications = new ArrayList<Medications>();
+
+	@Column(name = "medicalRecords")
+	private List<MedicalRecords> medications = new ArrayList<MedicalRecords>();
 
 	/**
-	 * @return the id
+	 * @return the allergiesId
 	 */
+	@ManyToMany
+	@JoinTable(name = "medical_records", joinColumns = { @JoinColumn(name = "allergiesId") }, inverseJoinColumns = { @JoinColumn(name = "medicationsId") })
 	public int getAllergiesId() {
 		return allergiesId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param allergiesId the allergiesId to set
 	 */
-	public void setAllergiesId(int id) {
-		this.allergiesId = id;
+	public void setAllergiesId(int allergiesId) {
+		this.allergiesId = allergiesId;
 	}
 
 	/**
@@ -54,20 +56,18 @@ public class Allergies {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * @return the medications
 	 */
-	@ManyToMany
-	@JoinTable(name = "medical_records", joinColumns = {@JoinColumn(name = "allergiesId")}, inverseJoinColumns = {@JoinColumn(name = "medicationsId")})
-	public List<Medications> getMedications() {
+	public List<MedicalRecords> getMedications() {
 		return medications;
 	}
 
 	/**
 	 * @param medications the medications to set
 	 */
-	public void setMedications(List<Medications> medications) {
+	public void setMedications(List<MedicalRecords> medications) {
 		this.medications = medications;
 	}
 
@@ -75,12 +75,12 @@ public class Allergies {
 		super();
 	}
 
-	public Allergies(int id, String name, List<Medications> medications) {
+	public Allergies(int allergiesId, String name, List<MedicalRecords> medications) {
 		super();
-		this.allergiesId = id;
+		this.allergiesId = allergiesId;
 		this.name = name;
 		this.medications = medications;
-		
+
 	}
 
 }

@@ -16,24 +16,28 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int addressId;
-	private List<Person> person;
-	private List<Firestation> firestation;
-
+	
 	@Column(name = "address")
 	String address;
+	
+	@Column (name = "persons")
+	private List<Person> person;
+	
+	@Column (name = "firestations")
+	private List<Firestation> firestation;
 
 	/**
-	 * @return the id
+	 * @return the addressId
 	 */
-	public int getId() {
+	public int getAddressId() {
 		return addressId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param addressId the addressId to set
 	 */
-	public void setId(int id) {
-		this.addressId = id;
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
 	}
 
 	/**
@@ -63,7 +67,7 @@ public class Address {
 	public void setPerson(List<Person> person) {
 		this.person = person;
 	}
-	
+
 	/**
 	 * @return the firestation
 	 */
@@ -82,12 +86,14 @@ public class Address {
 		super();
 	}
 
-	public Address(int id, String address, List<Person> person, List<Firestation> firestation) {
+	public Address(int addressId, String address, List<Person> person, List<Firestation> firestation) {
 		super();
-		this.addressId = id;
-		this.person = person;
+		this.addressId = addressId;
 		this.address = address;
+		this.person = person;
 		this.firestation = firestation;
 	}
 
+	// Convertir Liste de String en List de Firestations !! dans JsonReader !!
+	
 }

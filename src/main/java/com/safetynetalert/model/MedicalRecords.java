@@ -13,32 +13,49 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "medical_records")
 public class MedicalRecords {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int medicalRecordId;
-	
-	@Column(name = "medications")
-	private List<Medications> medications;
-	
-	@Column (name = "allergies")
-	private List<Allergies> allergies;
-	
+
+	@Column(name = "person")
+	private Person person;
+
 	@Column(name = "birthdate")
 	private LocalDate birthdate;
 
+	@Column(name = "medications")
+	private List<Medications> medications;
+
+	@Column(name = "allergies")
+	private List<Allergies> allergies;
+
 	/**
-	 * @return the id
+	 * @return the medicalRecordId
 	 */
-	public int getId() {
+	public int getMedicalRecordId() {
 		return medicalRecordId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param medicalRecordId the medicalRecordId to set
 	 */
-	public void setId(int id) {
-		this.medicalRecordId = id;
+	public void setMedicalRecordId(int medicalRecordId) {
+		this.medicalRecordId = medicalRecordId;
+	}
+
+	/**
+	 * @return the person
+	 */
+	public Person getPerson() {
+		return person;
+	}
+
+	/**
+	 * @param person the person to set
+	 */
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	/**
@@ -73,7 +90,7 @@ public class MedicalRecords {
 	 * @return the allergies
 	 */
 	public List<Allergies> getAllergies() {
-	return allergies;
+		return allergies;
 	}
 
 	/**
@@ -87,13 +104,14 @@ public class MedicalRecords {
 		super();
 	}
 
-	public MedicalRecords(int id, LocalDate birthdate, List<Medications> medications, List<Allergies> allergies) {
+	public MedicalRecords(int medicalRecordId, Person person, LocalDate birthdate, List<Medications> medications,
+			List<Allergies> allergies) {
 		super();
-		this.medicalRecordId = id;
+		this.medicalRecordId = medicalRecordId;
+		this.person = person;
 		this.birthdate = birthdate;
 		this.medications = medications;
 		this.allergies = allergies;
 	}
-
 
 }

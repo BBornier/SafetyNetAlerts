@@ -101,7 +101,7 @@ public class JsonReader {
 			// Stocker les informations de l'itération dans une variable firestation.
 			Firestation firestation = new Firestation();
 			firestation.setAddress(adressData);
-			firestation.setStation(stationData);
+			firestation.setStationNumber(stationData);
 			firestationsList.add(firestation);
 
 		}

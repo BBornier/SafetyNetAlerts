@@ -73,9 +73,9 @@ public class FirestationsController {
 		if (f.isPresent()) {
 			Firestation currentFirestation = f.get();
 
-			int station = firestation.getStation();
+			int station = firestation.getStationNumber();
 			if (Objects.isNull(station)) {
-				currentFirestation.setStation(station);
+				currentFirestation.setStationNumber(station);
 			}
 			List<Address> address = firestation.getAddress();
 			if (address != null) {

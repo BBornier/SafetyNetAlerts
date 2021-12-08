@@ -16,66 +16,66 @@ public class Firestation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int firestationId;
+
+	@Column (name = "addresses")
 	private List<Address> address;
 
-	@Column(name = "station")
-	private int station;
+	@Column(name = "station_number")
+	private int stationNumber;
 
 	/**
-	 * @return the id
+	 * @return the firestationId
 	 */
-	public int getId() {
+	public int getFirestationId() {
 		return firestationId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param firestationId the firestationId to set
 	 */
-	public void setId(int id) {
-		this.firestationId = id;
+	public void setFirestationId(int firestationId) {
+		this.firestationId = firestationId;
 	}
 
 	/**
-	 * @return the adress
+	 * @return the address
 	 */
-	
 	public List<Address> getAddress() {
 		return address;
 	}
 
 	/**
-	 * @param adress the adress to set
+	 * @param address the address to set
 	 */
-	public void setAddress(List<Address> adressData) {
-		this.address = adressData;
+	public void setAddress(List<Address> address) {
+		this.address = address;
 	}
 
 	/**
-	 * @return the station
+	 * @return the stationNumber
 	 */
-	public int getStation() {
-		return station;
+	public int getStationNumber() {
+		return stationNumber;
 	}
 
 	/**
-	 * @param station the station to set
+	 * @param stationNumber the stationNumber to set
 	 */
-	public void setStation(int station) {
-		this.station = station;
+	public void setStationNumber(int stationNumber) {
+		this.stationNumber = stationNumber;
 	}
 
 	public Firestation() {
-
+		super();
 	}
 
-	public Firestation(int id, List<Address> address, int station) {
-
-		this.firestationId = id;
+	public Firestation(int firestationId, List<Address> address, int stationNumber) {
+		super();
+		this.firestationId = firestationId;
 		this.address = address;
-		this.station = station;
-
-		// Liste de String en List d'Adresses.
-		
+		this.stationNumber = stationNumber;
 	}
+
+	// Convertir Liste de String en List d'Adresses !! dans JsonReader !!
 
 }

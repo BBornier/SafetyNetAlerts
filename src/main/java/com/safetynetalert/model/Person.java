@@ -14,14 +14,15 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int personId;
-	private Address address;
-	private MedicalRecords medicalRecords;
 
 	@Column(name = "first_name")
 	private String firstName;
 
 	@Column(name = "last_name")
 	private String lastName;
+
+	@Column(name = "address")
+	private Address address;
 
 	@Column(name = "city")
 	private String city;
@@ -35,18 +36,21 @@ public class Person {
 	@Column(name = "email")
 	private String email;
 
+	@Column(name = "medical_records")
+	private MedicalRecords medicalRecords;
+
 	/**
-	 * @return the id
+	 * @return the personId
 	 */
-	public int getId() {
+	public int getPersonId() {
 		return personId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param personId the personId to set
 	 */
-	public void setId(int id) {
-		this.personId = id;
+	public void setPersonId(int personId) {
+		this.personId = personId;
 	}
 
 	/**
@@ -78,17 +82,17 @@ public class Person {
 	}
 
 	/**
-	 * @return the adress
+	 * @return the address
 	 */
 	public Address getAddress() {
 		return address;
 	}
 
 	/**
-	 * @param adress the adress to set
+	 * @param address the address to set
 	 */
-	public void setAddress(Address addressData) {
-		this.address = addressData;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	/**
@@ -147,14 +151,28 @@ public class Person {
 		this.email = email;
 	}
 
-	public Person() {
-
+	/**
+	 * @return the medicalRecords
+	 */
+	public MedicalRecords getMedicalRecords() {
+		return medicalRecords;
 	}
 
-	public Person(int id, String firstName, String lastName, Address address, String city,
-			long zipCode, String phone, String email) {
+	/**
+	 * @param medicalRecords the medicalRecords to set
+	 */
+	public void setMedicalRecords(MedicalRecords medicalRecords) {
+		this.medicalRecords = medicalRecords;
+	}
 
-		this.personId = id;
+	public Person() {
+		super();
+	}
+
+	public Person(int personId, String firstName, String lastName, Address address, String city, long zipCode,
+			String phone, String email, MedicalRecords medicalRecords) {
+		super();
+		this.personId = personId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -162,6 +180,7 @@ public class Person {
 		this.zipCode = zipCode;
 		this.phone = phone;
 		this.email = email;
+		this.medicalRecords = medicalRecords;
 	}
 
 }

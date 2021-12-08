@@ -23,12 +23,15 @@ public class Medications {
 
 	@Column(name = "nameAndDosage")
 	private String nameAndDosage;
-	
-	private List<Allergies> allergies = new ArrayList<Allergies>();
+
+	@Column(name = "medicalRecords")
+	private List<MedicalRecords> allergies = new ArrayList<MedicalRecords>();
 
 	/**
 	 * @return the medicationsId
 	 */
+	@ManyToMany
+	@JoinTable(name = "medical_records", joinColumns = {@JoinColumn(name = "medicationsId")}, inverseJoinColumns = {@JoinColumn(name = "allergiesId")})
 	public int getMedicationsId() {
 		return medicationsId;
 	}
@@ -57,16 +60,14 @@ public class Medications {
 	/**
 	 * @return the allergies
 	 */
-	@ManyToMany
-	@JoinTable(name = "medical_records", joinColumns = {@JoinColumn(name = "medicationsId")}, inverseJoinColumns = {@JoinColumn(name = "allergiesId")})
-	public List<Allergies> getAllergies() {
+	public List<MedicalRecords> getAllergies() {
 		return allergies;
 	}
 
 	/**
 	 * @param allergies the allergies to set
 	 */
-	public void setAllergies(List<Allergies> allergies) {
+	public void setAllergies(List<MedicalRecords> allergies) {
 		this.allergies = allergies;
 	}
 
@@ -74,7 +75,7 @@ public class Medications {
 		super();
 	}
 
-	public Medications(int medicationsId, String nameAndDosage, List<Allergies> allergies) {
+	public Medications(int medicationsId, String nameAndDosage, List<MedicalRecords> allergies) {
 		super();
 		this.medicationsId = medicationsId;
 		this.nameAndDosage = nameAndDosage;
