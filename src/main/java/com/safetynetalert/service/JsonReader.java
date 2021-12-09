@@ -58,6 +58,7 @@ public class JsonReader {
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
+			
 			String firstNamesData = jsonObj.getString("firstName");
 			String lastNamesData = jsonObj.getString("lastName");
 			String addressData = jsonObj.getString("address");
@@ -66,11 +67,10 @@ public class JsonReader {
 			String phoneData = jsonObj.getString("phone");
 			String emailData = jsonObj.getString("email");
 
-			// Stocker les informations de l'itération dans une variable person.
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
 			person.setLastName(lastNamesData);
-			//person.setAddress(addressData); // Ecrire une méthode de conversion String adressData en un objet address.
+			person.setAddress(addressData); // Ecrire une méthode de conversion String adressData en un objet address.
 			person.setCity(cityData);
 			person.setZipCode(zipCodeData);
 			person.setPhone(phoneData);
@@ -85,23 +85,33 @@ public class JsonReader {
 
 	public static List<Firestation> parseJsonFirestationsFromUrl() throws JSONException, IOException {
 
+		// JSONObject à qui je passe la méthode readJsonFromUrl.
 		JSONObject jsonObject = JsonReader.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
 
+		// Je converti le JSONObject en JSONArray et je prends les informations dans firestations.
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
-
+		
+		// Je crée une instance de List de Firestation.
 		List<Firestation> firestationsList = new ArrayList<>();
 
+		// J'itère dans tout le JSONArray, et je prends chaque valeur de chaque index.  
+		// Je converti le JSONArray en JSONObject et je prends chaque objet à chaque itération.
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
-			
-			String adressData = jsonObj.getString("address");
+	 
+		// A chaque itération je prends la valeur de chaque adresse et de chaque caserne.
+		// Je converti mon JSONObject qui prend à chaque tour les valeurs des adresses et des casernes, en String. Je stocke dans mes objets String les valeurs.
+			String addressData = jsonObj.getString("address");
 			String stationNumberData = jsonObj.getString("station");
+			
+		// Je dois ensuite convertir mon String en objet Address !
 
-			// Stocker les informations de l'itération dans une variable firestation.
+		// Je crée un objet firestation, je lui paramètre les informations contenues dans les objets adressData et sattionNumberData.
+		// J'ajoute enfin à ma firesationList toutes les informations contenues dans l'objet firestation. Et je retourne comme valeur de la méthode la firestationList.
 			Firestation firestation = new Firestation();
-			//firestation.setAddress(adressData); // Ecrire une méthode de conversion String adressData en un objet address.
-			//firestation.setStationNumber(stationNumberData); // Ecrire une méthode de conversion String stationNumberData en un objet stationNumber.
+			firestation.setAddress(addressData); // Ecrire une méthode de conversion String adressData en un objet address.
+			firestation.setStationNumber(stationNumberData); // Ecrire une méthode de conversion String stationNumberData en un objet stationNumber.
 			firestationsList.add(firestation);
 
 		}
@@ -196,6 +206,14 @@ public class JsonReader {
 		}
 		
 		return allergiesList;
+		
+	}
+	
+	public static String convertStringToObject() {
+		
+		
+		
+		return null;
 		
 	}
 
