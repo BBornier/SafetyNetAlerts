@@ -93,7 +93,5 @@ public class Address {
 		this.person = person;
 		this.firestation = firestation;
 	}
-
-	// Convertir Liste de String en List de Firestations !! dans JsonReader !!
 	
 }

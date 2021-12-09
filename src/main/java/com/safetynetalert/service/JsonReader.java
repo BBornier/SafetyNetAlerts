@@ -67,10 +67,13 @@ public class JsonReader {
 			String phoneData = jsonObj.getString("phone");
 			String emailData = jsonObj.getString("email");
 
+			Address address = new Address();
+			address.setAddress(addressData);
+	
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
 			person.setLastName(lastNamesData);
-			person.setAddress(addressData); // Ecrire une méthode de conversion String adressData en un objet address.
+			person.setAddress(address); // Refacto exemple : person.setAddress(new Address(addressData)); travailler sur les constructeurs !
 			person.setCity(cityData);
 			person.setZipCode(zipCodeData);
 			person.setPhone(phoneData);
@@ -103,15 +106,19 @@ public class JsonReader {
 		// A chaque itération je prends la valeur de chaque adresse et de chaque caserne.
 		// Je converti mon JSONObject qui prend à chaque tour les valeurs des adresses et des casernes, en String. Je stocke dans mes objets String les valeurs.
 			String addressData = jsonObj.getString("address");
-			String stationNumberData = jsonObj.getString("station");
+			int stationNumberData = jsonObj.getInt("station");
 			
-		// Je dois ensuite convertir mon String en objet Address !
-
+		// Je dois ensuite convertir mon String en objet Address // puis passer en liste les objets Address.
+			Address address = new Address();
+			address.setAddress(addressData);
+			List<Address> addressList = new ArrayList<>();
+			addressList.add(address);
+			
 		// Je crée un objet firestation, je lui paramètre les informations contenues dans les objets adressData et sattionNumberData.
 		// J'ajoute enfin à ma firesationList toutes les informations contenues dans l'objet firestation. Et je retourne comme valeur de la méthode la firestationList.
 			Firestation firestation = new Firestation();
-			firestation.setAddress(addressData); // Ecrire une méthode de conversion String adressData en un objet address.
-			firestation.setStationNumber(stationNumberData); // Ecrire une méthode de conversion String stationNumberData en un objet stationNumber.
+			firestation.setAddress(addressList); 
+			firestation.setStationNumber(stationNumberData); 
 			firestationsList.add(firestation);
 
 		}
