@@ -30,8 +30,6 @@ public class Medications {
 	/**
 	 * @return the medicationsId
 	 */
-	@ManyToMany
-	@JoinTable(name = "medical_records", joinColumns = {@JoinColumn(name = "medicationsId")}, inverseJoinColumns = {@JoinColumn(name = "allergiesId")})
 	public int getMedicationsId() {
 		return medicationsId;
 	}

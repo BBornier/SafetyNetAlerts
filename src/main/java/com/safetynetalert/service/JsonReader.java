@@ -95,7 +95,7 @@ public class JsonReader {
 		// Je converti le JSONObject en JSONArray et je prends les informations dans firestations.
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
 		
-		// Je crée une instance de List de Firestation.
+		// Je crée une instance de List de Firestation. C'est dans cette Liste que je vai ajouter les informations acquise grâce à la boucle for.
 		List<Firestation> firestationsList = new ArrayList<>();
 
 		// J'itère dans tout le JSONArray, et je prends chaque valeur de chaque index.  
@@ -131,18 +131,24 @@ public class JsonReader {
 
 		JSONObject jsonFromUrl = JsonReader.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
-
+		
+		// Je converti le JSONObject en JSONArray et je prends les informations dans medicalrecords.
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
-
+		
+		// Je crée une instance de List de Medicalrecords. C'est à cette Liste que je vais ensuite ajouter les informations que j'aurai acquis grâce à la boucle for.
 		List<MedicalRecords> medicalRecordsList = new ArrayList<>();
 		
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			MedicalRecords medicalRecords = new MedicalRecords(); 
 			
+			// Je stocke mes informations parsées du JonArray dans une Liste de String.
 			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonArray);
+			// Je converti ensuite ma Liste de String vers une Liste de Medications grâce à la méthode convertStringListToMedicationJavaList().
 			List<Medications> medsList = convertStringListToMedicationJavaList(stringMedicationsList);
+			// Je passe à mon objet medicalRecords la méthode setMedications() auquel je passe en paramètre l'instance de List<Medications>. 
 			medicalRecords.setMedications(medsList);
+			// A la fin de la boucle, j'ajoute les informations (la liste de string de l'objet java medsList) contenues dans l'objet medicalRecords. 
 			medicalRecordsList.add(medicalRecords);
 			
 			
