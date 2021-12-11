@@ -13,6 +13,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Address;
@@ -24,6 +25,9 @@ import com.safetynetalert.model.Person;
 
 @Service
 public class JsonReader {
+	
+	@Autowired 
+	// ajouter le crud repo de Address.
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -73,7 +77,7 @@ public class JsonReader {
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
 			person.setLastName(lastNamesData);
-			person.setAddress(address); // Refacto exemple : person.setAddress(new Address(addressData)); travailler sur les constructeurs !
+			//person.setAddress(address); // Refacto exemple : person.setAddress(new Address(addressData)); travailler sur les constructeurs !
 			person.setCity(cityData);
 			person.setZipCode(zipCodeData);
 			person.setPhone(phoneData);

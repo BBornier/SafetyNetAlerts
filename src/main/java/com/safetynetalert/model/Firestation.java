@@ -3,6 +3,7 @@ package com.safetynetalert.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Firestation {
 	private int firestationId;
 
 	@Column (name = "addresses")
+	@ElementCollection(targetClass=Address.class)
 	private List<Address> address;
 
 	@Column(name = "station_number")
