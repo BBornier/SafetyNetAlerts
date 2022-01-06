@@ -22,12 +22,22 @@ import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.AddressRepository;
+import com.safetynetalert.repository.FirestationRepository;
+import com.safetynetalert.repository.MedicalRecordsRepository;
 
 @Service
 public class JsonReader {
 	
 	@Autowired 
 	// ajouter le crud repo de Address.
+	private AddressRepository addressRepository;
+	
+	@Autowired
+	private FirestationRepository firestationRepository;
+	
+	@Autowired
+	private MedicalRecordsRepository medicalRecordsRepository;
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
