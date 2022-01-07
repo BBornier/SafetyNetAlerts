@@ -44,8 +44,8 @@ public class SafetynetalertApplication implements CommandLineRunner {
 			/*List<Firestation> fireStList = JsonReader.parseJsonFirestationsFromUrl();
 			firestationRepository.saveAll(fireStList);*/
 			
-			List<MedicalRecords> medsRec = JsonReader.parseJsonMedicalRecordsFromUrl();
-			medicalRecordsRepository.saveAll(medsRec);
+			/*List<MedicalRecords> medsRec = JsonReader.parseJsonMedicalRecordsFromUrl();
+			medicalRecordsRepository.saveAll(medsRec);*/
 
 	}
 
