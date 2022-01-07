@@ -13,7 +13,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Address;
@@ -22,22 +21,9 @@ import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
-import com.safetynetalert.repository.AddressRepository;
-import com.safetynetalert.repository.FirestationRepository;
-import com.safetynetalert.repository.MedicalRecordsRepository;
 
 @Service
 public class JsonReader {
-	
-	@Autowired 
-	// ajouter le crud repo de Address.
-	private AddressRepository addressRepository;
-	
-	@Autowired
-	private FirestationRepository firestationRepository;
-	
-	@Autowired
-	private MedicalRecordsRepository medicalRecordsRepository;
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -87,7 +73,7 @@ public class JsonReader {
 			Person person = new Person();
 			person.setFirstName(firstNamesData);
 			person.setLastName(lastNamesData);
-			//person.setAddress(address); // Refacto exemple : person.setAddress(new Address(addressData)); travailler sur les constructeurs !
+			person.setAddress(address); // Refacto exemple : person.setAddress(new Address(addressData)); travailler sur les constructeurs !
 			person.setCity(cityData);
 			person.setZipCode(zipCodeData);
 			person.setPhone(phoneData);
@@ -183,7 +169,8 @@ public class JsonReader {
 		List<String> medicationsListParsed = new ArrayList<>();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			medicationsListParsed.add(jsonArray.getString(i));
+			//medicationsListParsed.add(jsonArray.getString(i));
+			medicationsListParsed.add(jsonArray.getJSONObject(i).getString("medications"));
 
 		}
 	
@@ -196,7 +183,8 @@ public class JsonReader {
 		List<String> allergiesListParsed = new ArrayList<>();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			allergiesListParsed.add(jsonArray.getString(i));
+			//allergiesListParsed.add(jsonArray.getString(i));
+			allergiesListParsed.add(jsonArray.getJSONObject(i).getString("allergies"));
 
 		}
 		
