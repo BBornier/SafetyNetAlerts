@@ -95,7 +95,7 @@ public class JsonReader {
 		// Je converti le JSONObject en JSONArray et je prends les informations dans firestations.
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
 		
-		// Je crée une instance de List de Firestation. C'est dans cette Liste que je vai ajouter les informations acquise grâce à la boucle for.
+		// Je crée une instance de List de Firestation. C'est dans cette Liste que je vais ajouter les informations acquise grâce à la boucle for.
 		List<Firestation> firestationsList = new ArrayList<>();
 
 		// J'itère dans tout le JSONArray, et je prends chaque valeur de chaque index.  
