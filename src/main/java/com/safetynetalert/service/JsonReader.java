@@ -55,6 +55,9 @@ public class JsonReader {
 		JSONArray jsonArray = jsonObject.getJSONArray("persons");
 
 		List<Person> personList = new ArrayList<>();
+		
+		//Stocker les adress dans une nouvelle méthode qui renverra la liste d'adresse !
+		//List<Address> addressList = new ArrayList<>();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
