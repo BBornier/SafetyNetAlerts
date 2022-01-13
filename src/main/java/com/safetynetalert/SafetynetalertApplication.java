@@ -56,9 +56,9 @@ public class SafetynetalertApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-			//Créer une liste d'adresse ICI !
-			List<Address> addressList = JsonReader.parseJsonPersonsFromUrl();
-			add
+			//Créer une liste d'adresse ICI, soit une nouvelle méthode pour prendre les adresses !
+			/*List<Address> addressList = JsonReader.parseJsonPersonsFromUrl();
+			addressRepository.saveAll(addressList);*/
 		
 			List<Person> personList = JsonReader.parseJsonPersonsFromUrl();
 			personRepository.saveAll(personList);
