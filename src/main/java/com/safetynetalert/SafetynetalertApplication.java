@@ -10,14 +10,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.safetynetalert.model.Address;
-import com.safetynetalert.model.Firestation;
-import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.AddressRepository;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.PersonRepository;
+import com.safetynetalert.service.JsonHelper;
 import com.safetynetalert.service.JsonReader;
 
 @SpringBootApplication
@@ -57,21 +55,17 @@ public class SafetynetalertApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 			//Créer une liste d'adresse ICI, soit une nouvelle méthode pour prendre les adresses !
-<<<<<<< HEAD
-			/*List<Address> addressList = JsonReader.parseJsonPersonsFromUrl();
+
+			/*List<Address> addressList = JsonHelper.parseJsonPersonsFromUrl();
 			addressRepository.saveAll(addressList);*/
-=======
-			List<Address> addressList = JsonReader.parseJsonPersonsFromUrl();
-			addressRepository.saveAll(addressList);
->>>>>>> NoComment
-		
-			List<Person> personList = JsonReader.parseJsonPersonsFromUrl();
+
+			List<Person> personList = JsonHelper.parseJsonPersonsFromUrl();
 			personRepository.saveAll(personList);
 			
-			/*List<Firestation> fireStList = JsonReader.parseJsonFirestationsFromUrl();
+			/*List<Firestation> fireStList = JsonHelper.parseJsonFirestationsFromUrl();
 			firestationRepository.saveAll(fireStList);*/
 			
-			/*List<MedicalRecords> medsRec = JsonReader.parseJsonMedicalRecordsFromUrl();
+			/*List<MedicalRecords> medsRec = JsonHelper.parseJsonMedicalRecordsFromUrl();
 			medicalRecordsRepository.saveAll(medsRec);*/
 
 	}

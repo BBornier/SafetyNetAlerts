@@ -23,7 +23,7 @@ import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
 
 @Service
-public class JsonReader {
+public class JsonHelper {
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -49,7 +49,7 @@ public class JsonReader {
 
 	public static List<Person> parseJsonPersonsFromUrl() throws JSONException, IOException {
 
-		JSONObject jsonObject = JsonReader.readJsonFromUrl(
+		JSONObject jsonObject = JsonHelper.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
 
 		JSONArray jsonArray = jsonObject.getJSONArray("persons");
@@ -87,7 +87,7 @@ public class JsonReader {
 
 	public static List<Firestation> parseJsonFirestationsFromUrl() throws JSONException, IOException {
 
-		JSONObject jsonObject = JsonReader.readJsonFromUrl(
+		JSONObject jsonObject = JsonHelper.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
 
@@ -115,7 +115,7 @@ public class JsonReader {
 
 	public static List<MedicalRecords> parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {
 
-		JSONObject jsonFromUrl = JsonReader.readJsonFromUrl(
+		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
 
