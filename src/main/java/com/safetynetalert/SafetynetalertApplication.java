@@ -16,7 +16,6 @@ import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalert.service.JsonHelper;
-import com.safetynetalert.service.JsonReader;
 
 @SpringBootApplication
 public class SafetynetalertApplication implements CommandLineRunner {
