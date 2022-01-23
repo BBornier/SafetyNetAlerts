@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.PersonRepository;
-import com.safetynetalert.service.JsonReader;
+
 
 import java.util.List;
 
