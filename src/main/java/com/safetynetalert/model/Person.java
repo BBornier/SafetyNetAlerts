@@ -14,6 +14,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "person")
 public class Person {
+	
+	
+
+	public Person() {
+		super();
+	}
+
+	public Person(String firstName, String lastName, Address address, String phoneNumber, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +44,8 @@ public class Person {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Address address;
 
-	@Column(name = "city")
-	private String city;
-
-	@Column(name = "zipCode")
-	private long zipCode;
-
 	@Column(name = "phone")
-	private String phone;
+	private String phoneNumber;
 
 	@Column(name = "email")
 	private String email;
@@ -101,45 +111,17 @@ public class Person {
 	}
 
 	/**
-	 * @return the city
-	 */
-	public String getCity() {
-		return city;
-	}
-
-	/**
-	 * @param city the city to set
-	 */
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	/**
-	 * @return the zipCode
-	 */
-	public long getZipCode() {
-		return zipCode;
-	}
-
-	/**
-	 * @param zipCode the zipCode to set
-	 */
-	public void setZipCode(long zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	/**
 	 * @return the phone
 	 */
-	public String getPhone() {
-		return phone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhoneNumber(String phone) {
+		this.phoneNumber = phone;
 	}
 
 	/**
@@ -170,22 +152,12 @@ public class Person {
 		this.medicalRecords = medicalRecords;
 	}
 
-	public Person() {
-		super();
+	@Override
+	public String toString() {
+		return "Person [personId=" + personId + ", firstName=" + firstName + ", lastName=" + lastName + ", address="
+				+ address + ", phone=" + phoneNumber + ", email=" + email + ", medicalRecords=" + medicalRecords + "]";
 	}
-
-	public Person(int personId, String firstName, String lastName, Address address, String city, long zipCode,
-			String phone, String email, MedicalRecords medicalRecords) {
-		super();
-		this.personId = personId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.city = city;
-		this.zipCode = zipCode;
-		this.phone = phone;
-		this.email = email;
-		this.medicalRecords = medicalRecords;
-	}
+	
+	
 
 }

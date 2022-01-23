@@ -1,54 +1,28 @@
 package com.safetynetalerts.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import java.io.IOException;
 
-import com.safetynetalert.model.Person;
-import com.safetynetalert.repository.PersonRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONException;
+
+import com.safetynetalert.service.JsonHelper;
 
 
-import java.util.List;
-
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-
-//@Configuration
 public class SafetyConfig {
-
-	/*@Autowired
-	PersonRepository personRepository;
 	
-	@Bean
-	CommandLineRunner commandLineRunner() {
-		return args -> {
-			
-			// parser objet Json au level 1.
-			JSONObject jsonObject = JsonReader.readJsonFromUrl(
-					"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json"); // Fonctionne !
+	private static final Logger LOGGER = LogManager.getLogger(SafetyConfig.class);
 
-			System.out.println(jsonObject.get("persons"));
-			System.out.println(jsonObject.get("firestations"));
-			System.out.println(jsonObject.get("medicalrecords"));
-
-			//parser objet Json avec une méthode sans JSONParser pour afficher noms et prénoms au level -1 du Json.
-			JSONObject jsonObject3 = JsonReader.parseJsonFirestationsFromUrl(); // Fonctionne !
-			JSONObject jsonObject4 = JsonReader.parseJsonMedicalRecordsFromUrl(); // ne fonctionne qu'au niveau 0 pas au niveau -1.
-			
-			Person person = new Person();
-			person.setAddress("16, impasse Montrat");
-			person.setCity("Villechenève");
-			person.setZipCode(69770);
-			personRepository.save(person);
-			
-			JsonReader js = new JsonReader();
-			List<Person> personList = js.parseJsonPersonsFromUrl();
-			
-			personRepository.saveAll(personList);
-			
+	public static void LoadData() {
+	
+		JsonHelper jsonHelper = new JsonHelper();
+		try {
+			jsonHelper.parseJsonPersonsFromUrl();
+		} catch (JSONException | IOException e) {
+			e.printStackTrace();
+			LOGGER.error("Impossible to load data !"); 
+		}
 		
-		};
-		
-	}*/
+	}
 
 }

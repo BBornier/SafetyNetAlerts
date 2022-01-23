@@ -8,11 +8,16 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Address;
@@ -21,9 +26,27 @@ import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.AddressRepository;
+import com.safetynetalert.repository.FirestationRepository;
+import com.safetynetalert.repository.MedicalRecordsRepository;
+import com.safetynetalert.repository.PersonRepository;
 
 @Service
 public class JsonHelper {
+	
+	@Autowired
+	private AddressRepository addressRepository;
+
+	@Autowired
+	private PersonRepository personRepository;
+	
+	@Autowired
+	private MedicalRecordsRepository medicalRecordsRepository;
+	
+	@Autowired
+	private FirestationRepository firestationRepository;
+	
+	
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -47,41 +70,34 @@ public class JsonHelper {
 		}
 	}
 
-	public static List<Person> parseJsonPersonsFromUrl() throws JSONException, IOException {
+	public void parseJsonPersonsFromUrl() throws JSONException, IOException {
 
 		JSONObject jsonObject = JsonHelper.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+		
+		/*//Iteration avancée dans le JsonObject, pour faire une généralisation de l'ensemble des données.
+		Map<String, Object> map = new HashMap<>(); 
+		Set<String> keys = jsonObject.keySet();
+		keys.stream().forEach(e -> map.put(e, jsonObject.get(e)));
+		
+		for(String str : keys)
+			map.put(str, jsonObject.get(str));
+		
+		for(Map.Entry<String, Object> e : map.entrySet())
+			System.out.println(e.getKey()+ " " + e.getValue());
+		//Fin*/
 
 		JSONArray jsonArray = jsonObject.getJSONArray("persons");
 
-		List<Person> personList = new ArrayList<>();
-
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
-
-			String firstNamesData = jsonObj.getString("firstName");
-			String lastNamesData = jsonObj.getString("lastName");
-			String addressData = jsonObj.getString("address");
-			String cityData = jsonObj.getString("city");
-			Long zipCodeData = jsonObj.getLong("zip");
-			String phoneData = jsonObj.getString("phone");
-			String emailData = jsonObj.getString("email");
-
-			Address address = new Address();
-			address.setAddress(addressData);
-
-			Person person = new Person();
-			person.setFirstName(firstNamesData);
-			person.setLastName(lastNamesData);
-			person.setAddress(address);
-			person.setCity(cityData);
-			person.setZipCode(zipCodeData);
-			person.setPhone(phoneData);
-			person.setEmail(emailData);
-			personList.add(person);
+			
+			Address address = new Address(jsonObj.getString("address"), jsonObj.getString("zip"), jsonObj.getString("city"));
+			
+			Person person = new Person(jsonObj.getString("firstName"), jsonObj.getString("lastName"), address, jsonObj.getString("phone"), jsonObj.getString("email"));
+			personRepository.save(person);
 
 		}
-		return personList;
 
 	}
 
@@ -98,7 +114,7 @@ public class JsonHelper {
 			int stationNumberData = jsonObj.getInt("station");
 
 			Address address = new Address();
-			address.setAddress(addressData);
+			//address.setAddress(addressData);
 			List<Address> addressList = new ArrayList<>();
 			addressList.add(address);
 

@@ -1,6 +1,5 @@
 package com.safetynetalert.controller;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,21 +74,11 @@ public class PersonController {
 			Address address = person.getAddress();
 			if (address != null) {
 				currentPerson.setAddress(address);
-				;
-			}
-			String city = person.getCity();
-			if (city != null) {
-				currentPerson.setCity(city);
-				;
-			}
-			long zipCode = person.getZipCode();
-			if (Objects.isNull(zipCode)) { // vérifier un null sur un type primitif. Avec la classe Objects.
-				currentPerson.setZipCode(zipCode);
 			}
 
-			String phone = person.getPhone();
+			String phone = person.getPhoneNumber();
 			if (phone != null) {
-				currentPerson.setPhone(phone);
+				currentPerson.setPhoneNumber(phone);
 			}
 
 			String email = person.getEmail();

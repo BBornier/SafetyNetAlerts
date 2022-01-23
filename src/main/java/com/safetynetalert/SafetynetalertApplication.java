@@ -1,38 +1,20 @@
 package com.safetynetalert;
 
-import java.util.List;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.safetynetalert.model.Person;
-import com.safetynetalert.repository.AddressRepository;
-import com.safetynetalert.repository.FirestationRepository;
-import com.safetynetalert.repository.MedicalRecordsRepository;
-import com.safetynetalert.repository.PersonRepository;
-import com.safetynetalert.service.JsonHelper;
+import com.safetynetalerts.config.SafetyConfig;
 
 @SpringBootApplication
-public class SafetynetalertApplication implements CommandLineRunner {
+public class SafetynetalertApplication {
 	
 	private static final Logger LOGGER = LogManager.getLogger(SafetynetalertApplication.class);
 	
-	@Autowired
-	private AddressRepository addressRepository;
-
-	@Autowired
-	private PersonRepository personRepository;
-	
-	@Autowired
-	private MedicalRecordsRepository medicalRecordsRepository;
-	
-	@Autowired
-	private FirestationRepository firestationRepository;
 	
 	
 	public static void main(String[] args) {
@@ -47,26 +29,9 @@ public class SafetynetalertApplication implements CommandLineRunner {
         LOGGER.error("Exemple of Error level log message.");
         
     	LOGGER.trace("Exiting application.");
+    	
+    	SafetyConfig.LoadData();
 	
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-
-			//Créer une liste d'adresse ICI, soit une nouvelle méthode pour prendre les adresses !
-
-			/*List<Address> addressList = JsonHelper.parseJsonPersonsFromUrl();
-			addressRepository.saveAll(addressList);*/
-
-			List<Person> personList = JsonHelper.parseJsonPersonsFromUrl();
-			personRepository.saveAll(personList);
-			
-			/*List<Firestation> fireStList = JsonHelper.parseJsonFirestationsFromUrl();
-			firestationRepository.saveAll(fireStList);*/
-			
-			/*List<MedicalRecords> medsRec = JsonHelper.parseJsonMedicalRecordsFromUrl();
-			medicalRecordsRepository.saveAll(medsRec);*/
-
 	}
 
 }

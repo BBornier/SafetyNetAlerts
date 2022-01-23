@@ -13,21 +13,35 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "address")
 public class Address {
+	
+	
+
+	public Address() {
+		super();
+	}
+
+
+	public Address(String streetName, String zip, String city) {
+		super();
+		this.streetName = streetName;
+		this.zip = zip;
+		this.city = city;
+	}
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int addressId;
 	
-	@Column(name = "address")
-	String address;
 	
-	@Column (name = "persons")
-	@ElementCollection(targetClass=Person.class)
-	private List<Person> person;
+	private String streetName;
 	
-	@Column (name = "firestations")
-	@ElementCollection(targetClass=Firestation.class)
-	private List<Firestation> firestation;
+	
+	private String zip	;
+	
+	
+	private String city;
+
 
 	/**
 	 * @return the addressId
@@ -36,6 +50,7 @@ public class Address {
 		return addressId;
 	}
 
+
 	/**
 	 * @param addressId the addressId to set
 	 */
@@ -43,58 +58,52 @@ public class Address {
 		this.addressId = addressId;
 	}
 
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
 
 	/**
-	 * @param address the address to set
+	 * @return the streetName
 	 */
-	public void setAddress(String address) {
-		this.address = address;
+	public String getStreetName() {
+		return streetName;
 	}
+
 
 	/**
-	 * @return the person
+	 * @param streetName the streetName to set
 	 */
-	public List<Person> getPerson() {
-		return person;
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
+
 
 	/**
-	 * @param person the person to set
+	 * @return the zip
 	 */
-	public void setPerson(List<Person> person) {
-		this.person = person;
+	public String getZip() {
+		return zip;
 	}
+
 
 	/**
-	 * @return the firestation
+	 * @param zip the zip to set
 	 */
-	public List<Firestation> getFirestation() {
-		return firestation;
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
+
 
 	/**
-	 * @param firestation the firestation to set
+	 * @return the city
 	 */
-	public void setFirestation(List<Firestation> firestation) {
-		this.firestation = firestation;
+	public String getCity() {
+		return city;
 	}
 
-	public Address() {
-		super();
-	}
 
-	public Address(int addressId, String address, List<Person> person, List<Firestation> firestation) {
-		super();
-		this.addressId = addressId;
-		this.address = address;
-		this.person = person;
-		this.firestation = firestation;
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 }
