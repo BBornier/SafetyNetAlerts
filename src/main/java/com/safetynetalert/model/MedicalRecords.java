@@ -9,6 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,11 +31,21 @@ public class MedicalRecords {
 	private LocalDate birthdate;
 
 	@Column(name = "medications")
+
 	@ElementCollection(targetClass=Medications.class)
-	private List<Medications> medications;
+	private List<Medications> medications1;
 
 	@Column(name = "tartonpion")
 	@ElementCollection(targetClass=Allergies.class)
+
+	@OneToMany
+	@JoinColumn(name = "Medical_Records_Id")
+	private List<Medications> medications;
+
+	@Column(name = "allergies")
+	@OneToMany
+	@JoinColumn(name = "Mediacal_Records_Id")
+
 	private List<Allergies> allergies;
 
 	/**
