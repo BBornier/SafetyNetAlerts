@@ -50,8 +50,7 @@ public class Person {
 	@Column(name = "email")
 	private String email;
 
-	@OneToOne
-	@JoinColumn(name = "medical_records")
+	@Column
 	private MedicalRecords medicalRecords;
 
 	/**

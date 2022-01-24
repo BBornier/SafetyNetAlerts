@@ -75,7 +75,7 @@ public class MedicalRecordsController {
 		if (mR.isPresent()) {
 			MedicalRecords currentMedicalRecord = mR.get();
 
-			LocalDate birthdate = medicalRecords.getBirthdate();
+			String birthdate = medicalRecords.getBirthdate();
 			if (birthdate != null) {
 				currentMedicalRecord.setBirthdate(birthdate);
 			}

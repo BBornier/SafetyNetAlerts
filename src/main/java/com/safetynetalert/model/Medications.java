@@ -14,6 +14,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "medications")
 public class Medications {
+	
+	public Medications() {
+		super();
+	}
+
+	public Medications(String nameAndDosage, List<MedicalRecords> allergies) {
+		super();
+		this.nameAndDosage = nameAndDosage;
+		this.allergies = allergies;
+	}
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,16 +78,5 @@ public class Medications {
 	public void setAllergies(List<MedicalRecords> allergies) {
 		this.allergies = allergies;
 	}
-
-	public Medications() {
-		super();
-	}
-
-	public Medications(int medicationsId, String nameAndDosage, List<MedicalRecords> allergies) {
-		super();
-		this.medicationsId = medicationsId;
-		this.nameAndDosage = nameAndDosage;
-		this.allergies = allergies;
-	}
-
+	
 }

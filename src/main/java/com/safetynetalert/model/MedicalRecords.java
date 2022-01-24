@@ -19,16 +19,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "medical_records")
 public class MedicalRecords {
+	
+	public MedicalRecords() {
+		super();
+	}
+
+	public MedicalRecords(int medicalRecordId, Person person, String birthdate, List<Medications> medications,
+			List<Allergies> allergies) {
+		super();
+		this.medicalRecordId = medicalRecordId;
+		this.person = person;
+		this.birthdate = birthdate;
+		this.medications = medications;
+		this.allergies = allergies;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int medicalRecordId;
 
-	@OneToOne
+	@Column
 	private Person person;
 
 	@Column(name = "birthdate")
-	private LocalDate birthdate;
+	private String birthdate;
 
 	@Column(name = "medications")
 
@@ -45,7 +59,6 @@ public class MedicalRecords {
 	@Column(name = "allergies")
 	@OneToMany
 	@JoinColumn(name = "Mediacal_Records_Id")
-
 	private List<Allergies> allergies;
 
 	/**
@@ -79,14 +92,14 @@ public class MedicalRecords {
 	/**
 	 * @return the birthdate
 	 */
-	public LocalDate getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
 
 	/**
 	 * @param birthdate the birthdate to set
 	 */
-	public void setBirthdate(LocalDate birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -115,20 +128,6 @@ public class MedicalRecords {
 	 * @param allergies the allergies to set
 	 */
 	public void setAllergies(List<Allergies> allergies) {
-		this.allergies = allergies;
-	}
-
-	public MedicalRecords() {
-		super();
-	}
-
-	public MedicalRecords(int medicalRecordId, Person person, LocalDate birthdate, List<Medications> medications,
-			List<Allergies> allergies) {
-		super();
-		this.medicalRecordId = medicalRecordId;
-		this.person = person;
-		this.birthdate = birthdate;
-		this.medications = medications;
 		this.allergies = allergies;
 	}
 

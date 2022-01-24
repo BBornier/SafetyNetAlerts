@@ -73,11 +73,11 @@ public class FirestationsController {
 		if (f.isPresent()) {
 			Firestation currentFirestation = f.get();
 
-			int station = firestation.getStationNumber();
+			String station = firestation.getStationNumber();
 			if (Objects.isNull(station)) {
 				currentFirestation.setStationNumber(station);
 			}
-			List<Address> address = firestation.getAddress();
+			Address address = firestation.getAddress();
 			if (address != null) {
 				currentFirestation.setAddress(address);
 				;

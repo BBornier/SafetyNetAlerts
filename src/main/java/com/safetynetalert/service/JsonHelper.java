@@ -8,12 +8,8 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,7 +89,7 @@ public class JsonHelper {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
 			Address address = new Address(jsonObj.getString("address"), jsonObj.getString("zip"), jsonObj.getString("city"));
-			
+
 			Person person = new Person(jsonObj.getString("firstName"), jsonObj.getString("lastName"), address, jsonObj.getString("phone"), jsonObj.getString("email"));
 			personRepository.save(person);
 
@@ -101,31 +97,23 @@ public class JsonHelper {
 
 	}
 
-	public static List<Firestation> parseJsonFirestationsFromUrl() throws JSONException, IOException {
+	public void parseJsonFirestationsFromUrl() throws JSONException, IOException {
 
 		JSONObject jsonObject = JsonHelper.readJsonFromUrl(
 				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
 
-		List<Firestation> firestationsList = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
-			String addressData = jsonObj.getString("address");
-			int stationNumberData = jsonObj.getInt("station");
+			
+			
+			//ici il ne devrait y avoir que adress dans le constructeur. Constructeur par défaut ? ou génération d'un autre modèle + constructeur ?
+			Address address = new Address(jsonObj.getString("address"),jsonObj.getString("zip"), jsonObj.getString("city"));
 
-			Address address = new Address();
-			//address.setAddress(addressData);
-			List<Address> addressList = new ArrayList<>();
-			addressList.add(address);
-
-			Firestation firestation = new Firestation();
-			firestation.setAddress(addressList);
-			firestation.setStationNumber(stationNumberData);
-			firestationsList.add(firestation);
+			Firestation firestation = new Firestation(address, jsonObj.getString("station"));
+			firestationRepository.save(firestation);
 
 		}
-
-		return firestationsList;
 
 	}
 

@@ -1,7 +1,5 @@
 package com.safetynetalert.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,17 +11,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "firestation")
 public class Firestation {
+	
+	public Firestation() {
+		super();
+	}
+
+	public Firestation(Address address, String stationNumber) {
+		super();
+		this.address = address;
+		this.stationNumber = stationNumber;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int firestationId;
 
 	@Column (name = "addresses")
-	@ElementCollection(targetClass=Address.class)
-	private List<Address> address;
+	private Address address;
 
 	@Column(name = "station_number")
-	private int stationNumber;
+	private String stationNumber;
 
 	/**
 	 * @return the firestationId
@@ -42,42 +49,29 @@ public class Firestation {
 	/**
 	 * @return the address
 	 */
-	public List<Address> getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 	/**
 	 * @param address the address to set
 	 */
-	public void setAddress(List<Address> address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
 	/**
 	 * @return the stationNumber
 	 */
-	public int getStationNumber() {
+	public String getStationNumber() {
 		return stationNumber;
 	}
 
 	/**
 	 * @param stationNumber the stationNumber to set
 	 */
-	public void setStationNumber(int stationNumber) {
+	public void setStationNumber(String stationNumber) {
 		this.stationNumber = stationNumber;
 	}
-
-	public Firestation() {
-		super();
-	}
-
-	public Firestation(int firestationId, List<Address> address, int stationNumber) {
-		super();
-		this.firestationId = firestationId;
-		this.address = address;
-		this.stationNumber = stationNumber;
-	}
-
-	// Convertir Liste de String en List d'Adresses !! dans JsonReader !!
 
 }
