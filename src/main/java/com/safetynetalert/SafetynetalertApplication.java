@@ -3,7 +3,6 @@ package com.safetynetalert;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,8 +12,6 @@ import com.safetynetalerts.config.SafetyConfig;
 public class SafetynetalertApplication {
 	
 	private static final Logger LOGGER = LogManager.getLogger(SafetynetalertApplication.class);
-	
-	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SafetynetalertApplication.class, args);
@@ -32,5 +29,4 @@ public class SafetynetalertApplication {
     	SafetyConfig.LoadData();
 	
 	}
-
 }

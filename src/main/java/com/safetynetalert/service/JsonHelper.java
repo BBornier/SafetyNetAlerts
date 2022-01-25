@@ -8,7 +8,13 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,27 +28,18 @@ import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
-import com.safetynetalert.repository.AddressRepository;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.PersonRepository;
 
 @Service
 public class JsonHelper {
+	private static final Logger LOGGER = LogManager.getLogger(JsonHelper.class);
 	
 	@Autowired
-	private AddressRepository addressRepository;
-
-	@Autowired
-	private PersonRepository personRepository;
+	private PersonService personService;
 	
-	@Autowired
-	private MedicalRecordsRepository medicalRecordsRepository;
-	
-	@Autowired
-	private FirestationRepository firestationRepository;
-	
-	
+	public static final String URL = "https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json";
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -68,59 +65,47 @@ public class JsonHelper {
 
 	public void parseJsonPersonsFromUrl() throws JSONException, IOException {
 
-		JSONObject jsonObject = JsonHelper.readJsonFromUrl(
-				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
-		
-		/*//Iteration avancée dans le JsonObject, pour faire une généralisation de l'ensemble des données.
-		Map<String, Object> map = new HashMap<>(); 
-		Set<String> keys = jsonObject.keySet();
-		keys.stream().forEach(e -> map.put(e, jsonObject.get(e)));
-		
-		for(String str : keys)
-			map.put(str, jsonObject.get(str));
-		
-		for(Map.Entry<String, Object> e : map.entrySet())
-			System.out.println(e.getKey()+ " " + e.getValue());
-		//Fin*/
+		JSONObject jsonObject = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 
 		JSONArray jsonArray = jsonObject.getJSONArray("persons");
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
+			Person person = new Person(jsonObj.getString("firstName"), jsonObj.getString("lastName"), jsonObj.getString("phone"), jsonObj.getString("email"));
 			Address address = new Address(jsonObj.getString("address"), jsonObj.getString("zip"), jsonObj.getString("city"));
-
-			Person person = new Person(jsonObj.getString("firstName"), jsonObj.getString("lastName"), address, jsonObj.getString("phone"), jsonObj.getString("email"));
-			personRepository.save(person);
-
+			
+			person.getAddress().add(address);
+			LOGGER.info("person before: " + person);
+			
+			person = personService.savePerson(person);
+			
+			LOGGER.info("person after: " + person);
+			
 		}
 
 	}
 
 	public void parseJsonFirestationsFromUrl() throws JSONException, IOException {
 
-		JSONObject jsonObject = JsonHelper.readJsonFromUrl(
-				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+		JSONObject jsonObject = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
 			
-			//ici il ne devrait y avoir que adress dans le constructeur. Constructeur par défaut ? ou génération d'un autre modèle + constructeur ?
 			Address address = new Address(jsonObj.getString("address"),jsonObj.getString("zip"), jsonObj.getString("city"));
-
-			Firestation firestation = new Firestation(address, jsonObj.getString("station"));
-			firestationRepository.save(firestation);
-
+			
+			//Firestation firestation = new Firestation(jsonObj.getString("station"));
+			//firestationRepository.save(firestation);
 		}
 
 	}
 
 	public static List<MedicalRecords> parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {
 
-		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(
-				"https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json");
+		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
 
 		List<MedicalRecords> medicalRecordsList = new ArrayList<>();

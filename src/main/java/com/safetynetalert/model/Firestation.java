@@ -1,6 +1,9 @@
 package com.safetynetalert.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +18,7 @@ public class Firestation {
 		super();
 	}
 
-	public Firestation(Address address, String stationNumber) {
+	public Firestation(List<Address> address, String stationNumber) {
 		super();
 		this.address = address;
 		this.stationNumber = stationNumber;
@@ -26,51 +29,46 @@ public class Firestation {
 	private int firestationId;
 
 	@Column (name = "addresses")
-	private Address address;
+	@ElementCollection(targetClass = Address.class)
+	private List<Address> address;
 
 	@Column(name = "station_number")
 	private String stationNumber;
 
-	/**
-	 * @return the firestationId
-	 */
+
 	public int getFirestationId() {
 		return firestationId;
 	}
 
-	/**
-	 * @param firestationId the firestationId to set
-	 */
+
 	public void setFirestationId(int firestationId) {
 		this.firestationId = firestationId;
 	}
 
-	/**
-	 * @return the address
-	 */
-	public Address getAddress() {
+	
+	public List<Address> getAddress() {
 		return address;
 	}
 
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(Address address) {
+	
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 
-	/**
-	 * @return the stationNumber
-	 */
+	
 	public String getStationNumber() {
 		return stationNumber;
 	}
 
-	/**
-	 * @param stationNumber the stationNumber to set
-	 */
+	
 	public void setStationNumber(String stationNumber) {
 		this.stationNumber = stationNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "Firestation [firestationId=" + firestationId + ", address=" + address + ", stationNumber="
+				+ stationNumber + "]";
 	}
 
 }

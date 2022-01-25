@@ -23,23 +23,13 @@ public class FirestationsController {
 	@Autowired
 	private FirestationService firestationService;
 
-	/**
-	 * Create - Add a new firestation
-	 * 
-	 * @param firestation An object firestation
-	 * @return The firestation object saved
-	 */
+	
 	@PostMapping("/firestation")
 	public Firestation create(@RequestBody Firestation firestation) {
 		return firestationService.saveFirestation(firestation);
 	}
 
-	/**
-	 * Read - Get one firestation
-	 * 
-	 * @param id The id of the firestation
-	 * @return A Firestation object full filled
-	 */
+	
 	@GetMapping("/firestation/{id}")
 	public Firestation getFirestation(@PathVariable("id") final Long id) {
 		Optional<Firestation> firestation = firestationService.getFirestation(id);
@@ -50,23 +40,13 @@ public class FirestationsController {
 		}
 	}
 
-	/**
-	 * Read - Get all firestations
-	 * 
-	 * @return - An Iterable object of Firestation full filled
-	 */
+	
 	@GetMapping("/firestation")
 	public Iterable<Firestation> getFirestations() {
 		return firestationService.getFirestations();
 	}
 
-	/**
-	 * Update - Update an existing firestation
-	 * 
-	 * @param id     - The id of the firestation to update
-	 * @param firestation - The firestation object updated
-	 * @return
-	 */
+	
 	@PutMapping("/firestation/{id}")
 	public Firestation updateFirestation(@PathVariable("id") final Long id, @RequestBody Firestation firestation) {
 		Optional<Firestation> f = firestationService.getFirestation(id);
@@ -77,11 +57,11 @@ public class FirestationsController {
 			if (Objects.isNull(station)) {
 				currentFirestation.setStationNumber(station);
 			}
-			Address address = firestation.getAddress();
+			/*Address address = firestation.getAddress();
 			if (address != null) {
 				currentFirestation.setAddress(address);
 				;
-			}
+			}*/
 
 			firestationService.saveFirestation(firestation);
 			return currentFirestation;
@@ -90,11 +70,6 @@ public class FirestationsController {
 		}
 	}
 
-	/**
-	 * Delete - Delete a firestation
-	 * 
-	 * @param id - The id of the firestation to delete
-	 */
 	@DeleteMapping("/firestation/{id}")
 	public void deleteFirestation(@PathVariable("id") final Long id) {
 		firestationService.deleteFirestation(id);

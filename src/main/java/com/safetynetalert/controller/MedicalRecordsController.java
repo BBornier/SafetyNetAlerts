@@ -25,23 +25,13 @@ public class MedicalRecordsController {
 	@Autowired
 	private MedicalRecordsService medicalRecordsService;
 
-	/**
-	 * Create - Add a new medical record
-	 * 
-	 * @param medicalRecord An object medicalrecord
-	 * @return The MedicalRecord object saved
-	 */
+	
 	@PostMapping("/medicalrecords")
 	public MedicalRecords create(@RequestBody MedicalRecords medicalRecord) {
 		return medicalRecordsService.saveMedicalRecords(medicalRecord);
 	}
 
-	/**
-	 * Read - Get one medical record
-	 * 
-	 * @param id The id of the medicalrecord
-	 * @return A MedicalRecord object full filled
-	 */
+	
 	@GetMapping("/medicalrecords/{id}")
 	public MedicalRecords getMedicalRecord(@PathVariable("id") final Long id) {
 		Optional<MedicalRecords> medicalRecord = medicalRecordsService.getMedicalRecord(id);
@@ -52,23 +42,13 @@ public class MedicalRecordsController {
 		}
 	}
 
-	/**
-	 * Read - Get all medical records
-	 * 
-	 * @return - An Iterable object of MedicalRecords full filled
-	 */
+	
 	@GetMapping("/medicalrecords")
 	public Iterable<MedicalRecords> getMedicalRecords() {
 		return medicalRecordsService.getMedicalRecords();
 	}
 
-	/**
-	 * Update - Update an existing medical record
-	 * 
-	 * @param id     - The id of the medical record to update
-	 * @param medicalrecord - The medical record object updated
-	 * @return
-	 */
+	
 	@PutMapping("/medicalrecords/{id}")
 	public MedicalRecords updateMedicalRecord(@PathVariable("id") final Long id, @RequestBody MedicalRecords medicalRecords) {
 		Optional<MedicalRecords> mR = medicalRecordsService.getMedicalRecord(id);
@@ -95,11 +75,7 @@ public class MedicalRecordsController {
 		}
 	}
 
-	/**
-	 * Delete - Delete a medicalrecord
-	 * 
-	 * @param id - The id of the medicalrecord to delete
-	 */
+	
 	@DeleteMapping("/medicalrecords/{id}")
 	public void deleteMedicalRecord(@PathVariable("id") final Long id) {
 		medicalRecordsService.deleteMedicalRecord(id);

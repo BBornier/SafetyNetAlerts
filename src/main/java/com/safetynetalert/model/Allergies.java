@@ -19,13 +19,12 @@ public class Allergies {
 		super();
 	}
 
+	//pq un paramètre medications avec un type List<> ici ?
 	public Allergies(String name, List<MedicalRecords> medications) {
 		super();
 		this.name = name;
 		this.medications = medications;
-
 	}
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,50 +32,42 @@ public class Allergies {
 
 	@Column(name = "name")
 	private String name;
-
+	
 	@Column(name = "medicalRecords")
-	@ElementCollection(targetClass=MedicalRecords.class)
+	@ElementCollection(targetClass = MedicalRecords.class)
 	private List<MedicalRecords> medications = new ArrayList<MedicalRecords>();
 
-	/**
-	 * @return the allergiesId
-	 */
+
 	public int getAllergiesId() {
 		return allergiesId;
 	}
 
-	/**
-	 * @param allergiesId the allergiesId to set
-	 */
+	
 	public void setAllergiesId(int allergiesId) {
 		this.allergiesId = allergiesId;
 	}
 
-	/**
-	 * @return the name
-	 */
+	
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the medications
-	 */
 	public List<MedicalRecords> getMedications() {
 		return medications;
 	}
 
-	/**
-	 * @param medications the medications to set
-	 */
 	public void setMedications(List<MedicalRecords> medications) {
 		this.medications = medications;
 	}
+
+	@Override
+	public String toString() {
+		return "Allergies [allergiesId=" + allergiesId + ", name=" + name + ", medications=" + medications + "]";
+	}
+
 }

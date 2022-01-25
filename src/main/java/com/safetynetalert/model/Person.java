@@ -1,29 +1,30 @@
 package com.safetynetalert.model;
 
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "person")
 public class Person {
 	
-	
-
 	public Person() {
 		super();
 	}
 
-	public Person(String firstName, String lastName, Address address, String phoneNumber, String email) {
+	public Person(String firstName, String lastName, String phoneNumber, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		
@@ -39,112 +40,86 @@ public class Person {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Address address;
-
 	@Column(name = "phone")
 	private String phoneNumber;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column
-	private MedicalRecords medicalRecords;
+	@ElementCollection
+	private Set<Address> address = new HashSet<>();
 
-	/**
-	 * @return the personId
-	 */
+	@OneToOne
+	@JoinColumn(name = "person_id")
+	private MedicalRecords medicalRecords;
+	
+	
+
 	public int getPersonId() {
 		return personId;
 	}
 
-	/**
-	 * @param personId the personId to set
-	 */
+	
 	public void setPersonId(int personId) {
 		this.personId = personId;
 	}
 
-	/**
-	 * @return the firstName
-	 */
+	
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * @param firstName the firstName to set
-	 */
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	/**
-	 * @return the lastName
-	 */
+	
 	public String getLastName() {
 		return lastName;
 	}
 
-	/**
-	 * @param lastName the lastName to set
-	 */
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	/**
-	 * @return the address
-	 */
-	public Address getAddress() {
+	
+	public Set<Address> getAddress() {
 		return address;
 	}
 
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(Address address) {
+	
+	public void setAddress(Set<Address> address) {
 		this.address = address;
 	}
 
-	/**
-	 * @return the phone
-	 */
+	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	/**
-	 * @param phone the phone to set
-	 */
+	
 	public void setPhoneNumber(String phone) {
 		this.phoneNumber = phone;
 	}
 
-	/**
-	 * @return the email
-	 */
+	
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param email the email to set
-	 */
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return the medicalRecords
-	 */
+	
 	public MedicalRecords getMedicalRecords() {
 		return medicalRecords;
 	}
 
-	/**
-	 * @param medicalRecords the medicalRecords to set
-	 */
+	
 	public void setMedicalRecords(MedicalRecords medicalRecords) {
 		this.medicalRecords = medicalRecords;
 	}
