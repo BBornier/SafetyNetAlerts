@@ -18,9 +18,8 @@ public class Firestation {
 		super();
 	}
 
-	public Firestation(List<Address> address, String stationNumber) {
+	public Firestation(String stationNumber) {
 		super();
-		this.address = address;
 		this.stationNumber = stationNumber;
 	}
 
@@ -28,7 +27,7 @@ public class Firestation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int firestationId;
 
-	@Column (name = "addresses")
+	@Column (name = "address")
 	@ElementCollection(targetClass = Address.class)
 	private List<Address> address;
 

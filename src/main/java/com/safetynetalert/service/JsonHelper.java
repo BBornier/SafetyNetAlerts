@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Allergies;
+import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
@@ -30,6 +31,9 @@ public class JsonHelper {
 	
 	@Autowired
 	private PersonService personService;
+	
+	@Autowired
+	private FirestationService firestationService;
 	
 	public static final String URL = "https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json";
 
@@ -86,11 +90,14 @@ public class JsonHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
-			
+			Firestation firestation = new Firestation(jsonObj.getString("station"));
 			Address address = new Address(jsonObj.getString("address"),jsonObj.getString("zip"), jsonObj.getString("city"));
 			
-			//Firestation firestation = new Firestation(jsonObj.getString("station"));
-			//firestationRepository.save(firestation);
+			firestation.getAddress().add(address);
+			LOGGER.info("firestation before: " + firestation);
+			
+			firestationService.saveFirestation(firestation);
+			LOGGER.info("firestation after: " + firestation);
 		}
 
 	}

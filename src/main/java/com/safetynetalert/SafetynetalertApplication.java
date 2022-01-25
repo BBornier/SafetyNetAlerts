@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import com.safetynetalerts.config.SafetyConfig;
 
@@ -29,7 +30,9 @@ public class SafetynetalertApplication {
         
     	LOGGER.trace("Exiting application.");
     	
-    	SafetyConfig.LoadData();
-	
+	}
+	@Bean
+	public SafetyConfig dataLoad() {
+		return new SafetyConfig();
 	}
 }

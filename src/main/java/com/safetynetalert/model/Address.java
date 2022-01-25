@@ -18,14 +18,14 @@ public class Address {
 		this.zip = zip;
 		this.city = city;
 	}
-
+	
 	private int addressId;
 	
 	
 	private String streetName;
 	
 
-	private String zip	;
+	private String zip;
 	
 	
 	private String city;
