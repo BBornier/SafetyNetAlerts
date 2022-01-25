@@ -1,6 +1,9 @@
 package com.safetynetalert.model;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Embeddable
 public class Address {
@@ -16,6 +19,11 @@ public class Address {
 		this.zip = zip;
 		this.city = city;
 	}
+	
+	public Address(String streetName) {
+		this.streetName = streetName;
+	}
+	
 	
 	private int addressId;
 	

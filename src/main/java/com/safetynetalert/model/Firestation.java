@@ -1,6 +1,10 @@
 package com.safetynetalert.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +19,8 @@ public class Firestation {
 		super();
 	}
 
-	public Firestation(String address, String stationNumber) {
+	public Firestation(String stationNumber) {
 		super();
-		this.address = address;
 		this.stationNumber = stationNumber;
 	}
 
@@ -25,8 +28,8 @@ public class Firestation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int firestationId;
 
-	@Column(name = "firestation_address")
-	private String address;
+	@ElementCollection
+	private Set<Address> address = new HashSet<>();
 
 	@Column(name = "station_number")
 	private String stationNumber;
@@ -42,12 +45,12 @@ public class Firestation {
 	}
 
 	
-	public String getAddress() {
+	public Set<Address> getAddress() {
 		return address;
 	}
 
 	
-	public void setAddress(String address) {
+	public void setAddress(Set<Address> address) {
 		this.address = address;
 	}
 

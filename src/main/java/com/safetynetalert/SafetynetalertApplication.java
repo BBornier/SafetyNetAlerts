@@ -23,10 +23,6 @@ public class SafetynetalertApplication {
 		LOGGER.info("Initializing Safety Net Alerts System.");
 		
 		LOGGER.log(Level.INFO, "Logs with Log4j2, don't be afraid of hackers.");
-		
-        LOGGER.debug("Exemple of Debug level log message.");
-        
-        LOGGER.error("Exemple of Error level log message.");
         
     	LOGGER.trace("Exiting application.");
     	

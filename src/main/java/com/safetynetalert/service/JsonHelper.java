@@ -91,9 +91,10 @@ public class JsonHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
+			Firestation firestation = new Firestation(jsonObj.getString("station"));
+			Address address = new Address(jsonObj.getString("address"));
 			
-			Firestation firestation = new Firestation(jsonObj.getString("address"), jsonObj.getString("station"));
-			
+			firestation.getAddress().add(address);
 			firestationService.saveFirestation(firestation);
 			LOGGER.info("firestation is here: " + firestation);
 		}
@@ -104,10 +105,14 @@ public class JsonHelper {
 
 		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
+		LOGGER.info("This is your jsonArray of medsRec : " + jsonArray);
 
 		List<MedicalRecords> medicalRecordsList = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
+			
+		LOGGER.info("This is your jsonObj : " + jsonObj);	
+			
 			MedicalRecords medicalRecords = new MedicalRecords();
 
 			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonArray);
@@ -131,10 +136,12 @@ public class JsonHelper {
 	public static List<String> parseJsonMedicationsFromMedicalRecords(JSONArray jsonArray)
 			throws JSONException, IOException {
 
+		
+		JSONArray jsonArrayMedications = jsonArray.getJSONArray("medications").getJSONArray(0);
+		
 		List<String> medicationsListParsed = new ArrayList<>();
-
 		for (int i = 0; i < jsonArray.length(); i++) {
-			medicationsListParsed.add(jsonArray.getString(i));
+			medicationsListParsed.add(jsonArray.getJSONObject(i));
 		}
 
 		return medicationsListParsed;

@@ -37,10 +37,20 @@ public class SafetyConfig implements CommandLineRunner {
 		} 
 	}
 	
+	public void LoadMedicalRecordsData() {
+		try {
+			jsonHelper.parseJsonMedicalRecordsFromUrl();
+		} catch (JSONException | IOException e) {
+			e.printStackTrace();
+			LOGGER.error("Impossible to load medical records data !"); 
+		} 
+	}
+	
 	@Override
 	public void run(String... args) throws Exception {
 		LoadPersonsData();
 		LoadFireData();
+		LoadMedicalRecordsData();
 	}
 
 }
