@@ -2,6 +2,7 @@ package com.safetynetalert.controller;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.service.FirestationService;
 
@@ -55,7 +57,7 @@ public class FirestationsController {
 			if (Objects.isNull(station)) {
 				currentFirestation.setStationNumber(station);
 			}
-			String address = firestation.getAddress();
+			Set<Address> address = firestation.getAddress();
 			if (address != null) {
 				currentFirestation.setAddress(address);
 				;

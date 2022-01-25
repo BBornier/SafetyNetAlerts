@@ -18,9 +18,7 @@ public class Medications {
 	public Medications(String nameAndDosage) {
 		super();
 		this.nameAndDosage = nameAndDosage;
-		
 	}
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

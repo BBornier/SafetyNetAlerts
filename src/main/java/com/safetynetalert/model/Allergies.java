@@ -19,7 +19,6 @@ public class Allergies {
 		super();
 	}
 
-	//pq un paramètre medications avec un type List<> ici ?
 	public Allergies(String name, List<MedicalRecords> medications) {
 		super();
 		this.name = name;

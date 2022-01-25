@@ -101,7 +101,7 @@ public class JsonHelper {
 
 	}
 
-	public static List<MedicalRecords> parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {
+	public List<MedicalRecords> parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {
 
 		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
@@ -115,44 +115,46 @@ public class JsonHelper {
 			
 			MedicalRecords medicalRecords = new MedicalRecords();
 
-			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonArray);
+			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonObj);
 			List<Medications> medsList = convertStringListToMedicationJavaList(stringMedicationsList);
 			medicalRecords.setMedications(medsList);
 			medicalRecordsList.add(medicalRecords);
 
-			List<String> stringAllergiesList = parseJsonAllergiesFromMedicalRecords(jsonArray);
+			List<String> stringAllergiesList = parseJsonAllergiesFromMedicalRecords(jsonObj);
 			List<Allergies> allergList = convertStringListToAllergiesJavaList(stringAllergiesList);
 			medicalRecords.setAllergies(allergList);
 			medicalRecordsList.add(medicalRecords);
+			
+			medicalRecordsService.saveMedicalRecords(medicalRecords);
 
-			
-			
 		}
 
 		return medicalRecordsList;
 
 	}
 
-	public static List<String> parseJsonMedicationsFromMedicalRecords(JSONArray jsonArray)
+	public static List<String> parseJsonMedicationsFromMedicalRecords(JSONObject jsonObjet)
 			throws JSONException, IOException {
-
-		
-		JSONArray jsonArrayMedications = jsonArray.getJSONArray("medications").getJSONArray(0);
 		
 		List<String> medicationsListParsed = new ArrayList<>();
-		for (int i = 0; i < jsonArray.length(); i++) {
-			medicationsListParsed.add(jsonArray.getJSONObject(i));
+		
+		JSONArray jsonArrayMedications = jsonObjet.getJSONArray("medications");
+		
+		for (int i = 0; i < jsonArrayMedications.length(); i++) {
+			medicationsListParsed.add(jsonArrayMedications.getString(i));
 		}
 
 		return medicationsListParsed;
 	}
 
-	public static List<String> parseJsonAllergiesFromMedicalRecords(JSONArray jsonArray) {
+	public static List<String> parseJsonAllergiesFromMedicalRecords(JSONObject jsonObjet) {
 
 		List<String> allergiesListParsed = new ArrayList<>();
 
-		for (int i = 0; i < jsonArray.length(); i++) {
-			allergiesListParsed.add(jsonArray.getString(i));
+		for (int i = 0; i < jsonObjet.length(); i++) {
+			
+			LOGGER.info("Allergies are :" + jsonObjet.getJSONArray("allergies"));
+			//allergiesListParsed.add(jsonArray.getString(i));
 		}
 
 		return allergiesListParsed;
