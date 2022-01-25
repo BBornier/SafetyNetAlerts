@@ -35,6 +35,10 @@ public class JsonHelper {
 	@Autowired
 	private FirestationService firestationService;
 	
+	@Autowired
+	private MedicalRecordsService medicalRecordsService;
+	
+	
 	public static final String URL = "https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json";
 
 	private static String readAll(Reader rd) throws IOException {
@@ -72,11 +76,8 @@ public class JsonHelper {
 			Address address = new Address(jsonObj.getString("address"), jsonObj.getString("zip"), jsonObj.getString("city"));
 			
 			person.getAddress().add(address);
-			LOGGER.info("person before: " + person);
-			
 			person = personService.savePerson(person);
-			
-			LOGGER.info("person after: " + person);
+			LOGGER.info("This person is a good person: " + person);
 			
 		}
 
@@ -90,14 +91,11 @@ public class JsonHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
-			Firestation firestation = new Firestation(jsonObj.getString("station"));
-			Address address = new Address(jsonObj.getString("address"),jsonObj.getString("zip"), jsonObj.getString("city"));
 			
-			firestation.getAddress().add(address);
-			LOGGER.info("firestation before: " + firestation);
+			Firestation firestation = new Firestation(jsonObj.getString("address"), jsonObj.getString("station"));
 			
 			firestationService.saveFirestation(firestation);
-			LOGGER.info("firestation after: " + firestation);
+			LOGGER.info("firestation is here: " + firestation);
 		}
 
 	}
@@ -122,6 +120,8 @@ public class JsonHelper {
 			medicalRecords.setAllergies(allergList);
 			medicalRecordsList.add(medicalRecords);
 
+			
+			
 		}
 
 		return medicalRecordsList;

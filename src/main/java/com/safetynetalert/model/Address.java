@@ -4,8 +4,6 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
-	
-	
 
 	public Address() {
 		super();

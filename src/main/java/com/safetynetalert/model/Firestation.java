@@ -1,9 +1,6 @@
 package com.safetynetalert.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,8 +15,9 @@ public class Firestation {
 		super();
 	}
 
-	public Firestation(String stationNumber) {
+	public Firestation(String address, String stationNumber) {
 		super();
+		this.address = address;
 		this.stationNumber = stationNumber;
 	}
 
@@ -27,9 +25,8 @@ public class Firestation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int firestationId;
 
-	@Column (name = "address")
-	@ElementCollection(targetClass = Address.class)
-	private List<Address> address;
+	@Column(name = "firestation_address")
+	private String address;
 
 	@Column(name = "station_number")
 	private String stationNumber;
@@ -45,12 +42,12 @@ public class Firestation {
 	}
 
 	
-	public List<Address> getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
 	
-	public void setAddress(List<Address> address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
