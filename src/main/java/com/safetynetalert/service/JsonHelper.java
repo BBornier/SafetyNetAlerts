@@ -24,7 +24,6 @@ import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
-import com.safetynetalert.repository.PersonRepository;
 
 @Service
 public class JsonHelper {
