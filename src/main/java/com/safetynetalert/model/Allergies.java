@@ -1,10 +1,5 @@
 package com.safetynetalert.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,30 +7,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "allergies")
+@Table(name = "Allergies")
 public class Allergies {
 	
 	public Allergies() {
 		super();
 	}
 
-	public Allergies(String name, List<MedicalRecords> medications) {
+	public Allergies(String name) {
 		super();
 		this.name = name;
-		this.medications = medications;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int allergiesId;
 
-	@Column(name = "name")
+
 	private String name;
 	
-	@Column(name = "medicalRecords")
-	@ElementCollection(targetClass = MedicalRecords.class)
-	private List<MedicalRecords> medications = new ArrayList<MedicalRecords>();
-
 
 	public int getAllergiesId() {
 		return allergiesId;
@@ -56,17 +46,9 @@ public class Allergies {
 		this.name = name;
 	}
 
-	public List<MedicalRecords> getMedications() {
-		return medications;
-	}
-
-	public void setMedications(List<MedicalRecords> medications) {
-		this.medications = medications;
-	}
-
 	@Override
 	public String toString() {
-		return "Allergies [allergiesId=" + allergiesId + ", name=" + name + ", medications=" + medications + "]";
+		return "Allergies [allergiesId=" + allergiesId + ", name=" + name + "]";
 	}
 
 }

@@ -24,6 +24,7 @@ import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.PersonRepository;
 
 @Service
 public class JsonHelper {
@@ -37,6 +38,12 @@ public class JsonHelper {
 	
 	@Autowired
 	private MedicalRecordsService medicalRecordsService;
+	
+	@Autowired
+	private MedicationsService medicationsService;
+	
+	@Autowired
+	private AllergiesService allergiesService;
 	
 	
 	public static final String URL = "https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DA+Java+EN/P5+/data.json";
@@ -105,35 +112,44 @@ public class JsonHelper {
 
 		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
-		LOGGER.info("This is your jsonArray of medsRec : " + jsonArray);
+				LOGGER.info("This is your jsonArray of medsRec : " + jsonArray);
 
 		List<MedicalRecords> medicalRecordsList = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
-		LOGGER.info("This is your jsonObj : " + jsonObj);	
+			MedicalRecords medRecords = new MedicalRecords();
 			
-			MedicalRecords medicalRecords = new MedicalRecords();
+			Person person = personService.findByName(jsonObj.getString("firstName"), jsonObj.getString("lastName"));
+			medRecords.setPerson(person);
+			
+			LOGGER.info("Hey ! this is your person motherfucker: " + medRecords.getPerson().getEmail());
+			LOGGER.info("Hey ! this is your birthdate but you'll be null: " + medRecords.getBirthdate());
+			
+			medRecords.setBirthdate(jsonObj.getString("birthdate"));
 
+			LOGGER.info("Hey ! this is your birthdate motherfucker bitch: " + medRecords.getBirthdate());
+			
 			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonObj);
 			List<Medications> medsList = convertStringListToMedicationJavaList(stringMedicationsList);
-			medicalRecords.setMedications(medsList);
-			medicalRecordsList.add(medicalRecords);
-
+			medRecords.setMedications(medsList); 
+			medicalRecordsList.add(medRecords);
+			 
 			List<String> stringAllergiesList = parseJsonAllergiesFromMedicalRecords(jsonObj);
 			List<Allergies> allergList = convertStringListToAllergiesJavaList(stringAllergiesList);
-			medicalRecords.setAllergies(allergList);
-			medicalRecordsList.add(medicalRecords);
+			medRecords.setAllergies(allergList); 
+			medicalRecordsList.add(medRecords);
 			
-			medicalRecordsService.saveMedicalRecords(medicalRecords);
+			medicalRecordsService.saveMedicalRecords(medRecords); 
 
 		}
 
 		return medicalRecordsList;
 
 	}
+	
 
-	public static List<String> parseJsonMedicationsFromMedicalRecords(JSONObject jsonObjet)
+	public List<String> parseJsonMedicationsFromMedicalRecords(JSONObject jsonObjet)
 			throws JSONException, IOException {
 		
 		List<String> medicationsListParsed = new ArrayList<>();
@@ -142,47 +158,53 @@ public class JsonHelper {
 		
 		for (int i = 0; i < jsonArrayMedications.length(); i++) {
 			medicationsListParsed.add(jsonArrayMedications.getString(i));
+			
 		}
-
 		return medicationsListParsed;
 	}
 
-	public static List<String> parseJsonAllergiesFromMedicalRecords(JSONObject jsonObjet) {
+	public List<String> parseJsonAllergiesFromMedicalRecords(JSONObject jsonObjet) {
 
 		List<String> allergiesListParsed = new ArrayList<>();
+		
+		JSONArray jsonArrayAllergies = jsonObjet.getJSONArray("allergies");
 
-		for (int i = 0; i < jsonObjet.length(); i++) {
-			
-			LOGGER.info("Allergies are :" + jsonObjet.getJSONArray("allergies"));
-			//allergiesListParsed.add(jsonArray.getString(i));
+		for (int i = 0; i < jsonArrayAllergies.length(); i++) {
+			allergiesListParsed.add(jsonArrayAllergies.getString(i));
+
 		}
 
 		return allergiesListParsed;
 	}
+	
 
-	public static List<Medications> convertStringListToMedicationJavaList(List<String> stringList) {
-
+	public List<Medications> convertStringListToMedicationJavaList(List<String> stringList) {
+		
 		List<Medications> medicationList = new ArrayList<>();
 
 		for (String s : stringList) {
 			Medications meds = new Medications();
 			meds.setNameAndDosage(s);
-
 			medicationList.add(meds);
+		
+			medicationsService.saveMedications(meds);
+			
 		}
 
 		return medicationList;
 	}
+	
 
-	public static List<Allergies> convertStringListToAllergiesJavaList(List<String> stringList) {
+	public List<Allergies> convertStringListToAllergiesJavaList(List<String> stringList) {
 
 		List<Allergies> allergiesList = new ArrayList<>();
 
 		for (String s : stringList) {
 			Allergies allergies = new Allergies();
 			allergies.setName(s);
-
 			allergiesList.add(allergies);
+			
+			allergiesService.saveAllergies(allergies);
 
 		}
 

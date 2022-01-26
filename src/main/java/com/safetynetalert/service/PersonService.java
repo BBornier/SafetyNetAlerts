@@ -30,4 +30,9 @@ public class PersonService {
 		return savedPerson;
 	}
 	
+	public Person findByName(String firstName, String lastName) {
+		return personRepository.findByFirstNameAndLastName(firstName, lastName);
+		
+	}
+	
 }

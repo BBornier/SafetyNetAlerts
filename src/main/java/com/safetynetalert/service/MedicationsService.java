@@ -29,7 +29,7 @@ public class MedicationsService {
 		medicationsRepository.deleteById(id);
 	}
 	
-	public Medications saveMedicationRecords(Medications medications) {
+	public Medications saveMedications(Medications medications) {
 		Medications savedMedications = medicationsRepository.save(medications);
 		return savedMedications;
 	}

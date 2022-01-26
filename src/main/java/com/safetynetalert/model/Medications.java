@@ -1,6 +1,5 @@
 package com.safetynetalert.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "medications")
+@Table(name = "Medications")
 public class Medications {
 	
 	public Medications() {
@@ -19,13 +18,14 @@ public class Medications {
 		super();
 		this.nameAndDosage = nameAndDosage;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int medicationsId;
 
-	@Column(name = "nameAndDosage")
+
 	private String nameAndDosage;
+	
 
 
 	public int getMedicationsId() {
