@@ -11,7 +11,7 @@ import net.bytebuddy.asm.Advice.Return;
 @Repository
 	public interface PersonRepository extends JpaRepository<Person, Long>{
 
-	public Person findByFirstNameAndLastName(String firstName, String LastName);
+	public Person findByFirstNameAndLastName(String firstName, String lastName);
 		
 	}
 

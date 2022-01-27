@@ -30,7 +30,7 @@ public class MedicalRecords {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int medicalRecordId;
+	private Long medicalRecordId;
 
 	@OneToOne
 	private Person person;
@@ -47,12 +47,12 @@ public class MedicalRecords {
 	private List<Allergies> allergies;
 
 	
-	public int getMedicalRecordId() {
+	public Long getMedicalRecordId() {
 		return medicalRecordId;
 	}
 
 	
-	public void setMedicalRecordId(int medicalRecordId) {
+	public void setMedicalRecordId(Long medicalRecordId) {
 		this.medicalRecordId = medicalRecordId;
 	}
 
