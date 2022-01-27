@@ -1,6 +1,9 @@
 package com.safetynetalert.service;
 
+import static org.hamcrest.CoreMatchers.anyOf;
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -37,8 +40,8 @@ public class PersonService {
 		return personRepository.save(newPerson);
 	}
 
-	public Person updatePersonById(Person updateThePersonPlease, Long idFix) {
-		Person anyPerson = personRepository.findById(idFix).get();
+	public Person updatePersonById(Person updateThePersonPlease, Long id) {
+		Person anyPerson = personRepository.findById(id).get();
 		anyPerson.setPhoneNumber(updateThePersonPlease.getPhoneNumber());
 		anyPerson.setEmail(updateThePersonPlease.getEmail());
 		anyPerson.setAddress(updateThePersonPlease.getAddress());
@@ -46,26 +49,8 @@ public class PersonService {
 		return personRepository.save(anyPerson);
 	}
 
-	public void deleteThisPerson() {
-		personRepository.deleteAll();
-		
+	public void deleteThisPerson(Long id) {
+		personRepository.deleteById(id);
 	}
-	
-	/*
-	 * public Optional<Person> getPerson(final Long id) { return
-	 * personRepository.findById(id); }
-	 * 
-	 * public Iterable<Person> getPersons() { return personRepository.findAll(); }
-	 * 
-	 * public void deletePerson(final Long id) { personRepository.deleteById(id); }
-	 * 
-	 * public Person savePerson(Person person) { Person savedPerson =
-	 * personRepository.save(person); return savedPerson; }
-	 * 
-	 * public Person findByName(String firstName, String lastName) { return
-	 * personRepository.findByFirstNameAndLastName(firstName, lastName);
-	 * 
-	 * }
-	 */
 	
 }

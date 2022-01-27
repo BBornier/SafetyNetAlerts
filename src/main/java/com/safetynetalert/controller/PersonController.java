@@ -19,8 +19,6 @@ public class PersonController {
 
 	@Autowired
 	private PersonService personService;
-	
-	//Post-Put-Delete + Get
 
 	public PersonController(PersonService personService) {
 		this.personService = personService;
@@ -31,18 +29,19 @@ public class PersonController {
 		return personService.findAllPersonsInDataBase();
 	}
 	
+	//problème de duplicata
 	@GetMapping("/person/{id}")
 	public Person solo(@PathVariable Long id) {
 		return personService.findPersonByHisId(id);
 	}
 	
-	@GetMapping("/person/{fisrstName}, {lastName}")
-	public Person name(@PathVariable String firstName, String lastName)	{
+	@GetMapping("/person/{firstName}/{lastName}")
+	public Person name(@PathVariable String firstName, @PathVariable String lastName) {
 		return personService.findPersonByHisName(firstName, lastName);
 	}
 	
 	@PostMapping("/person")
-	public Person save(@RequestBody Person newPerson) {
+	public Person create(@RequestBody Person newPerson) {
 		return personService.createNewPerson(newPerson);
 	}
 	
@@ -51,45 +50,10 @@ public class PersonController {
 		return personService.updatePersonById(update, id);
 	}
 	
-	@DeleteMapping("/person")
-	public String deleteById() {
-		personService.deleteThisPerson();
+	@DeleteMapping("/person/{id}")
+	public String deleteById(@PathVariable Long id) {
+		personService.deleteThisPerson(id);
 		return "Sorry for your loss.";
 	}
 	
-	/*
-	 * @PostMapping("/person") public Person create(@RequestBody Person person) {
-	 * return personService.savePerson(person); }
-	 * 
-	 * 
-	 * @GetMapping("/person/{id}") public Person getPerson(@PathVariable("id") final
-	 * Long id) { Optional<Person> person = personService.getPerson(id); if
-	 * (person.isPresent()) { return person.get(); } else { return null; } }
-	 * 
-	 * 
-	 * @GetMapping("/person") public Iterable<Person> getPersons() { return
-	 * personService.getPersons(); }
-	 * 
-	 * 
-	 * @PutMapping("/person/{id}") public Person updatePerson(@PathVariable("id")
-	 * final Long id, @RequestBody Person person) { Optional<Person> p =
-	 * personService.getPerson(id); if (p.isPresent()) { Person currentPerson =
-	 * p.get();
-	 * 
-	 * Set<Address> address = person.getAddress(); if (address != null) {
-	 * currentPerson.setAddress(address); }
-	 * 
-	 * String phone = person.getPhoneNumber(); if (phone != null) {
-	 * currentPerson.setPhoneNumber(phone); }
-	 * 
-	 * String email = person.getEmail(); if (email != null) {
-	 * currentPerson.setEmail(email); }
-	 * 
-	 * personService.savePerson(currentPerson); return currentPerson; } else {
-	 * return null; } }
-	 * 
-	 * 
-	 * @DeleteMapping("/person/{id}") public void deletePerson(@PathVariable("id")
-	 * final Long id) { personService.deletePerson(id); }
-	 */
 }
