@@ -24,7 +24,6 @@ import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
-import com.safetynetalert.repository.PersonRepository;
 
 @Service
 public class JsonHelper {
@@ -84,7 +83,7 @@ public class JsonHelper {
 			
 			person.getAddress().add(address);
 			person = personService.savePerson(person);
-			LOGGER.info("This person is a good person: " + person);
+			//LOGGER.info("This person is a good person: " + person);
 			
 		}
 
@@ -103,7 +102,7 @@ public class JsonHelper {
 			
 			firestation.getAddress().add(address);
 			firestationService.saveFirestation(firestation);
-			LOGGER.info("firestation is here: " + firestation);
+			//LOGGER.info("firestation is here: " + firestation);
 		}
 
 	}
@@ -112,7 +111,7 @@ public class JsonHelper {
 
 		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
-				LOGGER.info("This is your jsonArray of medsRec : " + jsonArray);
+				//LOGGER.info("This is your jsonArray of medsRec : " + jsonArray);
 
 		List<MedicalRecords> medicalRecordsList = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
@@ -123,12 +122,12 @@ public class JsonHelper {
 			Person person = personService.findPersonByHisName(jsonObj.getString("firstName"), jsonObj.getString("lastName"));
 			medRecords.setPerson(person);
 			
-			LOGGER.info("Hey ! Don't forget your email: " + medRecords.getPerson().getEmail());
-			LOGGER.info("Hey ! this is your birthdate but you'll be null: " + medRecords.getBirthdate());
+			//LOGGER.info("Hey ! Don't forget your email: " + medRecords.getPerson().getEmail());
+			//LOGGER.info("Hey ! this is your birthdate but you'll be null: " + medRecords.getBirthdate());
 			
 			medRecords.setBirthdate(jsonObj.getString("birthdate"));
 
-			LOGGER.info("Hey ! this is your real birthdate: " + medRecords.getBirthdate());
+			//LOGGER.info("Hey ! this is your real birthdate: " + medRecords.getBirthdate());
 			
 			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonObj);
 			List<Medications> medsList = convertStringListToMedicationJavaList(stringMedicationsList);
