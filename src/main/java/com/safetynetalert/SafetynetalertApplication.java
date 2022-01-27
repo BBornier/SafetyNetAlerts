@@ -20,9 +20,9 @@ public class SafetynetalertApplication {
 	public static void main(String[] args) throws JSONException, IOException {
 		SpringApplication.run(SafetynetalertApplication.class, args);
 		
-		LOGGER.info("Initializing Safety Net Alerts System.");
+		LOGGER.info("Surprise Motherfucker !! Initializing Safety Net Alerts System.");
 		
-		LOGGER.log(Level.INFO, "Logs with Log4j2, don't be afraid of hackers.");
+		LOGGER.log(Level.INFO, "Logs with Log4j2");
         
     	LOGGER.trace("Exiting application.");
     	

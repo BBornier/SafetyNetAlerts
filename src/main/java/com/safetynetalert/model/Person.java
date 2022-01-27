@@ -32,7 +32,7 @@ public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int personId;
+	private Long personId;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -55,12 +55,12 @@ public class Person {
 	
 	
 
-	public int getPersonId() {
+	public Long getPersonId() {
 		return personId;
 	}
 
 	
-	public void setPersonId(int personId) {
+	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 

@@ -119,15 +119,15 @@ public class JsonHelper {
 			
 			MedicalRecords medRecords = new MedicalRecords();
 			
-			Person person = personService.findByName(jsonObj.getString("firstName"), jsonObj.getString("lastName"));
+			Person person = personService.findPersonByHisName(jsonObj.getString("firstName"), jsonObj.getString("lastName"));
 			medRecords.setPerson(person);
 			
-			LOGGER.info("Hey ! this is your person motherfucker: " + medRecords.getPerson().getEmail());
+			LOGGER.info("Hey ! Don't forget your email: " + medRecords.getPerson().getEmail());
 			LOGGER.info("Hey ! this is your birthdate but you'll be null: " + medRecords.getBirthdate());
 			
 			medRecords.setBirthdate(jsonObj.getString("birthdate"));
 
-			LOGGER.info("Hey ! this is your birthdate motherfucker bitch: " + medRecords.getBirthdate());
+			LOGGER.info("Hey ! this is your real birthdate: " + medRecords.getBirthdate());
 			
 			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonObj);
 			List<Medications> medsList = convertStringListToMedicationJavaList(stringMedicationsList);
