@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.PersonService;
+import com.safetynetalerts.dto.PersonDTO;
 
 @RestController
 public class PersonController {
@@ -25,14 +27,14 @@ public class PersonController {
 	}
 	
 	@GetMapping("/persons")
-	public List<Person> all(){	
-		return personService.findAllPersonsInDataBase();
+	public List<PersonDTO> findAllPersonsInDataBase() {
+		return personService.returnAllPersonsInDataBase();
 	}
 	
 	//problème de duplicata
 	@GetMapping("/person/{id}")
-	public Person solo(@PathVariable Long id) {
-		return personService.findPersonByHisId(id);
+	public List<PersonDTO> findOnePersonById(@PathVariable Long id) {
+		return personService.returnPersonByHisId(id);
 	}
 	
 	@GetMapping("/person/{firstName}/{lastName}")
