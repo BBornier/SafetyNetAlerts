@@ -8,8 +8,9 @@ import com.safetynetalert.model.Address;
 public class PersonDTO {
 	
 	
-	public PersonDTO(String firstName, String lastName, String phoneNumber, String email, Set<Address> address) {
+	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> address) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -26,9 +27,9 @@ public class PersonDTO {
 	}
 	
 
-	public PersonDTO(Long id) {
+	/*public PersonDTO(Long id) {
 		super();
-	}
+	}*/
 
 	
 	private Long id;

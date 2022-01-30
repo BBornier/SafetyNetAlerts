@@ -2,6 +2,7 @@ package com.safetynetalert.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -24,23 +25,18 @@ public class PersonService {
 	public List<PersonDTO> returnAllPersonsInDataBase() {
 		List<Person> allPersons = personRepository.findAll();
 		List<PersonDTO> allOfThem = new ArrayList<>();
-		
 		for(Person perso : allPersons) {
-			PersonDTO personDto = new PersonDTO(perso.getFirstName(), perso.getLastName(), perso.getPhoneNumber(), perso.getEmail(), perso.getAddress());
+			PersonDTO personDto = new PersonDTO(perso.getPersonId(), perso.getFirstName(), perso.getLastName(), perso.getPhoneNumber(), perso.getEmail(), perso.getAddress());
 			allOfThem.add(personDto);
 		}
 			return allOfThem;
 	}
 	
-	public List<PersonDTO> returnPersonByHisId(Long id) {
-		List<Person> allPersonsId = personRepository.findItById(id);
-		List<PersonDTO> allById = new ArrayList<>();
+	public PersonDTO returnOnePersonWithHisId(Long id) {
+		Person person = personRepository.findByPersonId(id);
+		PersonDTO oneOfThem = new PersonDTO(person.getPersonId(), person.getFirstName(), person.getLastName(), person.getPhoneNumber(), person.getEmail(), person.getAddress());
 		
-		for(Person persoId : allPersonsId) {
-			PersonDTO personIdDto = new PersonDTO(persoId.getPersonId());
-					allById.add(personIdDto);
-		}
-		return allById;
+		return oneOfThem;
 	}
 	
 	
