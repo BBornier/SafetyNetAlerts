@@ -1,11 +1,14 @@
 package com.safetynetalert.service;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.PersonRepository;
+import com.safetynetalerts.dto.PersonDTO;
 
 @Service
 public class PersonService {
@@ -17,13 +20,25 @@ public class PersonService {
 		this.personRepository = personRepository;
 	}
 	
-	public List<Person> findAllPersonsInDataBase() {
-		return personRepository.findAll();
+	public List<PersonDTO> returnAllPersonsInDataBase() {
+		List<Person> allPersons = personRepository.findAll();
+		List<PersonDTO> allOfThem = new ArrayList<>();
+		for(Person perso : allPersons) {
+			PersonDTO personDto = new PersonDTO(perso.getPersonId(), perso.getFirstName(), perso.getLastName(), perso.getPhoneNumber(), perso.getEmail(), perso.getAddress());
+			allOfThem.add(personDto);
+		}
+			return allOfThem;
 	}
 	
-	public Person findPersonByHisId(final Long id) {
-		return personRepository.findById(id).get();
+	public PersonDTO returnOnePersonWithHisId(Long id) {
+		Person person = personRepository.findByPersonId(id);
+		PersonDTO oneOfThem = new PersonDTO(person.getPersonId(), person.getFirstName(), person.getLastName(), person.getPhoneNumber(), person.getEmail(), person.getAddress());
+		
+		return oneOfThem;
 	}
+	
+	
+	
 	
 	public Person findPersonByHisName(String firstName, String lastName) {
 		return personRepository.findByFirstNameAndLastName(firstName, lastName);

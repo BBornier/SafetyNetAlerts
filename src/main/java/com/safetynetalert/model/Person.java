@@ -131,6 +131,5 @@ public class Person {
 				+ address + ", phone=" + phoneNumber + ", email=" + email + ", medicalRecords=" + medicalRecords + "]";
 	}
 	
-	
 
 }
