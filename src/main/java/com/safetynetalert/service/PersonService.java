@@ -1,9 +1,6 @@
 package com.safetynetalert.service;
 
-import static org.hamcrest.CoreMatchers.anyOf;
-
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
