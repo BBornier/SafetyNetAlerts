@@ -29,9 +29,14 @@ public class MedicalRecordsService {
 	  List<MedicalRecords> allMedRec = medicalRecordsRepository.findAll();
 	  List<MedicalRecordsDTO> allOfThem = new ArrayList<>(); 
 	  for(MedicalRecords medRec : allMedRec) { 
-		  MedicalRecordsDTO medicalRecDto = new MedicalRecordsDTO(medRec.getMedicalRecordId(), medRec.getBirthdate());
+		  MedicalRecordsDTO medicalRecDto = new MedicalRecordsDTO(medRec.getMedicalRecordId(), 
+				  medRec.getBirthdate());
+		  
+		  //A faire avec setters et getters !!
 	  
-	  allOfThem.add(medicalRecDto); }
+	  allOfThem.add(medicalRecDto); 
+	  }
+	  
 	return allOfThem;
 	
 	}

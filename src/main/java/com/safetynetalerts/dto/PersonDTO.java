@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.safetynetalert.convertersdto.MedicalRecordsDTOConverter;
 import com.safetynetalert.model.Address;
 import com.safetynetalert.model.MedicalRecords;
@@ -15,8 +17,19 @@ public class PersonDTO {
 	
 	private MedicalRecordsDTOConverter medicalRecordsDTOConverter;
 	
-	
-	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> address) {
+
+	public PersonDTO() {
+		super();
+	}
+
+
+	public PersonDTO(Long id, String firstName, 
+			String lastName, 
+			String phoneNumber, 
+			String email, 
+			Set<Address> address) 
+	{
+		
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -24,10 +37,14 @@ public class PersonDTO {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.address = address;
+		
 	}
 	
 
-	public PersonDTO(String phoneNumber, String email, Set<Address> address) {
+	public PersonDTO(String phoneNumber, 
+			String email, 
+			Set<Address> address) {
+		
 		super();
 		this.phoneNumber = phoneNumber;
 		this.email = email;
@@ -56,10 +73,10 @@ public class PersonDTO {
 	
 	private Set<Address> address = new HashSet<>();
 	
-	private List<MedicalRecordsDTO> medicalRecords;
+	private MedicalRecords medicalRecords;
 	
 	/*public void fetchMedicalRecords() {
-		MedicalRecords mrs = medicalRecordsService.getMedicalRecordsByUserId(id);
+		List<MedicalRecords> mrs = medicalRecordsService.getMedicalRecordsByUserId(id);
 		for (MedicalRecords mr : mrs) {
 			medicalRecords.add(medicalRecordsDTOConverter.toDTO(mr));*/
 
@@ -151,7 +168,7 @@ public class PersonDTO {
 	/**
 	 * @return the medicalRecords
 	 */
-	public List<MedicalRecordsDTO> getMedicalRecords() {
+	public MedicalRecords getMedicalRecords() {
 		return medicalRecords;
 	}
 
@@ -159,7 +176,7 @@ public class PersonDTO {
 	/**
 	 * @param medicalRecords the medicalRecords to set
 	 */
-	public void setMedicalRecords(List<MedicalRecordsDTO> medicalRecords) {
+	public void setMedicalRecords(MedicalRecords medicalRecords) {
 		this.medicalRecords = medicalRecords;
 	}
 	

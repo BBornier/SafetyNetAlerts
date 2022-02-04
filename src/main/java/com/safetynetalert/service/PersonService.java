@@ -30,8 +30,12 @@ public class PersonService {
 		List<Person> allPersons = personRepository.findAll();
 		List<PersonDTO> allOfThem = new ArrayList<>();
 		for(Person perso : allPersons) {
-			PersonDTO personDto = new PersonDTO(perso.getPersonId(), perso.getFirstName(), perso.getLastName(), perso.getPhoneNumber(), 
-					perso.getEmail(), perso.getAddress());
+			PersonDTO personDto = new PersonDTO(perso.getPersonId(), 
+					perso.getFirstName(), 
+					perso.getLastName(), 
+					perso.getPhoneNumber(), 
+					perso.getEmail(), 
+					perso.getAddress());
 			
 			allOfThem.add(personDto);
 		}
@@ -45,18 +49,40 @@ public class PersonService {
 	
 	public PersonDTO findPersonByHisNamesAndShowHisProfile(String firstName, String lastName) {
 		Person personNames = personRepository.findByFirstNameAndLastName(firstName, lastName);
-		PersonDTO hisProfile = new PersonDTO(personNames.getPersonId(), personNames.getFirstName(), personNames.getLastName(), personNames.getPhoneNumber(), 
-				personNames.getEmail(), personNames.getAddress());
+		PersonDTO hisProfile = new PersonDTO(personNames.getPersonId(), 
+				personNames.getFirstName(), 
+				personNames.getLastName(), 
+				personNames.getPhoneNumber(), 
+				personNames.getEmail(), 
+				personNames.getAddress());
 		
 		return hisProfile;
+	}
+	
+	
+	public PersonDTO exempleUtilisationAvecSettersEtGetters(String firstName, String lastName) {
+		Person person = personRepository.findByFirstNameAndLastName(firstName, lastName);
+		PersonDTO dTo = new PersonDTO();
+		
+		dTo.setFirstName(person.getFirstName());
+		dTo.setLastName(person.getLastName());
+		dTo.setPhoneNumber(person.getPhoneNumber());
+		dTo.setEmail(person.getEmail());
+		
+		return dTo;
 	}
 	
 	
 	
 	public PersonDTO returnOnePersonWithHisId(Long id) {
 		Person person = personRepository.findByPersonId(id);
-		PersonDTO oneOfThem = new PersonDTO(person.getPersonId(), person.getFirstName(), person.getLastName(), person.getPhoneNumber(), 
-				person.getEmail(), person.getAddress());
+		PersonDTO oneOfThem = new PersonDTO(person.getPersonId(), 
+				person.getFirstName(), 
+				person.getLastName(), 
+				person.getPhoneNumber(), 
+				person.getEmail(), 
+				person.getAddress());
+		
 		return oneOfThem;
 	}
 	
