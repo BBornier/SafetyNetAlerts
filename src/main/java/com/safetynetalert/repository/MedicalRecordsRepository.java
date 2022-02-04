@@ -11,6 +11,6 @@ import com.safetynetalert.model.MedicalRecords;
 @Repository
 public interface MedicalRecordsRepository extends JpaRepository<MedicalRecords, Long> {
 	
-	List<MedicalRecords> findByPersonId(Long id);
+	MedicalRecords findByPersonId(Long id);
 
 }

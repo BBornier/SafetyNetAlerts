@@ -9,7 +9,7 @@ public class MedicalRecordsDTOConverter {
 		
 		MedicalRecordsDTO medicalRecordsDTO = new MedicalRecordsDTO(null, null, null);
 		
-		//medicalRecordsDTO.setMedications(medicalRecords.getMedications());
+		medicalRecordsDTO.setMedications(medicalRecords.getMedications());
 		
 		return medicalRecordsDTO;
 		

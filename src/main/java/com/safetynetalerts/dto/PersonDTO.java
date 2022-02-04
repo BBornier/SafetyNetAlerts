@@ -58,13 +58,11 @@ public class PersonDTO {
 	
 	private List<MedicalRecordsDTO> medicalRecords;
 	
-	public void fetchMedicalRecords() {
-		List<MedicalRecords> mrs = medicalRecordsService.getMedicalRecordsByUserId(id);
+	/*public void fetchMedicalRecords() {
+		MedicalRecords mrs = medicalRecordsService.getMedicalRecordsByUserId(id);
 		for (MedicalRecords mr : mrs) {
-			medicalRecords.add(medicalRecordsDTOConverter.toDTO(mr));
-		}
+			medicalRecords.add(medicalRecordsDTOConverter.toDTO(mr));*/
 
-	}
 	
 
 	/**

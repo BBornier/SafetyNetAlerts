@@ -34,7 +34,7 @@ public class MedicalRecordsService {
 	}
 	 
 	
-	public List<MedicalRecords> getMedicalRecordsByUserId(Long id) {
+	public MedicalRecords getMedicalRecordsByUserId(Long id) {
 		return medicalRecordsRepository.findByPersonId(id);
 		
 	}
