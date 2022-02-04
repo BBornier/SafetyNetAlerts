@@ -16,13 +16,22 @@ import com.safetynetalert.model.Allergies;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.service.MedicalRecordsService;
+import com.safetynetalerts.dto.MedicalRecordsDTO;
+import com.safetynetalerts.dto.PersonDTO;
 
 
 @RestController
+
 public class MedicalRecordsController {
 
 	@Autowired
 	private MedicalRecordsService medicalRecordsService;
+	
+	
+	@GetMapping("/medicalrecords")
+	public List<MedicalRecordsDTO> findAllMedicalRecordsInDataBase() {
+		return medicalRecordsService.returnAllMedicalRecordsInDataBase();
+	}
 
 	
 	@PostMapping("/medicalrecords")
@@ -42,43 +51,5 @@ public class MedicalRecordsController {
 	}
 
 	
-	@GetMapping("/medicalrecords")
-	public Iterable<MedicalRecords> getMedicalRecords() {
-		return medicalRecordsService.getMedicalRecords();
-	}
-
-	
-	@PutMapping("/medicalrecords/{id}")
-	public MedicalRecords updateMedicalRecord(@PathVariable("id") final Long id, @RequestBody MedicalRecords medicalRecords) {
-		Optional<MedicalRecords> mR = medicalRecordsService.getMedicalRecord(id);
-		if (mR.isPresent()) {
-			MedicalRecords currentMedicalRecord = mR.get();
-
-			String birthdate = medicalRecords.getBirthdate();
-			if (birthdate != null) {
-				currentMedicalRecord.setBirthdate(birthdate);
-			}
-			List<Medications> medications = medicalRecords.getMedications();
-			if (medications != null) {
-				currentMedicalRecord.setMedications(medications);
-			}
-			List<Allergies> allergies = medicalRecords.getAllergies();
-			if (allergies != null) {
-				currentMedicalRecord.setAllergies(allergies);
-			}
-
-			medicalRecordsService.saveMedicalRecords(medicalRecords);
-			return currentMedicalRecord;
-		} else {
-			return null;
-		}
-	}
-
-	
-	@DeleteMapping("/medicalrecords/{id}")
-	public void deleteMedicalRecord(@PathVariable("id") final Long id) {
-		medicalRecordsService.deleteMedicalRecord(id);
-	}
-
 }
 

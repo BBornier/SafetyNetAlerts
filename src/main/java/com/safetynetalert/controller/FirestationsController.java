@@ -41,7 +41,7 @@ public class FirestationsController {
 	}
 
 	
-	@GetMapping("/firestation")
+	@GetMapping("/firestations")
 	public Iterable<Firestation> getFirestations() {
 		return firestationService.getFirestations();
 	}

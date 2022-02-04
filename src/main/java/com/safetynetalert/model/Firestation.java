@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +26,7 @@ public class Firestation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int firestationId;
+	private Long firestationId;
 
 	@ElementCollection
 	private Set<Address> address = new HashSet<>();
@@ -36,12 +35,12 @@ public class Firestation {
 	private String stationNumber;
 
 
-	public int getFirestationId() {
+	public Long getFirestationId() {
 		return firestationId;
 	}
 
 
-	public void setFirestationId(int firestationId) {
+	public void setFirestationId(Long firestationId) {
 		this.firestationId = firestationId;
 	}
 

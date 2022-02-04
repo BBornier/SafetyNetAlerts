@@ -3,6 +3,8 @@ package com.safetynetalert.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import com.safetynetalert.service.PersonService;
 import com.safetynetalerts.dto.PersonDTO;
 
 @RestController
+
 public class PersonController {
 
 	@Autowired
@@ -36,27 +39,28 @@ public class PersonController {
 		return personService.returnOnePersonWithHisId(id);
 	}
 	
-	
-	
 	@GetMapping("/person/{firstName}/{lastName}")
-	public Person name(@PathVariable String firstName, @PathVariable String lastName) {
-		return personService.findPersonByHisName(firstName, lastName);
+	public PersonDTO names(@PathVariable String firstName, @PathVariable String lastName) {
+		 return personService.findPersonByHisNamesAndShowHisProfile(firstName, lastName);
 	}
 	
-	@PostMapping("/person")
-	public Person create(@RequestBody Person newPerson) {
-		return personService.createNewPerson(newPerson);
+	@PostMapping("/newPerson")
+	public String create(@RequestBody Person newPerson) {
+		personService.addNewPersonToTheList(newPerson);
+		return "A new kid in Town, congrats ! or a new stranger... be carefull.";
 	}
 	
 	@PutMapping("/updatePerson/{id}")
-	public Person updatePerson(@RequestBody Person update, @PathVariable Long id) {
-		return personService.updatePersonById(update, id);
+	public String updatePerson(@RequestBody Person update, @PathVariable Long id) {
+		personService.updatePersonById(update, id);
+		return "This fellow leveled up !";
 	}
 	
-	@DeleteMapping("/person/{id}")
-	public String deleteById(@PathVariable Long id) {
-		personService.deleteThisPerson(id);
-		return "Sorry for your loss.";
+	
+	@DeleteMapping("/person/{firstName}/{lastName}")
+    public String deleteByNames(@PathVariable String firstName, @PathVariable String lastName) {
+		personService.deleteOnePerson(firstName, lastName);
+        return "Sorry for your loss.";
 	}
 	
 }

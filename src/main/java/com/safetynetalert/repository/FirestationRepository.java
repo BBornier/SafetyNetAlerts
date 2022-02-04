@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.safetynetalert.model.Firestation;
 
 @Repository
-public interface FirestationRepository extends JpaRepository<Firestation, Long>{
+public interface FirestationRepository extends JpaRepository<Firestation, Long> {
+	
+	
 
 }

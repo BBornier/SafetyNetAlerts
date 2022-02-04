@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.safetynetalerts.dto.MedicationsDTO;
 
 @Entity
 @Table(name = "medical_records")
@@ -36,7 +37,6 @@ public class MedicalRecords {
 	private Long medicalRecordId;
 
 	@OneToOne
-	@JsonIgnore
 	private Person person;
 
 	@Column(name = "birthdate")
