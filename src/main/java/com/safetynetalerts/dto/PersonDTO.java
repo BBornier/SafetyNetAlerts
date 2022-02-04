@@ -1,11 +1,19 @@
 package com.safetynetalerts.dto;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.safetynetalert.convertersdto.MedicalRecordsDTOConverter;
 import com.safetynetalert.model.Address;
+import com.safetynetalert.model.MedicalRecords;
+import com.safetynetalert.service.MedicalRecordsService;
 
 public class PersonDTO {
+	
+	private MedicalRecordsService medicalRecordsService;
+	
+	private MedicalRecordsDTOConverter medicalRecordsDTOConverter;
 	
 	
 	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> address) {
@@ -27,11 +35,15 @@ public class PersonDTO {
 	}
 	
 
-	/*public PersonDTO(Long id) {
+	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email) {
 		super();
-	}*/
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
-	
 	private Long id;
 
 	private String firstName;
@@ -44,6 +56,15 @@ public class PersonDTO {
 	
 	private Set<Address> address = new HashSet<>();
 	
+	private List<MedicalRecordsDTO> medicalRecords;
+	
+	public void fetchMedicalRecords() {
+		List<MedicalRecords> mrs = medicalRecordsService.getMedicalRecordsByUserId(id);
+		for (MedicalRecords mr : mrs) {
+			medicalRecords.add(medicalRecordsDTOConverter.toDTO(mr));
+		}
+
+	}
 	
 
 	/**
@@ -128,6 +149,22 @@ public class PersonDTO {
 	 */
 	public void setAddress(Set<Address> address) {
 		this.address = address;
+	}
+
+
+	/**
+	 * @return the medicalRecords
+	 */
+	public List<MedicalRecordsDTO> getMedicalRecords() {
+		return medicalRecords;
+	}
+
+
+	/**
+	 * @param medicalRecords the medicalRecords to set
+	 */
+	public void setMedicalRecords(List<MedicalRecordsDTO> medicalRecords) {
+		this.medicalRecords = medicalRecords;
 	}
 	
 
