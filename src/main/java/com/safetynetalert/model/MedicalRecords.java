@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.safetynetalerts.dto.MedicationsDTO;
@@ -36,7 +37,7 @@ public class MedicalRecords {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long medicalRecordId;
 
-	@OneToOne
+	@OneToOne(optional = false)
 	private Person person;
 
 	@Column(name = "birthdate")

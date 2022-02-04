@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.safetynetalerts.config.SafetyConfig;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class SafetynetalertApplication {
 	
 	private static final Logger LOGGER = LogManager.getLogger(SafetynetalertApplication.class);

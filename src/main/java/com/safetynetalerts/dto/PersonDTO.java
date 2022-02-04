@@ -63,8 +63,6 @@ public class PersonDTO {
 		for (MedicalRecords mr : mrs) {
 			medicalRecords.add(medicalRecordsDTOConverter.toDTO(mr));*/
 
-	
-
 	/**
 	 * @return the id
 	 */

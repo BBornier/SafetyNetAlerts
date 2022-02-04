@@ -15,7 +15,7 @@ import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalerts.dto.PersonDTO;
 
 @Service
-
+@Transactional
 public class PersonService {
 
 	
