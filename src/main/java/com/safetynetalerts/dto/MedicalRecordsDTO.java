@@ -87,10 +87,10 @@ public class MedicalRecordsDTO {
 	}
 
 	/**
-	 * @param list the medications to set
+	 * @param medications the medications to set
 	 */
-	public void setMedications(List<Medications> list) {
-		this.medications = list;
+	public void setMedications(List<Medications> medications) {
+		this.medications = medications;
 	}
 
 	/**
