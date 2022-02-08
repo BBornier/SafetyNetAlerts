@@ -1,13 +1,14 @@
-package com.safetynetalert.convertersdto;
+package com.safetynetalert.converterstodto;
 
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
+import com.safetynetalerts.dto.MedicationsDTO;
 
 public class MedicalRecordsDTOConverter {
 	
-	public MedicalRecordsDTO toDTO(MedicalRecords medicalRecords) {
+	public MedicalRecordsDTO fromMedicalRecordstoDTO(MedicalRecords medicalRecords) {
 		
-		MedicalRecordsDTO medicalRecordsDTO = new MedicalRecordsDTO(null, null, null);
+		MedicalRecordsDTO medicalRecordsDTO = new MedicalRecordsDTO();
 		
 		medicalRecordsDTO.setMedications(medicalRecords.getMedications());
 		medicalRecordsDTO.setAllergies(medicalRecords.getAllergies());

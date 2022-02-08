@@ -10,17 +10,22 @@ public class MedicalRecordsDTO {
 	
 	
 	
+	public MedicalRecordsDTO() {
+		super();
+	}
+
 	public MedicalRecordsDTO(Long medicalRecordId, String birthdate) {
 		super();
 		this.medicalRecordId = medicalRecordId;
 		this.birthdate = birthdate;
 	}
 
-	public MedicalRecordsDTO(Long medicalRecordId, Person person, String birthdate) {
+	public MedicalRecordsDTO(Long medicalRecordId, String birthdate, List<Medications> medications, List<Allergies> allergies) {
 		super();
 		this.medicalRecordId = medicalRecordId;
-		this.person = person;
 		this.birthdate = birthdate;
+		this.medications = medications;
+		this.allergies = allergies;
 		
 	}
 	
@@ -31,10 +36,8 @@ public class MedicalRecordsDTO {
 
 	private String birthdate;
 	
-	// A générer en DTO !
 	private List<Medications> medications;
 
-	// A générer en DTO !
 	private List<Allergies> allergies;
 
 	/**
@@ -106,6 +109,5 @@ public class MedicalRecordsDTO {
 	public void setAllergies(List<Allergies> allergies) {
 		this.allergies = allergies;
 	}
-
 
 }

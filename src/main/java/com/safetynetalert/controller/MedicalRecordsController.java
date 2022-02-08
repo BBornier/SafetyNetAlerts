@@ -35,20 +35,14 @@ public class MedicalRecordsController {
 	}
 
 	
+	/*@GetMapping("/medicalrecords/{id}")
+	public MedicalRecordsDTO findOneMedicalRecordById(@PathVariable Long id) {
+		return medicalRecordsService.getMedicalRecordsByUserId(id);
+	}*/
+	
 	@PostMapping("/medicalrecords")
 	public MedicalRecords create(@RequestBody MedicalRecords medicalRecord) {
 		return medicalRecordsService.saveMedicalRecords(medicalRecord);
-	}
-
-	
-	@GetMapping("/medicalrecords/{id}")
-	public MedicalRecords getMedicalRecord(@PathVariable("id") final Long id) {
-		Optional<MedicalRecords> medicalRecord = medicalRecordsService.getMedicalRecord(id);
-		if (medicalRecord.isPresent()) {
-			return medicalRecord.get();
-		} else {
-			return null;
-		}
 	}
 
 	

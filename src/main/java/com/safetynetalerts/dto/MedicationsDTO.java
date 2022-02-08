@@ -2,6 +2,7 @@ package com.safetynetalerts.dto;
 
 public class MedicationsDTO {
 	
+	
 	private String nameAndDosage;
 
 	/**

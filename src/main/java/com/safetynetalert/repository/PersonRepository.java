@@ -8,11 +8,11 @@ import com.safetynetalert.model.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-	public Person findByFirstNameAndLastName(String firstName, String lastName);
+	Person findByFirstNameAndLastName(String firstName, String lastName);
 	
-	public Person findByPersonId(Long personId);
+	Person findByPersonId(Long personId);
 	
-	public void deleteByFirstNameAndLastName(String firstName, String lastName);
+	void deleteByFirstNameAndLastName(String firstName, String lastName);
 		
 }
 

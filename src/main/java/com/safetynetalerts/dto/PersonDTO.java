@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.safetynetalert.convertersdto.MedicalRecordsDTOConverter;
+import com.safetynetalert.converterstodto.MedicalRecordsDTOConverter;
 import com.safetynetalert.model.Address;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.service.MedicalRecordsService;
@@ -23,13 +23,12 @@ public class PersonDTO {
 	}
 
 
-	public PersonDTO(Long id, String firstName, 
+	public PersonDTO(Long id, 
+			String firstName, 
 			String lastName, 
 			String phoneNumber, 
 			String email, 
-			Set<Address> address) 
-	{
-		
+			Set<Address> address) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -52,13 +51,20 @@ public class PersonDTO {
 	}
 	
 
-	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email) {
+	public PersonDTO(Long id, 
+			String firstName, 
+			String lastName, 
+			String phoneNumber, 
+			String email,
+			Set<Address> address,
+			List<MedicalRecordsDTO> medicalRecordsDTO) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.medicalRecordsDTO = medicalRecordsDTO;
 	}
 
 	private Long id;
@@ -73,12 +79,47 @@ public class PersonDTO {
 	
 	private Set<Address> address = new HashSet<>();
 	
-	private MedicalRecords medicalRecords;
+	private List<MedicalRecordsDTO> medicalRecordsDTO;
 	
 	/*public void fetchMedicalRecords() {
 		List<MedicalRecords> mrs = medicalRecordsService.getMedicalRecordsByUserId(id);
 		for (MedicalRecords mr : mrs) {
-			medicalRecords.add(medicalRecordsDTOConverter.toDTO(mr));*/
+			medicalRecordsDTO.add(medicalRecordsDTOConverter.fromMedicalRecordstoDTO(mr));
+		}
+	}*/
+
+
+	/**
+	 * @return the medicalRecordsService
+	 */
+	public MedicalRecordsService getMedicalRecordsService() {
+		return medicalRecordsService;
+	}
+
+
+	/**
+	 * @param medicalRecordsService the medicalRecordsService to set
+	 */
+	public void setMedicalRecordsService(MedicalRecordsService medicalRecordsService) {
+		this.medicalRecordsService = medicalRecordsService;
+	}
+
+
+	/**
+	 * @return the medicalRecordsDTOConverter
+	 */
+	public MedicalRecordsDTOConverter getMedicalRecordsDTOConverter() {
+		return medicalRecordsDTOConverter;
+	}
+
+
+	/**
+	 * @param medicalRecordsDTOConverter the medicalRecordsDTOConverter to set
+	 */
+	public void setMedicalRecordsDTOConverter(MedicalRecordsDTOConverter medicalRecordsDTOConverter) {
+		this.medicalRecordsDTOConverter = medicalRecordsDTOConverter;
+	}
+
 
 	/**
 	 * @return the id
@@ -87,12 +128,14 @@ public class PersonDTO {
 		return id;
 	}
 
+
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	/**
 	 * @return the firstName
@@ -101,12 +144,14 @@ public class PersonDTO {
 		return firstName;
 	}
 
+
 	/**
 	 * @param firstName the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 
 	/**
 	 * @return the lastName
@@ -115,12 +160,14 @@ public class PersonDTO {
 		return lastName;
 	}
 
+
 	/**
 	 * @param lastName the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 
 	/**
 	 * @return the phoneNumber
@@ -129,12 +176,14 @@ public class PersonDTO {
 		return phoneNumber;
 	}
 
+
 	/**
 	 * @param phoneNumber the phoneNumber to set
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 
 	/**
 	 * @return the email
@@ -143,6 +192,7 @@ public class PersonDTO {
 		return email;
 	}
 
+
 	/**
 	 * @param email the email to set
 	 */
@@ -150,12 +200,14 @@ public class PersonDTO {
 		this.email = email;
 	}
 
+
 	/**
 	 * @return the address
 	 */
 	public Set<Address> getAddress() {
 		return address;
 	}
+
 
 	/**
 	 * @param address the address to set
@@ -166,19 +218,19 @@ public class PersonDTO {
 
 
 	/**
-	 * @return the medicalRecords
+	 * @return the medicalRecordsDTO
 	 */
-	public MedicalRecords getMedicalRecords() {
-		return medicalRecords;
+	public List<MedicalRecordsDTO> getMedicalRecordsDTO() {
+		return medicalRecordsDTO;
 	}
 
 
 	/**
-	 * @param medicalRecords the medicalRecords to set
+	 * @param medicalRecordsDTO the medicalRecordsDTO to set
 	 */
-	public void setMedicalRecords(MedicalRecords medicalRecords) {
-		this.medicalRecords = medicalRecords;
+	public void setMedicalRecordsDTO(List<MedicalRecordsDTO> medicalRecordsDTO) {
+		this.medicalRecordsDTO = medicalRecordsDTO;
 	}
-	
 
+	
 }

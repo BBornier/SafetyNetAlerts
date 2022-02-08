@@ -13,10 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.transaction.Transactional;
 
 @Entity
-@Transactional
 @Table(name = "person")
 public class Person {
 	
