@@ -3,11 +3,12 @@ package com.safetynetalerts.dto;
 import java.util.List;
 
 import com.safetynetalert.model.Allergies;
+import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.service.MedicalRecordsService;
 
 public class MedicalRecordsDTO {
-	
 	
 	
 	public MedicalRecordsDTO() {
@@ -39,6 +40,7 @@ public class MedicalRecordsDTO {
 	private List<Medications> medications;
 
 	private List<Allergies> allergies;
+	
 
 	/**
 	 * @return the medicalRecordId

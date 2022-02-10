@@ -42,15 +42,12 @@ public class MedicalRecordsService {
 	}
 	 
 	
-	/*public MedicalRecordsDTO getMedicalRecordsByUserId(Long id) {
-		MedicalRecords mr = medicalRecordsRepository.findByPersonId(id);
-		MedicalRecordsDTO oneOfMr = new MedicalRecordsDTO(mr.getMedications(), 
-				mr.getAllergies(), 
-				mr.getBirthdate(), 
-				mr.getPerson());
+	public MedicalRecordsDTO getMedicalRecordsByUserId(Long id) {
+		MedicalRecords mr = medicalRecordsRepository.findByMedicalRecordId(id);
+		MedicalRecordsDTO oneOfMr = new MedicalRecordsDTO(mr.getMedicalRecordId(), mr.getBirthdate(), mr.getMedications(), mr.getAllergies());
 		
 		return oneOfMr;
-	}*/
+	}
 	
 	
 	public MedicalRecords saveMedicalRecords(MedicalRecords medicalRecords) {

@@ -55,6 +55,7 @@ public class PersonService {
 				personNames.getPhoneNumber(), 
 				personNames.getEmail(), 
 				personNames.getAddress());
+				personNames.getMedicalRecords();
 		
 		return hisProfile;
 	}

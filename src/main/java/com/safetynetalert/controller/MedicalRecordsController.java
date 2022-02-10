@@ -35,10 +35,10 @@ public class MedicalRecordsController {
 	}
 
 	
-	/*@GetMapping("/medicalrecords/{id}")
+	@GetMapping("/medicalrecords/{id}")
 	public MedicalRecordsDTO findOneMedicalRecordById(@PathVariable Long id) {
 		return medicalRecordsService.getMedicalRecordsByUserId(id);
-	}*/
+	}
 	
 	@PostMapping("/medicalrecords")
 	public MedicalRecords create(@RequestBody MedicalRecords medicalRecord) {
