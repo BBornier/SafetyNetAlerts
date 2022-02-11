@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Person;

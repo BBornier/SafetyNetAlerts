@@ -22,7 +22,7 @@ public class Address {
 	}
 	
 	
-	private int addressId;
+	private Long addressId;
 	
 	
 	private String streetName;
@@ -34,12 +34,12 @@ public class Address {
 	private String city;
 
 	
-	public int getAddressId() {
+	public Long getAddressId() {
 		return addressId;
 	}
 
 
-	public void setAddressId(int addressId) {
+	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 
