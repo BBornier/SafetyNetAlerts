@@ -130,6 +130,9 @@ public class JsonHelper {
 
 			//LOGGER.info("Hey ! this is your real birthdate: " + medRecords.getBirthdate());
 			
+			medRecords.setFirstName(jsonObj.getString("firstName"));
+			medRecords.setLastName(jsonObj.getString("lastName"));
+			
 			List<String> stringMedicationsList = parseJsonMedicationsFromMedicalRecords(jsonObj);
 			List<Medications> medsList = convertStringListToMedicationJavaList(stringMedicationsList);
 			medRecords.setMedications(medsList); 
@@ -140,7 +143,7 @@ public class JsonHelper {
 			medRecords.setAllergies(allergList); 
 			medicalRecordsList.add(medRecords);
 			
-			medicalRecordsService.saveMedicalRecords(medRecords); 
+			medicalRecordsService.addNewMedicalRecord(medRecords); 
 
 		}
 

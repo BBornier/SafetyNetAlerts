@@ -11,6 +11,7 @@ import com.safetynetalert.service.MedicalRecordsService;
 public class MedicalRecordsDTO {
 	
 	
+
 	public MedicalRecordsDTO() {
 		super();
 	}
@@ -21,9 +22,11 @@ public class MedicalRecordsDTO {
 		this.birthdate = birthdate;
 	}
 
-	public MedicalRecordsDTO(Long medicalRecordId, String birthdate, List<Medications> medications, List<Allergies> allergies) {
+	public MedicalRecordsDTO(Long medicalRecordId, String firstName, String lastName, String birthdate, List<Medications> medications, List<Allergies> allergies) {
 		super();
 		this.medicalRecordId = medicalRecordId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.birthdate = birthdate;
 		this.medications = medications;
 		this.allergies = allergies;
@@ -32,8 +35,12 @@ public class MedicalRecordsDTO {
 	
 	
 	private Long medicalRecordId;
+	
+	private String firstName;
+	
+	private String lastName;
 
-	private Person person;
+	//private Person person;
 
 	private String birthdate;
 	
@@ -42,72 +49,71 @@ public class MedicalRecordsDTO {
 	private List<Allergies> allergies;
 	
 
-	/**
-	 * @return the medicalRecordId
-	 */
+	
 	public Long getMedicalRecordId() {
 		return medicalRecordId;
 	}
 
-	/**
-	 * @param medicalRecordId the medicalRecordId to set
-	 */
+	
 	public void setMedicalRecordId(Long medicalRecordId) {
 		this.medicalRecordId = medicalRecordId;
 	}
 
-	/**
-	 * @return the person
-	 */
-	public Person getPerson() {
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	
+	public String getLastName() {
+		return lastName;
+	}
+
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	/*public Person getPerson() {
 		return person;
 	}
 
-	/**
-	 * @param person the person to set
-	 */
+	
 	public void setPerson(Person person) {
 		this.person = person;
-	}
+	}*/
 
-	/**
-	 * @return the birthdate
-	 */
+	
 	public String getBirthdate() {
 		return birthdate;
 	}
 
-	/**
-	 * @param birthdate the birthdate to set
-	 */
+	
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
-	/**
-	 * @return the medications
-	 */
+	
 	public List<Medications> getMedications() {
 		return medications;
 	}
 
-	/**
-	 * @param medications the medications to set
-	 */
+	
 	public void setMedications(List<Medications> medications) {
 		this.medications = medications;
 	}
 
-	/**
-	 * @return the allergies
-	 */
+	
 	public List<Allergies> getAllergies() {
 		return allergies;
 	}
 
-	/**
-	 * @param allergies the allergies to set
-	 */
+	
 	public void setAllergies(List<Allergies> allergies) {
 		this.allergies = allergies;
 	}

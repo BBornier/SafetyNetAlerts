@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.safetynetalert.model.Allergies;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
+import com.safetynetalert.model.Person;
 import com.safetynetalert.service.MedicalRecordsService;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
 import com.safetynetalerts.dto.PersonDTO;
@@ -27,6 +28,10 @@ public class MedicalRecordsController {
 
 	@Autowired
 	private MedicalRecordsService medicalRecordsService;
+	
+	public MedicalRecordsController(MedicalRecordsService medicalRecordsService) {
+		this.medicalRecordsService = medicalRecordsService;
+	}
 	
 	
 	@GetMapping("/medicalrecords")
@@ -40,11 +45,12 @@ public class MedicalRecordsController {
 		return medicalRecordsService.getMedicalRecordsByUserId(id);
 	}
 	
-	@PostMapping("/medicalrecords")
+	@PostMapping("/newMedicalRecords")
 	public MedicalRecords create(@RequestBody MedicalRecords medicalRecord) {
-		return medicalRecordsService.saveMedicalRecords(medicalRecord);
+		return medicalRecordsService.addNewMedicalRecord(medicalRecord);
 	}
-
+	
+	
 	
 }
 

@@ -19,18 +19,27 @@ public class MedicalRecords {
 		super();
 	}
 
-	public MedicalRecords(Person person, String birthdate, List<Medications> medications,
+	public MedicalRecords(String firstName, String lastName, String birthdate, List<Medications> medications,
 			List<Allergies> allergies) {
 		super();
-		this.person = person;
+		//this.person = person;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.birthdate = birthdate;
 		this.medications = medications;
 		this.allergies = allergies;
+		
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long medicalRecordId;
+	
+	@Column(name = "firstName")
+	private String firstName;
+	
+	@Column(name = "lastName")
+	private String lastName;
 
 	@OneToOne(optional = false)
 	private Person person;
@@ -57,6 +66,25 @@ public class MedicalRecords {
 	}
 
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public Person getPerson() {
 		return person;
 	}

@@ -13,9 +13,9 @@ import com.safetynetalert.service.MedicalRecordsService;
 
 public class PersonDTO {
 
-	// private MedicalRecordsService medicalRecordsService;
+	/*private MedicalRecordsService medicalRecordsService;
 
-	// private MedicalRecordsDTOConverter medicalRecordsDTOConverter;
+	private MedicalRecordsDTOConverter medicalRecordsDTOConverter;*/
 
 	public PersonDTO() {
 		super();
@@ -41,8 +41,7 @@ public class PersonDTO {
 		this.address = address;
 	}
 
-	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> address,
-			List<MedicalRecordsDTO> medicalRecordsDTO) {
+	/*public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> address) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -50,7 +49,7 @@ public class PersonDTO {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.medicalRecordsDTO = medicalRecordsDTO;
-	}
+	}*/
 
 	private Long id;
 
@@ -64,46 +63,36 @@ public class PersonDTO {
 
 	private Set<Address> address = new HashSet<>();
 
-	private List<MedicalRecordsDTO> medicalRecordsDTO;
+	//private List<MedicalRecordsDTO> medicalRecordsDTO;
 
-	/*
-	 * public void fetchMedicalRecords() { MedicalRecordsDTO mrs =
-	 * medicalRecordsService.getMedicalRecordsByUserId(id); mrs.getBirthdate();
-	 * mrs.getMedications(); mrs.getAllergies();
-	 * 
-	 * }
-	 */
+	
+	  /*public void fetchMedicalRecords() { 
+		  MedicalRecordsDTO mrs = medicalRecordsService.getMedicalRecordsByUserId(id); 
+		  mrs.getBirthdate(); 
+		  mrs.getMedications(); 
+		  mrs.getAllergies();
+	  
+	  }
+	 
 
-	/**
-	 * @return the medicalRecordsService
-	 */
-	/*
-	 * public MedicalRecordsService getMedicalRecordsService() { return
-	 * medicalRecordsService; }
-	 * 
-	 * 
-	 *//**
-		 * @param medicalRecordsService the medicalRecordsService to set
-		 *//*
-			 * public void setMedicalRecordsService(MedicalRecordsService
-			 * medicalRecordsService) { this.medicalRecordsService = medicalRecordsService;
-			 * }
-			 */
+	
+	  public MedicalRecordsService getMedicalRecordsService() { 
+		  return medicalRecordsService; 
+	  }
+	
+	  public void setMedicalRecordsService(MedicalRecordsService medicalRecordsService) { 
+		this.medicalRecordsService = medicalRecordsService;
+	  }
 
-	/**
-	 * @return the medicalRecordsDTOConverter
-	 */
-	/*
-	 * public MedicalRecordsDTOConverter getMedicalRecordsDTOConverter() { return
-	 * medicalRecordsDTOConverter; }
-	 * 
-	 *//**
-		 * @param medicalRecordsDTOConverter the medicalRecordsDTOConverter to set
-		 *//*
-			 * public void setMedicalRecordsDTOConverter(MedicalRecordsDTOConverter
-			 * medicalRecordsDTOConverter) { this.medicalRecordsDTOConverter =
-			 * medicalRecordsDTOConverter; }
-			 */
+	
+	  public MedicalRecordsDTOConverter getMedicalRecordsDTOConverter() { 
+		  return medicalRecordsDTOConverter; 
+	  }
+	
+	  public void setMedicalRecordsDTOConverter(MedicalRecordsDTOConverter medicalRecordsDTOConverter) { 
+			  this.medicalRecordsDTOConverter = medicalRecordsDTOConverter; 
+	  }*/
+			 
 
 	/**
 	 * @return the id
@@ -189,18 +178,5 @@ public class PersonDTO {
 		this.address = address;
 	}
 
-	/**
-	 * @return the medicalRecordsDTO
-	 */
-	public List<MedicalRecordsDTO> getMedicalRecordsDTO() {
-		return medicalRecordsDTO;
-	}
-
-	/**
-	 * @param medicalRecordsDTO the medicalRecordsDTO to set
-	 */
-	public void setMedicalRecordsDTO(List<MedicalRecordsDTO> medicalRecordsDTO) {
-		this.medicalRecordsDTO = medicalRecordsDTO;
-	}
 
 }

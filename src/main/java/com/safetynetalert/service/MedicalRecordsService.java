@@ -30,9 +30,13 @@ public class MedicalRecordsService {
 	  List<MedicalRecords> allMedRec = medicalRecordsRepository.findAll();
 	  List<MedicalRecordsDTO> allOfThem = new ArrayList<>(); 
 	  for(MedicalRecords medRec : allMedRec) { 
-		  MedicalRecordsDTO medicalRecDto = new MedicalRecordsDTO(medRec.getMedicalRecordId(), medRec.getBirthdate(), medRec.getMedications(), medRec.getAllergies());
-		  
-		  //A faire avec setters et getters !!
+		  MedicalRecordsDTO medicalRecDto = new MedicalRecordsDTO(medRec.getMedicalRecordId(), 
+				  medRec.getFirstName(), 
+				  medRec.getLastName(), 
+				  medRec.getBirthdate(), 
+				  medRec.getMedications(), 
+				  medRec.getAllergies());
+	
 	  
 	  allOfThem.add(medicalRecDto); 
 	  }
@@ -44,15 +48,19 @@ public class MedicalRecordsService {
 	
 	public MedicalRecordsDTO getMedicalRecordsByUserId(Long id) {
 		MedicalRecords mr = medicalRecordsRepository.findByMedicalRecordId(id);
-		MedicalRecordsDTO oneOfMr = new MedicalRecordsDTO(mr.getMedicalRecordId(), mr.getBirthdate(), mr.getMedications(), mr.getAllergies());
+		MedicalRecordsDTO oneOfMr = new MedicalRecordsDTO(mr.getMedicalRecordId(), 
+				mr.getFirstName(), 
+				mr.getLastName(), 
+				mr.getBirthdate(), 
+				mr.getMedications(), 
+				mr.getAllergies());
 		
 		return oneOfMr;
 	}
 	
 	
-	public MedicalRecords saveMedicalRecords(MedicalRecords medicalRecords) {
-		MedicalRecords savedMedicalRecords = medicalRecordsRepository.save(medicalRecords);
-		return savedMedicalRecords;
+	public MedicalRecords addNewMedicalRecord(MedicalRecords medicalRecords) {
+		return medicalRecordsRepository.save(medicalRecords);
 	}
 	
 }
