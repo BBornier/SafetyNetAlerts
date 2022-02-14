@@ -30,44 +30,29 @@ public class FirestationsDTO {
 	private String stationNumber;
 	
 
-	/**
-	 * @return the id
-	 */
 	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the address
-	 */
+	
 	public Set<Address> getAddress() {
 		return address;
 	}
 
-	/**
-	 * @param address the address to set
-	 */
 	public void setAddress(Set<Address> address) {
 		this.address = address;
 	}
 
-	/**
-	 * @return the stationNumber
-	 */
+	
 	public String getStationNumber() {
 		return stationNumber;
 	}
 
-	/**
-	 * @param stationNumber the stationNumber to set
-	 */
 	public void setStationNumber(String stationNumber) {
 		this.stationNumber = stationNumber;
 	} 

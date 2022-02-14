@@ -1,19 +1,23 @@
 package com.safetynetalerts.dto;
 
 public class AllergiesDTO {
+	
+
+	public AllergiesDTO() {
+		super();
+	}
+
+	public AllergiesDTO(String allergiesName) {
+		super();
+		this.allergiesName = allergiesName;
+	}
 
 	private String allergiesName;
-
-	/**
-	 * @return the allergiesName
-	 */
+	
 	public String getAllergiesName() {
 		return allergiesName;
 	}
 
-	/**
-	 * @param allergiesName the allergiesName to set
-	 */
 	public void setAllergiesName(String allergiesName) {
 		this.allergiesName = allergiesName;
 	}
