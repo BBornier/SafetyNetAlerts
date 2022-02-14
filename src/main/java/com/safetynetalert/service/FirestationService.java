@@ -50,6 +50,7 @@ public class FirestationService {
 	public Firestation firestationMappedWithAddress(Firestation mapping, Long id) {
 		Firestation oneFirestation = firestationRepository.findById(id).get();
 		Person onePersonAddress = personRepository.findById(id).get();
+		onePersonAddress.setAddress(oneFirestation.getAddress());
 		return oneFirestation;
 	}
 	

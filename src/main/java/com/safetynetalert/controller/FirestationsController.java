@@ -48,9 +48,16 @@ public class FirestationsController {
 		return "Well done, station number updated";
 	}
 	
-	/*@PostMapping("/firestationWithAdresses")
-	public String firestationMappedWithAddress(@RequestBody Firestation) {
-		return "Well done, you made a new mapping between a firestation and an address. Good Job !";
-	}*/
+	@PostMapping("/newFirestation")
+	public String addAnewStation(@RequestBody Firestation newFirestation) {
+		firestationService.saveFirestation(newFirestation);
+		return "Firestation added, good job, really. braaaavo.";	
+	}
+	
+	@GetMapping("/newFirestation2/{id}")
+	public String addNewStationTest(@RequestBody Firestation newFirestation, Long id) {
+		firestationService.firestationMappedWithAddress(newFirestation, id);
+		return "It works !";
+	}
 	
 }

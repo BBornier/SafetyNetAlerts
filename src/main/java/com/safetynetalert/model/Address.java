@@ -21,28 +21,12 @@ public class Address {
 		this.streetName = streetName;
 	}
 	
-	
-	private Long addressId;
-	
-	
 	private String streetName;
-	
 
 	private String zip;
 	
-	
 	private String city;
-
 	
-	public Long getAddressId() {
-		return addressId;
-	}
-
-
-	public void setAddressId(Long addressId) {
-		this.addressId = addressId;
-	}
-
 
 	public String getStreetName() {
 		return streetName;
@@ -76,7 +60,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", streetName=" + streetName + ", zip=" + zip + ", city=" + city
+		return "Address [streetName=" + streetName + ", zip=" + zip + ", city=" + city
 				+ "]";
 	}
 	
