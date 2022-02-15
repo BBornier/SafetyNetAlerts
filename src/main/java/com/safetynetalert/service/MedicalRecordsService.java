@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
@@ -40,7 +42,6 @@ public class MedicalRecordsService {
 	  
 	  allOfThem.add(medicalRecDto); 
 	  }
-	  
 	return allOfThem;
 	
 	}
@@ -59,8 +60,26 @@ public class MedicalRecordsService {
 	}
 	
 	
-	public MedicalRecords addNewMedicalRecord(MedicalRecords medicalRecords) {
-		return medicalRecordsRepository.save(medicalRecords);
+	public MedicalRecords addNewMedicalRecord(MedicalRecords newMedicalRecord) {
+		return medicalRecordsRepository.save(newMedicalRecord);
+	}
+	
+	public MedicalRecords updateMedicalRecordsById(MedicalRecords updateThisMrPlease, Long id) {
+		MedicalRecords anyMr = medicalRecordsRepository.findById(id).get();
+		anyMr.setMedications(updateThisMrPlease.getMedications());
+		anyMr.setAllergies(updateThisMrPlease.getAllergies());
+		
+		return medicalRecordsRepository.save(anyMr);
+	}
+
+
+	public void deleteOneMedicalRecord(String firstName, String lastName) {
+		medicalRecordsRepository.deleteByFirstNameAndLastName(firstName, lastName);
+	}
+
+	
+	public MedicalRecords findByName(String firstNmae, String lastName) {
+		return medicalRecordsRepository.findByFirstNameAndLastName(firstNmae, lastName);
 	}
 	
 }

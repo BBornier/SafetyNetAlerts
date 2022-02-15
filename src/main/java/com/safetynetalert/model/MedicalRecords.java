@@ -19,10 +19,10 @@ public class MedicalRecords {
 		super();
 	}
 
-	public MedicalRecords(String firstName, String lastName, String birthdate, List<Medications> medications,
+	public MedicalRecords(Person person, String firstName, String lastName, String birthdate, List<Medications> medications,
 			List<Allergies> allergies) {
 		super();
-		//this.person = person;
+		this.person = person;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthdate = birthdate;

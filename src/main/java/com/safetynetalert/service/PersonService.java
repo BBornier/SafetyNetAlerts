@@ -6,17 +6,21 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynetalert.model.Allergies;
+import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalerts.dto.PersonDTO;
+import com.safetynetalerts.dto.PersonInfoDTO;
 
 @Service
 @Transactional
 public class PersonService {
 
-	
+	@Autowired
 	private PersonRepository personRepository; 
 	
 	
@@ -38,6 +42,20 @@ public class PersonService {
 			allOfThem.add(personDto);
 		}
 			return allOfThem;
+	}
+	
+	public List<PersonInfoDTO> returnAnyPersonByHisInfoDTO(String firstName, String lastName) {
+		List<Person> allPersonEntity = personRepository.findAllByFirstNameAndLastName(firstName, lastName);
+		List<PersonInfoDTO> personInfo = new ArrayList<>();
+		for (Person perso : allPersonEntity) {
+			PersonInfoDTO infoDTO = new PersonInfoDTO();
+				infoDTO.setFirstName(perso.getFirstName());
+				infoDTO.setLastName(perso.getLastName());
+				infoDTO.setMail(perso.getEmail());
+			
+			personInfo.add(infoDTO);
+		}
+		return personInfo;
 	}
 	
 	
@@ -62,16 +80,13 @@ public class PersonService {
 	public PersonDTO exempleUtilisationAvecSettersEtGetters(String firstName, String lastName) {
 		Person person = personRepository.findByFirstNameAndLastName(firstName, lastName);
 		PersonDTO dTo = new PersonDTO();
-		
-		dTo.setFirstName(person.getFirstName());
-		dTo.setLastName(person.getLastName());
-		dTo.setPhoneNumber(person.getPhoneNumber());
-		dTo.setEmail(person.getEmail());
+			dTo.setFirstName(person.getFirstName());
+			dTo.setLastName(person.getLastName());
+			dTo.setPhoneNumber(person.getPhoneNumber());
+			dTo.setEmail(person.getEmail());
 		
 		return dTo;
 	}
-	
-	
 	
 	public PersonDTO returnOnePersonWithHisId(Long id) {
 		Person person = personRepository.findByPersonId(id);
@@ -90,13 +105,12 @@ public class PersonService {
 		return personRepository.save(strangerInTown);
 	}
 	
-
-
+	
 	public Person updatePersonById(Person updateThePersonPlease, Long id) {
 		Person anyPerson = personRepository.findById(id).get();
-		anyPerson.setPhoneNumber(updateThePersonPlease.getPhoneNumber());
-		anyPerson.setEmail(updateThePersonPlease.getEmail());
-		anyPerson.setAddress(updateThePersonPlease.getAddress());
+			anyPerson.setPhoneNumber(updateThePersonPlease.getPhoneNumber());
+			anyPerson.setEmail(updateThePersonPlease.getEmail());
+			anyPerson.setAddress(updateThePersonPlease.getAddress());
 		
 		return personRepository.save(anyPerson);
 	}
@@ -110,6 +124,5 @@ public class PersonService {
 	public Person savePerson(Person person) {
 		return personRepository.save(person);
 	}
-
 	
 }

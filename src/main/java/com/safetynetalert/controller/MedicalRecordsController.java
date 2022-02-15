@@ -1,9 +1,6 @@
 package com.safetynetalert.controller;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,13 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynetalert.model.Allergies;
 import com.safetynetalert.model.MedicalRecords;
-import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.MedicalRecordsService;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
-import com.safetynetalerts.dto.PersonDTO;
 
 
 @RestController
@@ -45,12 +39,23 @@ public class MedicalRecordsController {
 		return medicalRecordsService.getMedicalRecordsByUserId(id);
 	}
 	
-	@PostMapping("/newMedicalRecords")
-	public MedicalRecords create(@RequestBody MedicalRecords medicalRecord) {
-		return medicalRecordsService.addNewMedicalRecord(medicalRecord);
+	@PostMapping("/newMedicalRecord")
+	public String createNewMr(@RequestBody MedicalRecords medicalRecord) {
+		medicalRecordsService.addNewMedicalRecord(medicalRecord);
+		return "New Medical Record registered, congrats !";
 	}
 	
+	@PutMapping("/updateMedicalRecord/{id}")
+	public String updateMr(@RequestBody MedicalRecords update, @PathVariable Long id) {
+		medicalRecordsService.updateMedicalRecordsById(update, id);
+		return "This Medical reacord is up to date !";
+	}
 	
+	@DeleteMapping("/medicalRecord/{firstName}/{lastName}")
+    public String deleteByNames(@PathVariable String firstName, @PathVariable String lastName) {
+		medicalRecordsService.deleteOneMedicalRecord(firstName, lastName);
+        return "Medical Record Shreded";
+	}
 	
 }
 

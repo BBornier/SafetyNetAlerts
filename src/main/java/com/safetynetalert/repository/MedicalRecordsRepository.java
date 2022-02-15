@@ -4,10 +4,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.safetynetalert.model.MedicalRecords;
+import com.safetynetalert.model.Person;
 
 @Repository
 public interface MedicalRecordsRepository extends JpaRepository<MedicalRecords, Long> {
 	
 	MedicalRecords findByMedicalRecordId(Long id);
+	
+	MedicalRecords findByFirstNameAndLastName(String firstName, String lastName);
+	
+	void deleteByFirstNameAndLastName(String firstName, String lastName);
 
 }

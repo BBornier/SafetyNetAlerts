@@ -10,7 +10,6 @@ import com.safetynetalert.service.MedicalRecordsService;
 
 public class MedicalRecordsDTO {
 	
-	
 
 	public MedicalRecordsDTO() {
 		super();
@@ -39,8 +38,6 @@ public class MedicalRecordsDTO {
 	private String firstName;
 	
 	private String lastName;
-
-	//private Person person;
 
 	private String birthdate;
 	
@@ -78,15 +75,6 @@ public class MedicalRecordsDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	/*public Person getPerson() {
-		return person;
-	}
-
-	
-	public void setPerson(Person person) {
-		this.person = person;
-	}*/
 
 	
 	public String getBirthdate() {

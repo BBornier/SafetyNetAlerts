@@ -1,4 +1,4 @@
-package com.safetynetalert.urls;
+package com.safetynetalerts.dto;
 
 import java.util.List;
 import java.util.Set;
@@ -9,29 +9,48 @@ import com.safetynetalert.model.Medications;
 
 public class PersonInfoDTO {
 	
-	String name;
 	
-	String age;
 	
-	String mail;
-	
-	Set<Address> address;
-	
-	List<Allergies> allergies;
-	
-	List<Medications> medications;
-
-	
-	public String getName() {
-		return name;
+	public PersonInfoDTO() {
+		super();
 	}
 
+
+	private String firstName;
 	
-	public void setName(String name) {
-		this.name = name;
+	private String lastName;
+	
+	private String age;
+	
+	private String mail;
+	
+	private String birthdate;
+	
+	private Set<Address> address;
+	
+	private List<Allergies> allergies;
+	
+	private List<Medications> medications;
+
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
 	public String getAge() {
 		return age;
 	}
@@ -52,6 +71,16 @@ public class PersonInfoDTO {
 	}
 
 	
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
+	}
+
+
 	public Set<Address> getAddress() {
 		return address;
 	}
