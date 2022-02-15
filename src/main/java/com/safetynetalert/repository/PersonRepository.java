@@ -16,7 +16,9 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	
 	void deleteByFirstNameAndLastName(String firstName, String lastName);
 		
-	List<Person> findAllByCity(String city);
+	List<Person> findAllByFirstNameAndLastName(String firstName, String lastName); 
+	
+	//List<Person> findAllByCity(String city);
 	
 }
 
