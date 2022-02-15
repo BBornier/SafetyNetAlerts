@@ -124,5 +124,9 @@ public class PersonService {
 	public Person savePerson(Person person) {
 		return personRepository.save(person);
 	}
+
+	public List<Person> returnAnyPersonByHisInNames(String firstName, String lastName) {
+		return personRepository.findAllByFirstNameAndLastName(firstName, lastName);
+	}
 	
 }

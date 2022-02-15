@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.MedicalRecordsRepository;
+import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
 
 @Service
@@ -23,9 +24,8 @@ public class MedicalRecordsService {
 	@Autowired
 	private MedicalRecordsRepository medicalRecordsRepository; 
 	
-	public MedicalRecordsService(MedicalRecordsRepository medicalRecordsRepository) {
-		this.medicalRecordsRepository = medicalRecordsRepository;
-	}
+	@Autowired
+	private PersonRepository personRepository;
 	
 	
 	  public List<MedicalRecordsDTO> returnAllMedicalRecordsInDataBase() {
@@ -61,7 +61,15 @@ public class MedicalRecordsService {
 	
 	
 	public MedicalRecords addNewMedicalRecord(MedicalRecords newMedicalRecord) {
-		return medicalRecordsRepository.save(newMedicalRecord);
+		Person person = personRepository.findByFirstNameAndLastName(newMedicalRecord.getFirstName(), newMedicalRecord.getLastName());
+		MedicalRecords mr = new MedicalRecords();
+		mr.setPerson(person);
+		mr.setFirstName(person.getFirstName());
+		mr.setLastName(person.getLastName());
+		mr.setBirthdate(newMedicalRecord.getBirthdate());
+		mr.setMedications(newMedicalRecord.getMedications());
+		mr.setAllergies(newMedicalRecord.getAllergies());
+		return medicalRecordsRepository.save(mr);
 	}
 	
 	public MedicalRecords updateMedicalRecordsById(MedicalRecords updateThisMrPlease, Long id) {

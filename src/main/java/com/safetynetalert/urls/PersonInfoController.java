@@ -1,4 +1,4 @@
-package com.safetynetalert.controller;
+package com.safetynetalert.urls;
 
 import java.util.List;
 
@@ -31,9 +31,9 @@ public class PersonInfoController {
 	@Autowired
 	private MedicalRecordsService medicalRecordsService;
 	
-	@GetMapping("/personInfo/")
-	public List<PersonInfoDTO> getPersonInfo(@RequestParam String firstName, @RequestParam String lastName) {
-		return personService.returnAnyPersonByHisInfoDTO(firstName, lastName);
+	@GetMapping("/personInfo")
+	public List<Person> findPersonByHisNames(@RequestParam String firstName, @RequestParam String lastName) {
+		return personService.returnAnyPersonByHisInNames(firstName, lastName);
 		
 	}
 
