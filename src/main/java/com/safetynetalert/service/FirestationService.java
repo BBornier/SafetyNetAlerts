@@ -47,10 +47,10 @@ public class FirestationService {
 		return firestationRepository.save(anyFirestation);
 	}
 	
-	public Firestation firestationMappedWithAddress(Firestation mapping, Long id) {
+	public Firestation firestationMappedWithAddress(Long id) {
 		Firestation oneFirestation = firestationRepository.findById(id).get();
 		Person onePersonAddress = personRepository.findById(id).get();
-		onePersonAddress.setAddress(oneFirestation.getAddress());
+		oneFirestation.setAddress(onePersonAddress.getAddress());
 		return oneFirestation;
 	}
 	

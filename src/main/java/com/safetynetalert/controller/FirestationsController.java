@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynetalert.model.Firestation;
@@ -54,10 +55,10 @@ public class FirestationsController {
 		return "Firestation added, good job, really. braaaavo.";	
 	}
 	
-	@GetMapping("/newFirestation2/{id}")
-	public String addNewStationTest(@RequestBody Firestation newFirestation, Long id) {
-		firestationService.firestationMappedWithAddress(newFirestation, id);
-		return "It works !";
+	@GetMapping("/FirestationWithAdresses/{id}")
+	public Firestation addNewStationTest(@PathVariable Long id) {
+		return firestationService.firestationMappedWithAddress(id);
+		//return "It works !";
 	}
 	
 }

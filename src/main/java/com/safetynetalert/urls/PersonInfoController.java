@@ -7,13 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.MedicalRecordsService;
 import com.safetynetalert.service.PersonService;
-import com.safetynetalerts.dto.MedicalRecordsDTO;
-import com.safetynetalerts.dto.PersonDTO;
-import com.safetynetalerts.dto.PersonInfoDTO;
 
 
 /*http://localhost:8080/personInfo?firstName=<firstName>&lastName=<lastName>

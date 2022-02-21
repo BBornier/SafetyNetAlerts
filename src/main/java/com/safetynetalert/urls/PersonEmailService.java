@@ -2,6 +2,7 @@ package com.safetynetalert.urls;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,12 @@ public class PersonEmailService {
 
 	
 	public List<String> findEmailsByPersonsCity(String city) {
-		List<Person> allPersons = personRepository.findAllByCity(city);
-		List<String> byString = new ArrayList<>();
-		for(Person perso : allPersons) {
-			byString.add(perso.getEmail());
+		List<PersonDTO> allPersons = personRepository.findByCity(city);
+		List<String> cities = new ArrayList<>();
+		for(PersonDTO perso : allPersons) {
+			cities.add(city);
 		}
-		return byString;
+		return cities;
 		
 	}
 
