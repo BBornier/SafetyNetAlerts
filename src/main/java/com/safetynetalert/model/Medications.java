@@ -27,8 +27,7 @@ public class Medications {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int medicationsId;
-
-
+	
 	private String nameAndDosage;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -38,34 +37,24 @@ public class Medications {
 	public int getMedicationsId() {
 		return medicationsId;
 	}
-
 	
 	public void setMedicationsId(int medicationsId) {
 		this.medicationsId = medicationsId;
 	}
-
 	
-	/**
-	 * @return the medicalRecords
-	 */
 	public List<MedicalRecords> getMedicalRecords() {
 		return medicalRecords;
 	}
 
-	/**
-	 * @param medicalRecords the medicalRecords to set
-	 */
 	public void setMedicalRecords(List<MedicalRecords> medicalRecords) {
 		this.medicalRecords = medicalRecords;
 	}
 	
 	
-
 	public String getNameAndDosage() {
 		return nameAndDosage;
 	}
 
-	
 	public void setNameAndDosage(String nameAndDosage) {
 		this.nameAndDosage = nameAndDosage;
 	}

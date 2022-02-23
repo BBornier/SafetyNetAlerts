@@ -67,26 +67,21 @@ public class MedicalRecords {
 		return medicalRecordId;
 	}
 
-	
 	public void setMedicalRecordId(Long medicalRecordId) {
 		this.medicalRecordId = medicalRecordId;
 	}
 
-	
 	public String getFirstName() {
 		return firstName;
 	}
-
 	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
 	public String getLastName() {
 		return lastName;
 	}
-
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -96,32 +91,26 @@ public class MedicalRecords {
 		return person;
 	}
 
-	
 	public void setPerson(Person person) {
 		this.person = person;
 	}
 
-	
 	public String getBirthdate() {
 		return birthdate;
 	}
 
-	
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
-	
 	public List<Medications> getMedications() {
 		return medications;
 	}
 
-	
 	public void setMedications(List<Medications> medications) {
 		this.medications = medications;
 	}
 
-	
 	public List<Allergies> getAllergies() {
 		return allergies;
 	}

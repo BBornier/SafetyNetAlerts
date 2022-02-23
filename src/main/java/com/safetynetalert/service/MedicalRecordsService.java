@@ -35,16 +35,20 @@ public class MedicalRecordsService {
 	@Autowired
 	private PersonRepository personRepository;
 	
+	@Autowired
+	private MedicationsRepository medicationsRepository;
+	
 
 	  public List<MedicalRecordsDTO> returnAllMedicalRecordsInDataBase() {
 	  List<MedicalRecords> allMedRec = medicalRecordsRepository.findAll();
 	  List<MedicalRecordsDTO> allOfThem = new ArrayList<>(); 
 	  for(MedicalRecords medRec : allMedRec) { 
+		  List<Medications> allMedications = medicationsRepository.findAllByMrId(); // à créer
 		  MedicalRecordsDTO medicalRecDto = new MedicalRecordsDTO(medRec.getMedicalRecordId(), 
 				  medRec.getFirstName(), 
 				  medRec.getLastName(), 
 				  medRec.getBirthdate(), 
-				  medRec.getMedications(), 
+				  medRec.setMedications(allMedications), // à corriger.
 				  medRec.getAllergies());
 	
 	  
@@ -70,6 +74,7 @@ public class MedicalRecordsService {
 	
 	public MedicalRecords saveNewMedicalRecord(MedicalRecords medicalRecord) {
 		Person person = personRepository.findByFirstNameAndLastName(medicalRecord.getFirstName(), medicalRecord.getLastName());	
+		// if person = null; créer une nouvelle personne via une méthode.
 		MedicalRecords mr = new MedicalRecords();
 		mr.setPerson(person);
 		mr.setFirstName(person.getFirstName());

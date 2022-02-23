@@ -28,7 +28,6 @@ public class Allergies {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int allergiesId;
 
-
 	private String name;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -38,34 +37,22 @@ public class Allergies {
 	public int getAllergiesId() {
 		return allergiesId;
 	}
-
 	
 	public void setAllergiesId(int allergiesId) {
 		this.allergiesId = allergiesId;
 	}
 	
-	
-	
-	/**
-	 * @return the medicalRecords
-	 */
 	public List<MedicalRecords> getMedicalRecords() {
 		return medicalRecords;
 	}
-
-	/**
-	 * @param medicalRecords the medicalRecords to set
-	 */
+	
 	public void setMedicalRecords(List<MedicalRecords> medicalRecords) {
 		this.medicalRecords = medicalRecords;
 	}
-
-	
 	
 	public String getName() {
 		return name;
 	}
-
 	
 	public void setName(String name) {
 		this.name = name;
