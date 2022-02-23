@@ -55,13 +55,11 @@ public class MedicalRecords {
 	@Column(name = "medications")
 	//@ElementCollection(targetClass = Medications.class)
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
-	//@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Medications> medications;
 
 	@Column(name = "allergies")
 	//@ElementCollection(targetClass = Allergies.class)
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
-	//@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Allergies> allergies;
 
 	
