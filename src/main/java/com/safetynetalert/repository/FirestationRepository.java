@@ -8,7 +8,5 @@ import com.safetynetalert.model.Firestation;
 
 @Repository
 public interface FirestationRepository extends JpaRepository<Firestation, Long> {
-	
-	
 
 }

@@ -1,9 +1,14 @@
 package com.safetynetalert.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +31,10 @@ public class Medications {
 
 	private String nameAndDosage;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<MedicalRecords> medicalRecords;
 
-
+	
 	public int getMedicationsId() {
 		return medicationsId;
 	}
@@ -38,6 +45,22 @@ public class Medications {
 	}
 
 	
+	/**
+	 * @return the medicalRecords
+	 */
+	public List<MedicalRecords> getMedicalRecords() {
+		return medicalRecords;
+	}
+
+	/**
+	 * @param medicalRecords the medicalRecords to set
+	 */
+	public void setMedicalRecords(List<MedicalRecords> medicalRecords) {
+		this.medicalRecords = medicalRecords;
+	}
+	
+	
+
 	public String getNameAndDosage() {
 		return nameAndDosage;
 	}

@@ -19,9 +19,9 @@ public class PersonEmailController {
 	@Autowired
 	public PersonEmailService personEmailService;
 	
-	@GetMapping("/communityEmail")
+	/*@GetMapping("/communityEmail")
 	public List<String> findEmailByLocation(@RequestParam String city) {
 		return personEmailService.findEmailsByPersonsCity(city);
-	}
+	}*/
 
 }

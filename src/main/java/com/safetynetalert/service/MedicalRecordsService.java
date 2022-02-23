@@ -11,11 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.fasterxml.jackson.core.sym.Name;
+import com.safetynetalert.model.Allergies;
+import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
+import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.AllergiesRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
+import com.safetynetalert.repository.MedicationsRepository;
 import com.safetynetalert.repository.PersonRepository;
+import com.safetynetalerts.dto.AllergiesDTO;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
+import com.safetynetalerts.dto.MedicationsDTO;
 
 @Service
 @Transactional
@@ -27,7 +35,7 @@ public class MedicalRecordsService {
 	@Autowired
 	private PersonRepository personRepository;
 	
-	
+
 	  public List<MedicalRecordsDTO> returnAllMedicalRecordsInDataBase() {
 	  List<MedicalRecords> allMedRec = medicalRecordsRepository.findAll();
 	  List<MedicalRecordsDTO> allOfThem = new ArrayList<>(); 
@@ -60,15 +68,15 @@ public class MedicalRecordsService {
 	}
 	
 	
-	public MedicalRecords addNewMedicalRecord(MedicalRecords newMedicalRecord) {
-		Person person = personRepository.findByFirstNameAndLastName(newMedicalRecord.getFirstName(), newMedicalRecord.getLastName());
+	public MedicalRecords saveNewMedicalRecord(MedicalRecords medicalRecord) {
+		Person person = personRepository.findByFirstNameAndLastName(medicalRecord.getFirstName(), medicalRecord.getLastName());	
 		MedicalRecords mr = new MedicalRecords();
 		mr.setPerson(person);
 		mr.setFirstName(person.getFirstName());
 		mr.setLastName(person.getLastName());
-		mr.setBirthdate(newMedicalRecord.getBirthdate());
-		mr.setMedications(newMedicalRecord.getMedications());
-		mr.setAllergies(newMedicalRecord.getAllergies());
+		mr.setBirthdate(medicalRecord.getBirthdate());
+		mr.setMedications(medicalRecord.getMedications());
+		mr.setAllergies(medicalRecord.getAllergies());
 		return medicalRecordsRepository.save(mr);
 	}
 	
@@ -89,7 +97,13 @@ public class MedicalRecordsService {
 	public MedicalRecords findByName(String firstNmae, String lastName) {
 		return medicalRecordsRepository.findByFirstNameAndLastName(firstNmae, lastName);
 	}
-	
-}
+
+
+	public MedicalRecords saveMedicalRecord(MedicalRecords medRecords) {
+		MedicalRecords savedMr = medicalRecordsRepository.save(medRecords);
+		return savedMr;
+		}
+	}
+
 
 

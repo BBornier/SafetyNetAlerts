@@ -2,14 +2,19 @@ package com.safetynetalert.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "medical_records")
@@ -48,11 +53,15 @@ public class MedicalRecords {
 	private String birthdate;
 
 	@Column(name = "medications")
-	@ElementCollection(targetClass = Medications.class)
+	//@ElementCollection(targetClass = Medications.class)
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
+	//@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Medications> medications;
 
 	@Column(name = "allergies")
-	@ElementCollection(targetClass = Allergies.class)
+	//@ElementCollection(targetClass = Allergies.class)
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
+	//@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Allergies> allergies;
 
 	

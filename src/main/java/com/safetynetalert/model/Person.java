@@ -30,6 +30,14 @@ public class Person {
 		this.email = email;
 		
 	}
+	
+
+	public Person(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

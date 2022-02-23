@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.AllergiesRepository;
+import com.safetynetalert.repository.MedicationsRepository;
 import com.safetynetalert.service.MedicalRecordsService;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
 
@@ -40,9 +42,9 @@ public class MedicalRecordsController {
 	}
 	
 	@PostMapping("/newMedicalRecord")
-	public String createNewMr(@RequestBody MedicalRecords medicalRecord) {
-		medicalRecordsService.addNewMedicalRecord(medicalRecord);
-		return "New Medical Record registered, congrats !";
+	public MedicalRecords createNewMr(@RequestBody MedicalRecords medicalRecord) {
+		return medicalRecordsService.saveNewMedicalRecord(medicalRecord);
+		//return "New Medical Record registered, congrats !";
 	}
 	
 	@PutMapping("/updateMedicalRecord/{id}")

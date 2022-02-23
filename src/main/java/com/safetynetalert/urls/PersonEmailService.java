@@ -20,7 +20,7 @@ public class PersonEmailService {
 	private PersonRepository personRepository;
 
 	
-	public List<String> findEmailsByPersonsCity(String city) {
+	/*public List<String> findEmailsByPersonsCity(String city) {
 		List<PersonDTO> allPersons = personRepository.findByCity(city);
 		List<String> cities = new ArrayList<>();
 		for(PersonDTO perso : allPersons) {
@@ -28,6 +28,6 @@ public class PersonEmailService {
 		}
 		return cities;
 		
-	}
+	}*/
 
 }

@@ -143,7 +143,7 @@ public class JsonHelper {
 			medRecords.setAllergies(allergList); 
 			medicalRecordsList.add(medRecords);
 			
-			medicalRecordsService.addNewMedicalRecord(medRecords); 
+			medicalRecordsService.saveMedicalRecord(medRecords); 
 
 		}
 
