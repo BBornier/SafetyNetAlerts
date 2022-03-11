@@ -14,6 +14,11 @@ public class PersonDTO {
 	public PersonDTO() {
 		super();
 	}
+	
+	public PersonDTO(String email) {
+		super ();
+		this.email = email;
+	}
 
 	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email,
 			Set<Address> address) {

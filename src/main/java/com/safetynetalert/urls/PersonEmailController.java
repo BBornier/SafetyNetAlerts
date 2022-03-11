@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynetalerts.dto.AddressDTO;
 import com.safetynetalerts.dto.PersonDTO;
 
 /*http://localhost:8080/communityEmail?city=<city>
@@ -19,9 +20,9 @@ public class PersonEmailController {
 	@Autowired
 	public PersonEmailService personEmailService;
 	
-	/*@GetMapping("/communityEmail")
+	@GetMapping("/communityEmail")
 	public List<String> findEmailByLocation(@RequestParam String city) {
-		return personEmailService.findEmailsByPersonsCity(city);
-	}*/
+		return personEmailService.getEmail(city);
+	}
 
 }

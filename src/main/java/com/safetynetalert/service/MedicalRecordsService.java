@@ -43,14 +43,13 @@ public class MedicalRecordsService {
 	  List<MedicalRecords> allMedRec = medicalRecordsRepository.findAll();
 	  List<MedicalRecordsDTO> allOfThem = new ArrayList<>(); 
 	  for(MedicalRecords medRec : allMedRec) { 
-		  List<Medications> allMedications = medicationsRepository.findAllByMrId(); // à créer
+		  List<Medications> allMedications = medicationsRepository.findAll();
 		  MedicalRecordsDTO medicalRecDto = new MedicalRecordsDTO(medRec.getMedicalRecordId(), 
 				  medRec.getFirstName(), 
 				  medRec.getLastName(), 
 				  medRec.getBirthdate(), 
-				  medRec.setMedications(allMedications), // à corriger.
+				  medRec.getMedications(),
 				  medRec.getAllergies());
-	
 	  
 	  allOfThem.add(medicalRecDto); 
 	  }

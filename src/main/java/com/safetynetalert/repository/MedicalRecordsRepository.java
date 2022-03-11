@@ -15,4 +15,5 @@ public interface MedicalRecordsRepository extends JpaRepository<MedicalRecords, 
 	
 	void deleteByFirstNameAndLastName(String firstName, String lastName);
 
+
 }

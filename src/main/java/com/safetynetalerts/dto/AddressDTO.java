@@ -7,7 +7,11 @@ public class AddressDTO {
 	public AddressDTO() {
 		super();
 	}
-
+	
+	public AddressDTO(String city) {
+		super();
+		this.city = city;
+	}
 
 	public AddressDTO(String streetName, String zip, String city) {
 		super();
