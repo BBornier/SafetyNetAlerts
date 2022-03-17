@@ -31,8 +31,8 @@ public class MedicalRecordsDTO {
 		this.allergies = allergies;
 		
 	}
-	
-	
+
+
 	private Long medicalRecordId;
 	
 	private String firstName;

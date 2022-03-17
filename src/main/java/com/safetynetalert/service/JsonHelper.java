@@ -122,14 +122,7 @@ public class JsonHelper {
 			
 			Person person = personService.findPersonByHisName(jsonObj.getString("firstName"), jsonObj.getString("lastName"));
 			medRecords.setPerson(person);
-			
-			//LOGGER.info("Hey ! Don't forget your email: " + medRecords.getPerson().getEmail());
-			//LOGGER.info("Hey ! this is your birthdate but you'll be null: " + medRecords.getBirthdate());
-			
 			medRecords.setBirthdate(jsonObj.getString("birthdate"));
-
-			//LOGGER.info("Hey ! this is your real birthdate: " + medRecords.getBirthdate());
-			
 			medRecords.setFirstName(jsonObj.getString("firstName"));
 			medRecords.setLastName(jsonObj.getString("lastName"));
 			

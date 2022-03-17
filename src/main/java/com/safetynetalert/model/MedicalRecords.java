@@ -53,12 +53,10 @@ public class MedicalRecords {
 	private String birthdate;
 
 	@Column(name = "medications")
-	//@ElementCollection(targetClass = Medications.class)
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
 	private List<Medications> medications;
 
 	@Column(name = "allergies")
-	//@ElementCollection(targetClass = Allergies.class)
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
 	private List<Allergies> allergies;
 

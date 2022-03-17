@@ -35,15 +35,11 @@ public class MedicalRecordsService {
 	@Autowired
 	private PersonRepository personRepository;
 	
-	@Autowired
-	private MedicationsRepository medicationsRepository;
-	
 
 	  public List<MedicalRecordsDTO> returnAllMedicalRecordsInDataBase() {
 	  List<MedicalRecords> allMedRec = medicalRecordsRepository.findAll();
 	  List<MedicalRecordsDTO> allOfThem = new ArrayList<>(); 
 	  for(MedicalRecords medRec : allMedRec) { 
-		  List<Medications> allMedications = medicationsRepository.findAll();
 		  MedicalRecordsDTO medicalRecDto = new MedicalRecordsDTO(medRec.getMedicalRecordId(), 
 				  medRec.getFirstName(), 
 				  medRec.getLastName(), 
