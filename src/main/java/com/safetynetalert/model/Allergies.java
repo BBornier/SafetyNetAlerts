@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Allergies")
 public class Allergies {
@@ -30,7 +32,8 @@ public class Allergies {
 
 	private String name;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "allergies", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<MedicalRecords> medicalRecords;
 	
 

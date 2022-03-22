@@ -1,4 +1,4 @@
-package com.safetynetalert.urls;
+package com.safetynetalert.controller;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynetalert.model.Person;
 import com.safetynetalert.service.MedicalRecordsService;
-import com.safetynetalert.service.PersonService;
+import com.safetynetalert.service.PersonServiceImpl;
+import com.safetynetalerts.dto.PersonInfoDTO;
 
 
 /*http://localhost:8080/personInfo?firstName=<firstName>&lastName=<lastName>
@@ -22,14 +22,11 @@ toutes apparaître.
 public class PersonInfoController {
 	
 	@Autowired
-	private PersonService personService;
-	
-	@Autowired
-	private MedicalRecordsService medicalRecordsService;
+	private PersonServiceImpl personService;
 	
 	@GetMapping("/personInfo")
-	public List<Person> findPersonByHisNames(@RequestParam String firstName, @RequestParam String lastName) {
-		return personService.returnAnyPersonByHisInNames(firstName, lastName);
+	public List<PersonInfoDTO> findPersonByHisNames(@RequestParam String firstName, @RequestParam String lastName) {
+		return personService.returnAnyPersonByHisInfoDTO(firstName, lastName);
 		
 	}
 

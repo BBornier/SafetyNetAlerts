@@ -1,4 +1,4 @@
-package com.safetynetalert.urls;
+package com.safetynetalert.controller;
 
 import java.util.List;
 
@@ -7,11 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynetalerts.dto.AddressDTO;
-import com.safetynetalerts.dto.PersonDTO;
-
-/*http://localhost:8080/communityEmail?city=<city>
-Cette url doit retourner les adresses mail de tous les habitants de la ville.*/
+import com.safetynetalert.service.PersonEmailService;
 
 
 @RestController

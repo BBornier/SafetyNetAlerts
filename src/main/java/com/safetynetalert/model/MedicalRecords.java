@@ -9,10 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.JoinColumnOrFormula;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -52,12 +55,18 @@ public class MedicalRecords {
 	@Column(name = "birthdate")
 	private String birthdate;
 
-	@Column(name = "medications")
-	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
+	@ManyToMany
+	@JoinTable (
+			name = "MedialRecord_Medications", 
+			joinColumns = @JoinColumn (name = "medical_records"),
+			inverseJoinColumns = @JoinColumn (name = "medications"))
 	private List<Medications> medications;
 
-	@Column(name = "allergies")
-	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "medicalRecords")
+	@ManyToMany
+	@JoinTable (
+			name = "MedialRecord_Allergies", 
+			joinColumns = @JoinColumn (name = "medical_records"),
+			inverseJoinColumns = @JoinColumn (name = "allergies"))
 	private List<Allergies> allergies;
 
 	

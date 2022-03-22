@@ -24,30 +24,10 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	
 	List<PersonDTO> findAllByAddress(String city);
 	
-	@Query(value = "SELECT PERSON.email from PERSON JOIN PERSON_ADDRESS ON PERSON_ADDRESS.PERSON_PERSON_ID=PERSON.PERSON_ID WHERE city=?1", nativeQuery = true) //?1 premier paramètre soit city.
+	@Query(value = "SELECT PERSON.EMAIL from PERSON JOIN PERSON_ADDRESS ON PERSON_ADDRESS.PERSON_PERSON_ID=PERSON.PERSON_ID WHERE city=?1", nativeQuery = true) //?1 premier paramètre soit city.
 	List<String> findEmailByCity(String city);
 	
-	/*@Entity
-	public class Product extends AbstractEntity {
-	...
-
-	@ElementCollection
-	    private Map<String, String> attributes = new HashMap<String, String>();
-	...
-	}
-	The repository query method that allows querying for arbitrary product attributes:
-
-	@Query("select p from Product p where p.attributes[?1] = ?2")
-	List<Product> findByAttributeAndValue(String attribute, String value);*/
 	
-	/*@Query("select p from Product p where p.attributes[?1] = ?2")
-	List<Product> findByAttributeAndValue(String attribute, String value);
-	
-	SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
-	FROM Orders
-	INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;*/
-
-	/*PERSON_ADDRESS  PERSON_PERSON_ID*/
 	
 }
 

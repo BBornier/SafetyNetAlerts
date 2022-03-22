@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.service.FirestationService;
-import com.safetynetalert.service.PersonService;
+import com.safetynetalert.service.PersonServiceImpl;
 
 @RestController
 public class FirestationsController {

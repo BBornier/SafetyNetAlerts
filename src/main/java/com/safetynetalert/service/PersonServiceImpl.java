@@ -10,21 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Allergies;
+import com.safetynetalert.model.Firestation;
+import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
+import com.safetynetalert.repository.FirestationRepository;
+import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.PersonRepository;
+import com.safetynetalerts.dto.FirestationsDTO;
+import com.safetynetalerts.dto.MedicalRecordsDTO;
 import com.safetynetalerts.dto.PersonDTO;
 import com.safetynetalerts.dto.PersonInfoDTO;
 
 @Service
 @Transactional
-public class PersonService {
+public class PersonServiceImpl implements PersonEmailService, PersonInfoService, FamiliesInfoService {
 
 	@Autowired
 	private PersonRepository personRepository; 
 	
+	@Autowired
+	private MedicalRecordsRepository medicalRecordsRepository;
 	
-	public PersonService(PersonRepository personRepository) {
+	@Autowired 
+	private BirthdayCalculationService birthdayCalculationService;
+	
+	@Autowired
+	private FirestationRepository firestationRepository;
+	
+	public PersonServiceImpl(PersonRepository personRepository) {
 		this.personRepository = personRepository;
 	}
 	
@@ -42,20 +56,6 @@ public class PersonService {
 			allOfThem.add(personDto);
 		}
 			return allOfThem;
-	}
-	
-	public List<PersonInfoDTO> returnAnyPersonByHisInfoDTO(String firstName, String lastName) {
-		List<Person> allPersonEntity = personRepository.findAllByFirstNameAndLastName(firstName, lastName);
-		List<PersonInfoDTO> personInfo = new ArrayList<>();
-		for (Person perso : allPersonEntity) {
-			PersonInfoDTO infoDTO = new PersonInfoDTO();
-				infoDTO.setFirstName(perso.getFirstName());
-				infoDTO.setLastName(perso.getLastName());
-				infoDTO.setMail(perso.getEmail());
-			
-			personInfo.add(infoDTO);
-		}
-		return personInfo;
 	}
 	
 	
@@ -128,5 +128,61 @@ public class PersonService {
 	public List<Person> returnAnyPersonByHisInNames(String firstName, String lastName) {
 		return personRepository.findAllByFirstNameAndLastName(firstName, lastName);
 	}
+
+	@Override
+	public List<String> getEmail(String city) {
+		return personRepository.findEmailByCity(city);
+	}
 	
+	@Override
+	public List<PersonInfoDTO> returnAnyPersonByHisInfoDTO(String firstName, String lastName) {
+		
+		List<Person> allPersonEntity = personRepository.findAllByFirstNameAndLastName(firstName, lastName);
+		List<MedicalRecords> allMedicalRecords = medicalRecordsRepository.findAll();
+		
+		List<PersonInfoDTO> personInfo = new ArrayList<>();
+		for (Person perso : allPersonEntity) {
+			for(MedicalRecords mr : allMedicalRecords) {
+			PersonInfoDTO infoDTO = new PersonInfoDTO();
+
+			infoDTO.setFirstName(perso.getFirstName());
+			infoDTO.setLastName(perso.getLastName());
+			infoDTO.setMail(perso.getEmail());
+			infoDTO.setAddress(perso.getAddress());
+			infoDTO.setAllergies(mr.getAllergies());
+			infoDTO.setMedications(mr.getMedications());
+			//infoDTO.setAge(birthdayCalculationService.returnBirthdatesInDataBase()); // A terminer pour l'url
+				personInfo.add(infoDTO);
+			}
+			
+		}
+		return personInfo;
+	}
+
+	@Override
+	public List<FirestationsDTO> returnAnyFamiliesByTheirFirestationDTO(String stationNumber) {
+		
+		List<Firestation> allFirestations = firestationRepository.findAllByStationNumber(stationNumber);
+		List<Person> allPersons = personRepository.findAll();
+		List<MedicalRecords> allMedicalRecords = medicalRecordsRepository.findAll();
+		
+		List<FirestationsDTO> stationInfo = new ArrayList<>();
+		for (Firestation station : allFirestations) {
+			for(Person perso : allPersons) {
+			for(MedicalRecords mr : allMedicalRecords) {
+				
+			FirestationsDTO infoDTO = new FirestationsDTO();
+			infoDTO.setAddress(station.getAddress());
+			infoDTO.setStationNumber(station.getStationNumber());
+			
+			//infoDTO.setAge(birthdayCalculationService.returnBirthdatesInDataBase()); // A terminer pour l'url
+				stationInfo.add(infoDTO);
+				}
+			
+			}
+		}
+		return stationInfo;
+	}
 }
+	
+

@@ -31,7 +31,7 @@ public class JsonHelper {
 	private static final Logger LOGGER = LogManager.getLogger(JsonHelper.class);
 	
 	@Autowired
-	private PersonService personService;
+	private PersonServiceImpl personService;
 	
 	@Autowired
 	private FirestationService firestationService;
@@ -112,7 +112,6 @@ public class JsonHelper {
 
 		JSONObject jsonFromUrl = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonFromUrl.getJSONArray("medicalrecords");
-				//LOGGER.info("This is your jsonArray of medsRec : " + jsonArray);
 
 		List<MedicalRecords> medicalRecordsList = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {

@@ -47,7 +47,6 @@ public class MedicalRecordsController {
 		//return "New Medical Record registered, congrats !";
 	}
 	
-	// Probleme de null si le retour est medicalRecords
 	@PutMapping("/updateMedicalRecord/{id}")
 	public String updateMr(@RequestBody MedicalRecords update, @PathVariable Long id) {
 		medicalRecordsService.updateMedicalRecordsById(update, id);

@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynetalert.model.Person;
-import com.safetynetalert.service.PersonService;
+import com.safetynetalert.service.PersonServiceImpl;
 import com.safetynetalerts.dto.PersonDTO;
 
 @RestController
 public class PersonController {
 
 	@Autowired
-	private PersonService personService;
+	private PersonServiceImpl personService;
 
-	public PersonController(PersonService personService) {
+	public PersonController(PersonServiceImpl personService) {
 		this.personService = personService;
 	}
 	

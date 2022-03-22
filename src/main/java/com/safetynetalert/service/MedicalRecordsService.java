@@ -103,7 +103,11 @@ public class MedicalRecordsService {
 		MedicalRecords savedMr = medicalRecordsRepository.save(medRecords);
 		return savedMr;
 		}
+
+	public List<MedicalRecords> getAllMedicalRecordsInDataBase() {
+		return medicalRecordsRepository.findAll();
 	}
+}
 
 
 

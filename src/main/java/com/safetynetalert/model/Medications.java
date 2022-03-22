@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.criteria.Fetch;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Medications")
@@ -30,7 +33,8 @@ public class Medications {
 	
 	private String nameAndDosage;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "medications", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<MedicalRecords> medicalRecords;
 
 	
