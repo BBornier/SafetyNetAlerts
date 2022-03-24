@@ -1,13 +1,10 @@
 package com.safetynetalert.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynetalert.service.MedicalRecordsService;
 import com.safetynetalert.service.PersonServiceImpl;
 import com.safetynetalerts.dto.PersonInfoDTO;
 
@@ -25,8 +22,8 @@ public class PersonInfoController {
 	private PersonServiceImpl personService;
 	
 	@GetMapping("/personInfo")
-	public List<PersonInfoDTO> findPersonByHisNames(@RequestParam String firstName, @RequestParam String lastName) {
-		return personService.returnAnyPersonByHisInfoDTO(firstName, lastName);
+	public PersonInfoDTO findPersonByHisNames(@RequestParam String firstName, @RequestParam String lastName) {
+		return personService.findPersonInfos(firstName, lastName);
 		
 	}
 

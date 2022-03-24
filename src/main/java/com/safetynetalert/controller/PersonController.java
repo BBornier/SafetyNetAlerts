@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.PersonServiceImpl;
 import com.safetynetalerts.dto.PersonDTO;
+import com.safetynetalerts.dto.PersonInfoDTO;
 
 @RestController
 public class PersonController {

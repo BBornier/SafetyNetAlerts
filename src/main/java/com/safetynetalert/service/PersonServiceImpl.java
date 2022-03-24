@@ -3,12 +3,14 @@ package com.safetynetalert.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Allergies;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
@@ -24,16 +26,13 @@ import com.safetynetalerts.dto.PersonInfoDTO;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements PersonEmailService, PersonInfoService, FamiliesInfoService {
+public class PersonServiceImpl implements PersonEmailService, IPersonInfo, FamiliesInfoService {
 
 	@Autowired
 	private PersonRepository personRepository; 
 	
 	@Autowired
 	private MedicalRecordsRepository medicalRecordsRepository;
-	
-	@Autowired 
-	private BirthdayCalculationService birthdayCalculationService;
 	
 	@Autowired
 	private FirestationRepository firestationRepository;
@@ -71,9 +70,8 @@ public class PersonServiceImpl implements PersonEmailService, PersonInfoService,
 				personNames.getPhoneNumber(), 
 				personNames.getEmail(), 
 				personNames.getAddress());
-				personNames.getMedicalRecords();
 		
-		return hisProfile;
+		return hisProfile; 
 	}
 	
 	
@@ -133,30 +131,20 @@ public class PersonServiceImpl implements PersonEmailService, PersonInfoService,
 	public List<String> getEmail(String city) {
 		return personRepository.findEmailByCity(city);
 	}
+
 	
 	@Override
-	public List<PersonInfoDTO> returnAnyPersonByHisInfoDTO(String firstName, String lastName) {
+	public PersonInfoDTO findPersonInfos(String firstName, String lastName) {
+		Person person = personRepository.findByFirstNameAndLastName(firstName, lastName);
+		PersonInfoDTO personInfos = new PersonInfoDTO(person.getFirstName(), 
+				person.getLastName(),
+				person.getMedicalRecords().getBirthdate(), 
+				person.getEmail(), 
+				person.getAddress(),
+				person.getMedicalRecords().getAllergies(),
+				person.getMedicalRecords().getMedications());
 		
-		List<Person> allPersonEntity = personRepository.findAllByFirstNameAndLastName(firstName, lastName);
-		List<MedicalRecords> allMedicalRecords = medicalRecordsRepository.findAll();
-		
-		List<PersonInfoDTO> personInfo = new ArrayList<>();
-		for (Person perso : allPersonEntity) {
-			for(MedicalRecords mr : allMedicalRecords) {
-			PersonInfoDTO infoDTO = new PersonInfoDTO();
-
-			infoDTO.setFirstName(perso.getFirstName());
-			infoDTO.setLastName(perso.getLastName());
-			infoDTO.setMail(perso.getEmail());
-			infoDTO.setAddress(perso.getAddress());
-			infoDTO.setAllergies(mr.getAllergies());
-			infoDTO.setMedications(mr.getMedications());
-			//infoDTO.setAge(birthdayCalculationService.returnBirthdatesInDataBase()); // A terminer pour l'url
-				personInfo.add(infoDTO);
-			}
-			
-		}
-		return personInfo;
+		return personInfos;
 	}
 
 	@Override
@@ -164,25 +152,35 @@ public class PersonServiceImpl implements PersonEmailService, PersonInfoService,
 		
 		List<Firestation> allFirestations = firestationRepository.findAllByStationNumber(stationNumber);
 		List<Person> allPersons = personRepository.findAll();
-		List<MedicalRecords> allMedicalRecords = medicalRecordsRepository.findAll();
 		
 		List<FirestationsDTO> stationInfo = new ArrayList<>();
 		for (Firestation station : allFirestations) {
 			for(Person perso : allPersons) {
-			for(MedicalRecords mr : allMedicalRecords) {
+			Person person = new Person();	
+				perso.getFirstName();
+				perso.getLastName();
+				perso.getPhoneNumber();
+				perso.getMedicalRecords().getBirthdate();
 				
 			FirestationsDTO infoDTO = new FirestationsDTO();
 			infoDTO.setAddress(station.getAddress());
 			infoDTO.setStationNumber(station.getStationNumber());
 			
-			//infoDTO.setAge(birthdayCalculationService.returnBirthdatesInDataBase()); // A terminer pour l'url
 				stationInfo.add(infoDTO);
 				}
-			
 			}
-		}
+		
 		return stationInfo;
+
+		}
+
+
+	@Override
+	public PersonInfoDTO returnAnyPersonByHisInfoDTO(String firstName, String lastName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }
 	
 

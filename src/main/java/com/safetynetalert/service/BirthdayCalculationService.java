@@ -39,7 +39,7 @@ public class BirthdayCalculationService {
 		
 		}
 	 
-	 public int pleaseCalculateMyAge(LocalDate birthDate) {
+	 public static int pleaseCalculateMyAge(LocalDate birthDate) {
 		LocalDate currentDate = LocalDate.now();
 		Period period = Period.between(birthDate, currentDate);
 		return Math.abs(period.getYears());
