@@ -6,8 +6,12 @@ import java.util.Set;
 import com.safetynetalert.model.Address;
 
 public class FirestationsDTO {
-
 	
+	public FirestationsDTO() {
+		super();
+	}
+
+
 	public FirestationsDTO(Long id, Set<Address> address, String stationNumber) {
 		super();
 		this.id = id;

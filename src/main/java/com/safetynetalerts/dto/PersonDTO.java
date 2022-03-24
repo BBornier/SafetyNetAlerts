@@ -7,10 +7,6 @@ import com.safetynetalert.model.Address;
 
 public class PersonDTO {
 
-	/*private MedicalRecordsService medicalRecordsService;
-
-	private MedicalRecordsDTOConverter medicalRecordsDTOConverter;*/
-
 	public PersonDTO() {
 		super();
 	}
@@ -29,6 +25,7 @@ public class PersonDTO {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.address = address;
+		
 
 	}
 
@@ -40,15 +37,6 @@ public class PersonDTO {
 		this.address = address;
 	}
 
-	/*public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> address) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.medicalRecordsDTO = medicalRecordsDTO;
-	}*/
 
 	private Long id;
 
@@ -61,37 +49,6 @@ public class PersonDTO {
 	private String email;
 
 	private Set<Address> address = new HashSet<>();
-
-	//private List<MedicalRecordsDTO> medicalRecordsDTO;
-
-	
-	  /*public void fetchMedicalRecords() { 
-		  MedicalRecordsDTO mrs = medicalRecordsService.getMedicalRecordsByUserId(id); 
-		  mrs.getBirthdate(); 
-		  mrs.getMedications(); 
-		  mrs.getAllergies();
-	  
-	  }
-	 
-
-	
-	  public MedicalRecordsService getMedicalRecordsService() { 
-		  return medicalRecordsService; 
-	  }
-	
-	  public void setMedicalRecordsService(MedicalRecordsService medicalRecordsService) { 
-		this.medicalRecordsService = medicalRecordsService;
-	  }
-
-	
-	  public MedicalRecordsDTOConverter getMedicalRecordsDTOConverter() { 
-		  return medicalRecordsDTOConverter; 
-	  }
-	
-	  public void setMedicalRecordsDTOConverter(MedicalRecordsDTOConverter medicalRecordsDTOConverter) { 
-			  this.medicalRecordsDTOConverter = medicalRecordsDTOConverter; 
-	  }*/
-			 
 
 	
 	public Long getId() {

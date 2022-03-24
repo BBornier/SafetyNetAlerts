@@ -3,28 +3,60 @@ package com.safetynetalerts.dto;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Allergies;
+import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
+import com.safetynetalert.service.BirthdayCalculationService;
+import com.safetynetalerts.config.DateHelper;
 
 public class PersonInfoDTO {
-	
 	
 	
 	public PersonInfoDTO() {
 		super();
 	}
+	
+
+	public PersonInfoDTO(String firstName, String lastName, String birthdate, String mail, Set<Address> address,
+			List<Allergies> allergies, List<Medications> medications) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthdate = birthdate;
+		this.age = getAge();
+		this.mail = mail;
+		this.address = address;
+		this.allergies = allergies;
+		this.medications = medications;
+	}
+	
+	
+	public PersonInfoDTO(String firstName, String lastName, String phoneNumber, String mail, Set<Address> address) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.mail = mail;
+		this.address = address;
+	}
 
 
+	public static final String DATEFORMAT = "MM/dd/yyyy";  
+	
 	private String firstName;
 	
 	private String lastName;
 	
-	private String age;
-	
-	private String mail;
+	private int age;
 	
 	private String birthdate;
+	
+	private String phoneNumber;
+	
+	private String mail;
 	
 	private Set<Address> address;
 	
@@ -51,25 +83,15 @@ public class PersonInfoDTO {
 	}
 
 
-	public String getAge() {
-		return age;
+	public int getAge() {
+		return BirthdayCalculationService.pleaseCalculateMyAge(DateHelper.convertStringtoDate(birthdate, DATEFORMAT));
 	}
 
 	
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
-
 	
-	public String getMail() {
-		return mail;
-	}
-
-	
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
 	
 	public String getBirthdate() {
 		return birthdate;
@@ -80,7 +102,25 @@ public class PersonInfoDTO {
 		this.birthdate = birthdate;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	
 	public Set<Address> getAddress() {
 		return address;
 	}
@@ -109,6 +149,8 @@ public class PersonInfoDTO {
 	public void setMedications(List<Medications> medications) {
 		this.medications = medications;
 	}
+
+	
 	
 
 }
