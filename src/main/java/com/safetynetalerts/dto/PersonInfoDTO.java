@@ -3,11 +3,8 @@ package com.safetynetalerts.dto;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Allergies;
-import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.service.BirthdayCalculationService;
 import com.safetynetalerts.config.DateHelper;
@@ -20,12 +17,12 @@ public class PersonInfoDTO {
 	}
 	
 
-	public PersonInfoDTO(String firstName, String lastName, String birthdate, String mail, Set<Address> address,
+	public PersonInfoDTO(String firstName, String lastName, int age, String mail, Set<Address> address,
 			List<Allergies> allergies, List<Medications> medications) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.age = getAge();
+		this.age = age;
 		this.mail = mail;
 		this.address = address;
 		this.allergies = allergies;
@@ -33,22 +30,11 @@ public class PersonInfoDTO {
 	}
 	
 	
-	public PersonInfoDTO(String firstName, String lastName, String phoneNumber, String mail, Set<Address> address) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.mail = mail;
-		this.address = address;
-	}
-
-
 	public static final String DATEFORMAT = "MM/dd/yyyy";  
 	
 	private String firstName;
 	
 	private String lastName;
-	
-	private String birthdate;
 	
 	private int age;
 	
@@ -80,7 +66,7 @@ public class PersonInfoDTO {
 
 
 	public int getAge() {
-		return BirthdayCalculationService.pleaseCalculateMyAge(DateHelper.convertStringtoDate(birthdate, DATEFORMAT));
+		return age;
 	}
 
 	
@@ -88,15 +74,6 @@ public class PersonInfoDTO {
 		this.age = age;
 	}
 	
-	
-	public String getBirthdate() {
-		return birthdate;
-	}
-
-
-	public void setBirthdate(String birthdate) {
-		this.birthdate = birthdate;
-	}
 
 	public String getMail() {
 		return mail;
@@ -136,5 +113,8 @@ public class PersonInfoDTO {
 	public void setMedications(List<Medications> medications) {
 		this.medications = medications;
 	}
+
+	
+	
 
 }

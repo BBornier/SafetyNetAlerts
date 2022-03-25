@@ -1,26 +1,22 @@
 package com.safetynetalert.service;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.safetynetalert.model.Address;
-import com.safetynetalert.model.Allergies;
 import com.safetynetalert.model.Firestation;
-import com.safetynetalert.model.MedicalRecords;
-import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.PersonRepository;
+import com.safetynetalerts.config.DateHelper;
 import com.safetynetalerts.dto.FirestationsDTO;
-import com.safetynetalerts.dto.MedicalRecordsDTO;
 import com.safetynetalerts.dto.PersonDTO;
 import com.safetynetalerts.dto.PersonInfoDTO;
 
@@ -32,10 +28,10 @@ public class PersonServiceImpl implements PersonEmailService, IPersonInfo, Famil
 	private PersonRepository personRepository; 
 	
 	@Autowired
-	private MedicalRecordsRepository medicalRecordsRepository;
+	private FirestationRepository firestationRepository;
 	
 	@Autowired
-	private FirestationRepository firestationRepository;
+	private BirthdayCalculationService birthdayCalculationService;
 	
 	public PersonServiceImpl(PersonRepository personRepository) {
 		this.personRepository = personRepository;
@@ -136,9 +132,12 @@ public class PersonServiceImpl implements PersonEmailService, IPersonInfo, Famil
 	@Override
 	public PersonInfoDTO findPersonInfos(String firstName, String lastName) {
 		Person person = personRepository.findByFirstNameAndLastName(firstName, lastName);
+		String birthdate = person.getMedicalRecords().getBirthdate();
+		LocalDate date = DateHelper.convertStringtoDate(birthdate, "MM/dd/yyyy");
+		int age = birthdayCalculationService.pleaseCalculateMyAge(date);
 		PersonInfoDTO personInfos = new PersonInfoDTO(person.getFirstName(), 
 				person.getLastName(),
-				person.getMedicalRecords().getBirthdate(), 
+				age, 
 				person.getEmail(), 
 				person.getAddress(),
 				person.getMedicalRecords().getAllergies(),
@@ -174,12 +173,6 @@ public class PersonServiceImpl implements PersonEmailService, IPersonInfo, Famil
 
 		}
 
-
-	@Override
-	public PersonInfoDTO returnAnyPersonByHisInfoDTO(String firstName, String lastName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
 	
