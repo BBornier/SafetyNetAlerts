@@ -25,7 +25,6 @@ public class PersonInfoDTO {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.birthdate = birthdate;
 		this.age = getAge();
 		this.mail = mail;
 		this.address = address;
@@ -38,7 +37,6 @@ public class PersonInfoDTO {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
 		this.mail = mail;
 		this.address = address;
 	}
@@ -50,11 +48,9 @@ public class PersonInfoDTO {
 	
 	private String lastName;
 	
-	private int age;
-	
 	private String birthdate;
 	
-	private String phoneNumber;
+	private int age;
 	
 	private String mail;
 	
@@ -102,15 +98,6 @@ public class PersonInfoDTO {
 		this.birthdate = birthdate;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public String getMail() {
 		return mail;
 	}
@@ -149,8 +136,5 @@ public class PersonInfoDTO {
 	public void setMedications(List<Medications> medications) {
 		this.medications = medications;
 	}
-
-	
-	
 
 }
