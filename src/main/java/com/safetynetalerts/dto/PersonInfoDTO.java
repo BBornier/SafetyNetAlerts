@@ -27,10 +27,7 @@ public class PersonInfoDTO {
 		this.address = address;
 		this.allergies = allergies;
 		this.medications = medications;
-	}
-	
-	
-	public static final String DATEFORMAT = "MM/dd/yyyy";  
+	} 
 	
 	private String firstName;
 	
@@ -113,8 +110,5 @@ public class PersonInfoDTO {
 	public void setMedications(List<Medications> medications) {
 		this.medications = medications;
 	}
-
-	
-	
 
 }

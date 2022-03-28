@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynetalert.model.Firestation;
-import com.safetynetalert.service.FirestationService;
+import com.safetynetalert.service.FirestationServiceImpl;
 import com.safetynetalert.service.PersonServiceImpl;
 
 @RestController
 public class FirestationsController {
 
 	@Autowired
-	private FirestationService firestationService;
+	private FirestationServiceImpl firestationService;
 	
 	
-	public FirestationsController(FirestationService firestationService) {
+	public FirestationsController(FirestationServiceImpl firestationService) {
 		this.firestationService = firestationService;
 	}
 

@@ -1,6 +1,7 @@
 package com.safetynetalert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,23 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.safetynetalert.service.PersonServiceImpl;
 import com.safetynetalerts.dto.PersonInfoDTO;
 
-
-/*http://localhost:8080/personInfo?firstName=<firstName>&lastName=<lastName>
-Cette url doit retourner le nom, l'adresse, l'âge, l'adresse mail et les antécédents médicaux (médicaments,
-posologie, allergies) de chaque habitant. Si plusieurs personnes portent le même nom, elles doivent
-toutes apparaître.
-*/
-
 @RestController
 public class PersonInfoController {
 	
 	@Autowired
 	private PersonServiceImpl personService;
 	
+	//pour les tests -> response entity pour paramétrer manuellement la réponse 200, 201, 202, etc. au lieu d'une automatisation de la réponse de la requête http faite par Spring. 
 	@GetMapping("/personInfo")
-	public PersonInfoDTO findPersonByHisNames(@RequestParam String firstName, @RequestParam String lastName) {
-		return personService.findPersonInfos(firstName, lastName);
-		
+	public ResponseEntity<PersonInfoDTO> findPersonByHisNames(@RequestParam String firstName, @RequestParam String lastName) {
+		return ResponseEntity.ok().body(personService.findPersonInfos(firstName, lastName));
+	
 	}
 
 }

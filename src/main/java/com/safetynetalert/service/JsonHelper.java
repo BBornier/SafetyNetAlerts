@@ -34,7 +34,7 @@ public class JsonHelper {
 	private PersonServiceImpl personService;
 	
 	@Autowired
-	private FirestationService firestationService;
+	private FirestationServiceImpl firestationService;
 	
 	@Autowired
 	private MedicalRecordsService medicalRecordsService;

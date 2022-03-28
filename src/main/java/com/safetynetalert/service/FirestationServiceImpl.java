@@ -13,7 +13,7 @@ import com.safetynetalert.repository.PersonRepository;
 
 
 @Service
-public class FirestationService {
+public class FirestationServiceImpl {
 
 	@Autowired
 	private FirestationRepository firestationRepository; 

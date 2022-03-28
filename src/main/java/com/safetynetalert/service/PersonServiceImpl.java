@@ -22,13 +22,10 @@ import com.safetynetalerts.dto.PersonInfoDTO;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements PersonEmailService, IPersonInfo, FamiliesInfoService {
+public class PersonServiceImpl implements IPersonEmail, IPersonInfo {
 
 	@Autowired
 	private PersonRepository personRepository; 
-	
-	@Autowired
-	private FirestationRepository firestationRepository;
 	
 	@Autowired
 	private BirthdayCalculationService birthdayCalculationService;
@@ -145,33 +142,6 @@ public class PersonServiceImpl implements PersonEmailService, IPersonInfo, Famil
 		
 		return personInfos;
 	}
-
-	@Override
-	public List<FirestationsDTO> returnAnyFamiliesByTheirFirestationDTO(String stationNumber) {
-		
-		List<Firestation> allFirestations = firestationRepository.findAllByStationNumber(stationNumber);
-		List<Person> allPersons = personRepository.findAll();
-		
-		List<FirestationsDTO> stationInfo = new ArrayList<>();
-		for (Firestation station : allFirestations) {
-			for(Person perso : allPersons) {
-			Person person = new Person();	
-				perso.getFirstName();
-				perso.getLastName();
-				perso.getPhoneNumber();
-				perso.getMedicalRecords().getBirthdate();
-				
-			FirestationsDTO infoDTO = new FirestationsDTO();
-			infoDTO.setAddress(station.getAddress());
-			infoDTO.setStationNumber(station.getStationNumber());
-			
-				stationInfo.add(infoDTO);
-				}
-			}
-		
-		return stationInfo;
-
-		}
 
 
 }

@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynetalert.service.PersonEmailService;
+import com.safetynetalert.service.IPersonEmail;
 
 
 @RestController
 public class PersonEmailController {
 	
 	@Autowired
-	public PersonEmailService personEmailService;
+	public IPersonEmail personEmailService;
 	
 	@GetMapping("/communityEmail")
 	public List<String> findEmailByLocation(@RequestParam String city) {
