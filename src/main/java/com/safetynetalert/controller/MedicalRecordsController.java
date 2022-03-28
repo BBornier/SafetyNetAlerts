@@ -18,6 +18,7 @@ import com.safetynetalert.repository.MedicationsRepository;
 import com.safetynetalert.service.MedicalRecordsService;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
 
+//AJOUT DES LOGGERS
 
 @RestController
 public class MedicalRecordsController {

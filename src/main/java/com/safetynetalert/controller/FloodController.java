@@ -10,6 +10,8 @@ import com.safetynetalert.service.FirestationServiceImpl;
 personnes par adresse. Elle doit aussi inclure le nom, le numéro de téléphone et l'âge des habitants, et
 faire figurer leurs antécédents médicaux (médicaments, posologie et allergies) à côté de chaque nom.*/
 
+//AJOUT DES LOGGERS
+
 @RestController
 public class FloodController {
 	
