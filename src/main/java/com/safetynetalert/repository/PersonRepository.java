@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Person;
+import com.safetynetalerts.dto.FirePersonDTO;
 import com.safetynetalerts.dto.PersonDTO;
 
 @Repository
@@ -23,6 +24,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	List<Person> findAllByFirstNameAndLastName(String firstName, String lastName); 
 	
 	List<Person> findListOfPersonByAddress(Address address);
+	
+	List<Person> findAllByAddress(Address address);
 	
 	List<PersonDTO> findAllByAddress(String city);
 	

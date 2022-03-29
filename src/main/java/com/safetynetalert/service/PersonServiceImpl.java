@@ -10,22 +10,28 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Firestation;
+import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalerts.config.DateHelper;
+import com.safetynetalerts.dto.FirePersonDTO;
 import com.safetynetalerts.dto.FirestationsDTO;
 import com.safetynetalerts.dto.PersonDTO;
 import com.safetynetalerts.dto.PersonInfoDTO;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements IPersonEmail, IPersonInfo {
+public class PersonServiceImpl implements IPersonEmail, IPersonInfo, IFirePersonAddress {
 
 	@Autowired
 	private PersonRepository personRepository; 
+	
+	@Autowired
+	private MedicalRecordsRepository medicalRecordsRepository;
 	
 	@Autowired
 	private BirthdayCalculationService birthdayCalculationService;
@@ -132,6 +138,7 @@ public class PersonServiceImpl implements IPersonEmail, IPersonInfo {
 		String birthdate = person.getMedicalRecords().getBirthdate();
 		LocalDate date = DateHelper.convertStringtoDate(birthdate, "MM/dd/yyyy");
 		int age = birthdayCalculationService.pleaseCalculateMyAge(date);
+		
 		PersonInfoDTO personInfos = new PersonInfoDTO(person.getFirstName(), 
 				person.getLastName(),
 				age, 
@@ -141,6 +148,33 @@ public class PersonServiceImpl implements IPersonEmail, IPersonInfo {
 				person.getMedicalRecords().getMedications());
 		
 		return personInfos;
+	}
+
+	@Override
+	public List<FirePersonDTO> getPersonWithAddress(Address address) {
+		List<Person> person = personRepository.findAllByAddress(address);
+		List<MedicalRecords> medicalR= medicalRecordsRepository.findAll();
+		
+		List<FirePersonDTO> fireAlertDTO = new ArrayList<>();
+		for(Person p : person) {
+			for(MedicalRecords mr : medicalR) {
+				
+				String birthdate = p.getMedicalRecords().getBirthdate();
+				LocalDate date = DateHelper.convertStringtoDate(birthdate, "MM/dd/yyyy");
+				int age = birthdayCalculationService.pleaseCalculateMyAge(date);
+				
+			FirePersonDTO firePersonDTO = new FirePersonDTO(p.getFirstName(),
+					p.getLastName(),
+					p.getPhoneNumber(),
+					age,
+					p.getMedicalRecords().getAllergies(),
+					p.getMedicalRecords().getMedications());
+					fireAlertDTO.add(firePersonDTO);
+			
+			}
+		
+		}
+		return fireAlertDTO;
 	}
 
 
