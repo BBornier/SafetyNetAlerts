@@ -25,7 +25,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	
 	List<Person> findListOfPersonByAddress(Address address);
 	
-	List<Person> findAllByAddress(Address address);
+	List<Person> getAllPersonsByAddress(String address);
 	
 	List<PersonDTO> findAllByAddress(String city);
 	

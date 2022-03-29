@@ -4,10 +4,15 @@ package com.safetynetalert.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.safetynetalert.model.Address;
@@ -151,9 +156,9 @@ public class PersonServiceImpl implements IPersonEmail, IPersonInfo, IFirePerson
 	}
 
 	@Override
-	public List<FirePersonDTO> getPersonWithAddress(Address address) {
-		List<Person> person = personRepository.findAllByAddress(address);
-		List<MedicalRecords> medicalR= medicalRecordsRepository.findAll();
+	public List<FirePersonDTO> findAllByAddress(String address) {
+		List<Person> person = personRepository.getAllPersonsByAddress(address);
+		List<MedicalRecords> medicalR = medicalRecordsRepository.findAll();
 		
 		List<FirePersonDTO> fireAlertDTO = new ArrayList<>();
 		for(Person p : person) {
@@ -176,7 +181,6 @@ public class PersonServiceImpl implements IPersonEmail, IPersonInfo, IFirePerson
 		}
 		return fireAlertDTO;
 	}
-
 
 }
 	
