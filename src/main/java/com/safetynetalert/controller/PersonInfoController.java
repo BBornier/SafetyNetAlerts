@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.safetynetalert.service.PersonServiceImpl;
 import com.safetynetalerts.dto.PersonInfoDTO;
 
+
+//AJOUT DE LOGGER A FAIRE.
+
 @RestController
 public class PersonInfoController {
 	

@@ -1,20 +1,22 @@
 package com.safetynetalert.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Firestation;
+import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.PersonRepository;
 import com.safetynetalerts.config.DateHelper;
-import com.safetynetalerts.dto.FirestationsDTO;
 import com.safetynetalerts.dto.FloodDTO;
-import com.safetynetalerts.dto.PersonDTO;
+import com.safetynetalerts.dto.FloodPersonDTO;
 import com.safetynetalerts.dto.PersonInfoDTO;
 
 @Service
@@ -28,6 +30,10 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 
 	@Autowired
 	private BirthdayCalculationService birthdayCalculationService;
+	
+	@Autowired
+	private MedicalRecordsService medicalRecordsService;
+	
 
 	public Optional<Firestation> getFirestation(final Long id) {
 		return firestationRepository.findById(id);
@@ -61,15 +67,58 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 	}
 
 	@Override
-	public FloodDTO returnHomesByTheirFirestationNumberDTO(List<String> stationNumber) {
-		List<FirestationsDTO> firestations = firestationRepository.findByListOfStationNumber(stationNumber);
-		List<Person> person = personRepository.findAll();
-		String birthdate = ((Person) person).getMedicalRecords().getBirthdate();
-		LocalDate date = DateHelper.convertStringtoDate(birthdate, "MM/dd/yyyy");
-		int age = birthdayCalculationService.pleaseCalculateMyAge(date);
+	public List<FloodDTO> returnHomesByTheirFirestationNumberDTO(List<String> stationNumber) {
+		List<Firestation> firestations = firestationRepository.findByStationNumberIn(stationNumber);
+		List<FloodDTO> floods = new ArrayList<FloodDTO>();
+		
+		for(Firestation station : firestations) {
+			for(Address address : station.getAddress()) {
+				List<Person> persons = personRepository.findListOfPersonByAddress(address);
+				List<MedicalRecords> mrs = medicalRecordsService.getMedicalrecordsByPersons(persons);
+				List<FloodPersonDTO> fpDTO = getFloodPersonDTOByPersonListAndMrList(persons, mrs);
+				
+				FloodDTO floodDTO = new FloodDTO();
+				floodDTO.setAddress(address);
+				floodDTO.setFirestation(station.getStationNumber());
+				floodDTO.setFloodPersonDTO(fpDTO);
+				
+				floods.add(floodDTO);
+			}
+		}
+		
+		return floods;
+	}
 
-		FloodDTO floodDTO = new FloodDTO();
-		// type Liste d'adresses
+	public List<FloodPersonDTO> getFloodPersonDTOByPersonListAndMrList(List<Person> personList, List<MedicalRecords> medicalRecordList) {
+
+		List<FloodPersonDTO> floodPersonDTOList = new ArrayList<>();
+		for(Person p : personList) {
+			MedicalRecords medicalRecord = new MedicalRecords();
+			for(MedicalRecords mr : medicalRecordList) {
+				if(p.equals(mr.getPerson())) {
+					medicalRecord = mr;
+					break;
+					}
+				}
+				
+				String birthdate = p.getMedicalRecords().getBirthdate();
+				LocalDate date = DateHelper.convertStringtoDate(birthdate, "MM/dd/yyyy");
+				int age = birthdayCalculationService.pleaseCalculateMyAge(date);
+				
+				FloodPersonDTO fpDTO = new FloodPersonDTO();
+				fpDTO.setFirstName(p.getFirstName());
+				fpDTO.setLastName(p.getLastName());
+				fpDTO.setPhoneNumber(p.getPhoneNumber());
+				fpDTO.setAge(age);
+				fpDTO.setMedications(medicalRecord.getMedications());
+				fpDTO.setAllergies(medicalRecord.getAllergies());
+				floodPersonDTOList.add(fpDTO);
+		}
+				return floodPersonDTOList;
+	}
+
+	@Override
+	public PersonInfoDTO findPersonInfos(String firstName, String lastName) {
 		return null;
 	}
 

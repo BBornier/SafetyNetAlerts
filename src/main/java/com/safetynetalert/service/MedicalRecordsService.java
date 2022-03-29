@@ -107,6 +107,20 @@ public class MedicalRecordsService {
 	public List<MedicalRecords> getAllMedicalRecordsInDataBase() {
 		return medicalRecordsRepository.findAll();
 	}
+
+
+	public List<MedicalRecords> getMedicalrecordsByPersons(List<Person> persons) {
+			List<MedicalRecords> allMrOfDB = medicalRecordsRepository.findAll();
+			List<MedicalRecords> MrsForThesePelos = new ArrayList<MedicalRecords>();
+			for(MedicalRecords mr : allMrOfDB) {
+				for(Person p : persons) {
+					if(p.equals(mr.getPerson())) {
+						MrsForThesePelos.add(mr);	
+					} 
+				}
+			}
+		return MrsForThesePelos;
+	}
 }
 
 

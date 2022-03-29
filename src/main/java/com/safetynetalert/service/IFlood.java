@@ -6,6 +6,6 @@ import com.safetynetalerts.dto.FloodDTO;
 
 public interface IFlood {
 
-	public FloodDTO returnHomesByTheirFirestationNumberDTO(List<String> stationNumber);
+	public List<FloodDTO> returnHomesByTheirFirestationNumberDTO(List<String> stationNumber);
 	
 }
