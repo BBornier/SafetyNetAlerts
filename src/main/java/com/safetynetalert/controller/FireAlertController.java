@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynetalert.model.Address;
 import com.safetynetalert.service.PersonServiceImpl;
 import com.safetynetalerts.dto.FirePersonDTO;
 
@@ -21,7 +20,7 @@ public class FireAlertController {
 	
 	@GetMapping("/fire")
 	List<FirePersonDTO> findPersonsLivingInThisAddress(@RequestParam String address) {
-		return personService.findAllByAddress(address);
+		return personService.findByAddress(address);
 	}
 
 }

@@ -79,10 +79,10 @@ public class JsonHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
-			Person person = new Person(jsonObj.getString("firstName"), jsonObj.getString("lastName"), jsonObj.getString("phone"), jsonObj.getString("email"));
-			Address address = new Address(jsonObj.getString("address"), jsonObj.getString("zip"), jsonObj.getString("city"));
+			Person person = new Person(jsonObj.getString("firstName"), jsonObj.getString("lastName"), jsonObj.getString("phone"), jsonObj.getString("email"), jsonObj.getString("address"), jsonObj.getString("zip"), jsonObj.getString("city"));
+			//Address address = new Address(jsonObj.getString("address"), jsonObj.getString("zip"), jsonObj.getString("city"));
 			
-			person.getAddress().add(address);
+			//person.getAddress().add(address);
 			person = personService.savePerson(person);
 			//LOGGER.info("This person is a good person: " + person);
 			
@@ -98,10 +98,10 @@ public class JsonHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
 			
-			Firestation firestation = new Firestation(jsonObj.getString("station"));
-			Address address = new Address(jsonObj.getString("address"));
+			Firestation firestation = new Firestation(jsonObj.getString("address"), jsonObj.getString("station"));
+			//Address address = new Address(jsonObj.getString("address"));
 			
-			firestation.getAddress().add(address);
+			//firestation.getAddress().add(address);
 			firestationService.saveFirestation(firestation);
 			//LOGGER.info("firestation is here: " + firestation);
 		}

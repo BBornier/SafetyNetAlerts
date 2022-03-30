@@ -27,12 +27,12 @@ public class Allergies {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int allergiesId;
 
 	private String name;
 	
-	@ManyToMany(mappedBy = "allergies", fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "allergies", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<MedicalRecords> medicalRecords;
 	

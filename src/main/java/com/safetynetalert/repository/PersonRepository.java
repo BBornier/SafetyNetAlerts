@@ -23,13 +23,14 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 		
 	List<Person> findAllByFirstNameAndLastName(String firstName, String lastName); 
 	
-	List<Person> findListOfPersonByAddress(Address address);
+	//List<Person> findListOfPersonByAddress(Address address);
+	List<Person> findListOfPersonByAddress(String address);
 	
-	List<Person> getAllPersonsByAddress(String address);
+	List<Person> findPersonByAddress(String address);
 	
 	List<PersonDTO> findAllByAddress(String city);
 	
-	@Query(value = "SELECT PERSON.EMAIL from PERSON JOIN PERSON_ADDRESS ON PERSON_ADDRESS.PERSON_PERSON_ID=PERSON.PERSON_ID WHERE city=?1", nativeQuery = true) //?1 premier paramètre soit city.
+	//@Query(value = "SELECT PERSON.EMAIL from PERSON JOIN PERSON_ADDRESS ON PERSON_ADDRESS.PERSON_PERSON_ID=PERSON.PERSON_ID WHERE city=?1", nativeQuery = true) //?1 premier paramètre soit city.
 	List<String> findEmailByCity(String city);
 	
 	

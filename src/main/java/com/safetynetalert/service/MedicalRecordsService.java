@@ -2,18 +2,13 @@ package com.safetynetalert.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import com.fasterxml.jackson.core.sym.Name;
 import com.safetynetalert.model.Allergies;
-import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Medications;
 import com.safetynetalert.model.Person;
@@ -21,9 +16,7 @@ import com.safetynetalert.repository.AllergiesRepository;
 import com.safetynetalert.repository.MedicalRecordsRepository;
 import com.safetynetalert.repository.MedicationsRepository;
 import com.safetynetalert.repository.PersonRepository;
-import com.safetynetalerts.dto.AllergiesDTO;
 import com.safetynetalerts.dto.MedicalRecordsDTO;
-import com.safetynetalerts.dto.MedicationsDTO;
 
 @Service
 @Transactional
@@ -31,6 +24,12 @@ public class MedicalRecordsService {
 
 	@Autowired
 	private MedicalRecordsRepository medicalRecordsRepository; 
+	
+	@Autowired
+	private MedicationsRepository medicationsRepository;
+	
+	@Autowired
+	private AllergiesRepository allergiesRepository;
 	
 	@Autowired
 	private PersonRepository personRepository;
@@ -69,13 +68,15 @@ public class MedicalRecordsService {
 	
 	public MedicalRecords saveNewMedicalRecord(MedicalRecords medicalRecord) {
 		Person person = personRepository.findByFirstNameAndLastName(medicalRecord.getFirstName(), medicalRecord.getLastName());	
+		List<Medications> meds = medicationsRepository.findAll();
+		List<Allergies> allerg = allergiesRepository.findAll();
 		// if person = null; créer une nouvelle personne via une méthode.
 		MedicalRecords mr = new MedicalRecords();
 		mr.setPerson(person);
 		mr.setFirstName(person.getFirstName());
 		mr.setLastName(person.getLastName());
 		mr.setBirthdate(medicalRecord.getBirthdate());
-		mr.setMedications(medicalRecord.getMedications());
+		mr.setMedications(medicalRecord.getMedications());							
 		mr.setAllergies(medicalRecord.getAllergies());
 		return medicalRecordsRepository.save(mr);
 	}

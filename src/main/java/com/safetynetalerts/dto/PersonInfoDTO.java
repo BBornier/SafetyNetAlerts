@@ -9,13 +9,14 @@ import com.safetynetalert.model.Medications;
 
 public class PersonInfoDTO {
 	
+	// Changement de Set d'adresses en String address
 	
 	public PersonInfoDTO() {
 		super();
 	}
 	
 
-	public PersonInfoDTO(String firstName, String lastName, int age, String mail, Set<Address> address,
+	public PersonInfoDTO(String firstName, String lastName, int age, String mail, String address,
 			List<Allergies> allergies, List<Medications> medications) {
 		super();
 		this.firstName = firstName;
@@ -35,7 +36,7 @@ public class PersonInfoDTO {
 	
 	private String mail;
 	
-	private Set<Address> address;
+	private String address;
 	
 	private List<Allergies> allergies;
 	
@@ -80,12 +81,12 @@ public class PersonInfoDTO {
 	}
 
 	
-	public Set<Address> getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
 	
-	public void setAddress(Set<Address> address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 

@@ -11,13 +11,15 @@ public class PersonDTO {
 		super();
 	}
 	
+	// Changement de Sert d'adresses en String address
+	
 	public PersonDTO(String email) {
 		super ();
 		this.email = email;
 	}
 
 	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email,
-			Set<Address> address) {
+			String address) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -29,7 +31,7 @@ public class PersonDTO {
 
 	}
 
-	public PersonDTO(String phoneNumber, String email, Set<Address> address) {
+	public PersonDTO(String phoneNumber, String email, String address) {
 
 		super();
 		this.phoneNumber = phoneNumber;
@@ -48,7 +50,7 @@ public class PersonDTO {
 
 	private String email;
 
-	private Set<Address> address = new HashSet<>();
+	private String address;
 
 	
 	public Long getId() {
@@ -101,12 +103,12 @@ public class PersonDTO {
 	}
 
 	
-	public Set<Address> getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
 	
-	public void setAddress(Set<Address> address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 

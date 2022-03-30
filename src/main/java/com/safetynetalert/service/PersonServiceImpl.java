@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -156,13 +157,12 @@ public class PersonServiceImpl implements IPersonEmail, IPersonInfo, IFirePerson
 	}
 
 	@Override
-	public List<FirePersonDTO> findAllByAddress(String address) {
-		List<Person> person = personRepository.getAllPersonsByAddress(address);
+	public List<FirePersonDTO> findByAddress(String address) {
+		List<Person> person = personRepository.findPersonByAddress(address);
 		List<MedicalRecords> medicalR = medicalRecordsRepository.findAll();
 		
 		List<FirePersonDTO> fireAlertDTO = new ArrayList<>();
 		for(Person p : person) {
-			for(MedicalRecords mr : medicalR) {
 				
 				String birthdate = p.getMedicalRecords().getBirthdate();
 				LocalDate date = DateHelper.convertStringtoDate(birthdate, "MM/dd/yyyy");
@@ -177,8 +177,6 @@ public class PersonServiceImpl implements IPersonEmail, IPersonInfo, IFirePerson
 					fireAlertDTO.add(firePersonDTO);
 			
 			}
-		
-		}
 		return fireAlertDTO;
 	}
 
