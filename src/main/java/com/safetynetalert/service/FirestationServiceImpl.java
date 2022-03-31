@@ -80,6 +80,7 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 	@Override
 	public List<FloodDTO> returnHomesByTheirFirestationNumberDTO(List<String> stationNumber) {
 		Map<String, List<Person>> listFoyers = returnFoyerMap(personRepository.findAll());
+		
 		return null;
 		
 		
