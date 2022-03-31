@@ -3,12 +3,13 @@ package com.safetynetalert.service;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.safetynetalerts.dto.FirePersonDTO;
 
-@Repository
+
 public interface IFirePersonAddress {
 
-	public List<FirePersonDTO> findByAddress(String address);
+	public List<FirePersonDTO> findPeopleByTheirAddress(String address);
 
 }

@@ -3,6 +3,8 @@ package com.safetynetalerts.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+
 import com.safetynetalert.model.Address;
 
 public class PersonDTO {
@@ -10,16 +12,15 @@ public class PersonDTO {
 	public PersonDTO() {
 		super();
 	}
-	
+
 	// Changement de Sert d'adresses en String address
-	
+
 	public PersonDTO(String email) {
-		super ();
+		super();
 		this.email = email;
 	}
 
-	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email,
-			String address) {
+	public PersonDTO(Long id, String firstName, String lastName, String phoneNumber, String email, String address) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -27,7 +28,6 @@ public class PersonDTO {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.address = address;
-		
 
 	}
 
@@ -38,7 +38,6 @@ public class PersonDTO {
 		this.email = email;
 		this.address = address;
 	}
-
 
 	private Long id;
 
@@ -52,65 +51,72 @@ public class PersonDTO {
 
 	private String address;
 
-	
+	private String zip;
+
+	private String city;
+
 	public Long getId() {
 		return id;
 	}
 
-	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	
 	public String getFirstName() {
 		return firstName;
 	}
 
-	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	
 	public String getLastName() {
 		return lastName;
 	}
 
-	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	
 	public String getEmail() {
 		return email;
 	}
 
-	
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	
 	public String getAddress() {
 		return address;
 	}
 
-	
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 }

@@ -24,7 +24,13 @@ public class Person {
 		super();
 	}
 	
-	// Nouveau constructeur pour le jsonHelper avec les paramètres de person sauvegardés // Changement du set d'addresses en String
+	public Person(String city) {
+		super();
+		this.city = city;
+	}
+
+	// Nouveau constructeur pour le jsonHelper avec les paramètres de person
+	// sauvegardés // Changement du set d'addresses en String
 
 	public Person(String firstName, String lastName, String phoneNumber, String email, String address, String zip,
 			String city) {
@@ -37,8 +43,6 @@ public class Person {
 		this.zip = zip;
 		this.city = city;
 	}
-
-
 
 	public Person(String firstName, String lastName, String phoneNumber, String email) {
 		super();

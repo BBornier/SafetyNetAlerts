@@ -20,7 +20,7 @@ public class FireAlertController {
 	
 	@GetMapping("/fire")
 	List<FirePersonDTO> findPersonsLivingInThisAddress(@RequestParam String address) {
-		return personService.findByAddress(address);
+		return personService.findPeopleByTheirAddress(address);
 	}
 
 }
