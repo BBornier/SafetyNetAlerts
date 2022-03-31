@@ -2,13 +2,14 @@ package com.safetynetalert.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.safetynetalert.model.Address;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecords;
 import com.safetynetalert.model.Person;
@@ -66,13 +67,34 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 		return oneFirestation;
 	}
 
+	
+	/*
+	 * http://localhost:8080/flood/stations?stations=<a list of station_numbers>
+	 * Cette url doit retourner une liste de tous les foyers desservis par la
+	 * caserne. Cette liste doit regrouper les personnes par adresse. Elle doit
+	 * aussi inclure le nom, le numéro de téléphone et l'âge des habitants, et faire
+	 * figurer leurs antécédents médicaux (médicaments, posologie et allergies) à
+	 * côté de chaque nom.
+	 */
+
 	@Override
 	public List<FloodDTO> returnHomesByTheirFirestationNumberDTO(List<String> stationNumber) {
-		List<Firestation> firestations = firestationRepository.findByStationNumberIn(stationNumber);
+		Map<String, List<Person>> listFoyers = returnFoyerMap(personRepository.findAll());
+		return null;
+		
+		
+		/*List<Firestation> firestations = firestationRepository.findByStationNumberIn(stationNumber);
+		
+		List<String> address = new ArrayList<>();
 		List<FloodDTO> floods = new ArrayList<FloodDTO>();
 		
 		for(Firestation station : firestations) {
-			for(Address address : station.getAddress()) {
+			
+				
+				
+				address.add(p.getAddress());
+				
+				
 				List<Person> persons = personRepository.findListOfPersonByAddress(address);
 				List<MedicalRecords> mrs = medicalRecordsService.getMedicalrecordsByPersons(persons);
 				List<FloodPersonDTO> fpDTO = getFloodPersonDTOByPersonListAndMrList(persons, mrs);
@@ -84,9 +106,27 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 				
 				floods.add(floodDTO);
 			}
-		}
+		}*/
+	
+	}
+	
+	private Map<String, List<Person>> returnFoyerMap(List<Person> persons) {
 		
-		return floods;
+		Map<String, List<Person>> listFoyers = new HashMap();
+		
+		for(Person p : persons) {
+			List<Person> listPersons = listFoyers.get(p.getAddress());
+			if(listPersons != null) {
+				listPersons.add(p);
+				listFoyers.put(p.getAddress(), listPersons);
+			} else {
+				List<Person> newPersons = new ArrayList<>();
+				newPersons.add(p);
+				listFoyers.put(p.getAddress(), newPersons);
+			}
+			
+		}
+		return listFoyers;
 	}
 
 	public List<FloodPersonDTO> getFloodPersonDTOByPersonListAndMrList(List<Person> personList, List<MedicalRecords> medicalRecordList) {

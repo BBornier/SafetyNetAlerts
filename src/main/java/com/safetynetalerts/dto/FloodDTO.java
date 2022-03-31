@@ -14,7 +14,7 @@ public class FloodDTO {
 
 	private String firestation;
 
-	private Address address;
+	private List<String> address;
 	
 
 	//Parent > enfant // DTO imbriquées.
@@ -28,11 +28,11 @@ public class FloodDTO {
 		this.firestation = firestation;
 	}
 
-	public Address getAddress() {
+	public List<String> getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(List<String> address) {
 		this.address = address;
 	}
 
