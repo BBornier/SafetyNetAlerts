@@ -23,7 +23,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 		
 	List<Person> findAllByFirstNameAndLastName(String firstName, String lastName); 
 	
-	List<Person> findListOfPersonByAddress(List<String> address);
+	//List<Person> findListOfPersonByAddress(List<String> address);
 	
 	List<Person> findByAddress(String address);
 	

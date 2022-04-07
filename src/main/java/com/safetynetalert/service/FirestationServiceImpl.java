@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.collections.iterators.EntrySetMapIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,39 +80,43 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 
 	@Override
 	public List<FloodDTO> returnHomesByTheirFirestationNumberDTO(List<String> stationNumber) {
-		Map<String, List<Person>> listFoyers = returnFoyerMap(personRepository.findAll());
 		
-		return null;
+		//J'instancie une liste de FloodDTO :
 		
-		
-		/*List<Firestation> firestations = firestationRepository.findByStationNumberIn(stationNumber);
-		
-		List<String> address = new ArrayList<>();
+		List<String> addresses = new ArrayList<>();
 		List<FloodDTO> floods = new ArrayList<FloodDTO>();
 		
-		for(Firestation station : firestations) {
+		//Récupérer une liste de foyers (adresses + liste de personnes) : 
+		Map<String, List<Person>> listFoyers = returnHomesMap(personRepository.findAll());
+		
+		//Récupérer les addresses des firestations :
+		List<Firestation> firestations = firestationRepository.findByStationNumberIn(stationNumber);
 			
-				
-				
-				address.add(p.getAddress());
-				
-				
-				List<Person> persons = personRepository.findListOfPersonByAddress(address);
-				List<MedicalRecords> mrs = medicalRecordsService.getMedicalrecordsByPersons(persons);
-				List<FloodPersonDTO> fpDTO = getFloodPersonDTOByPersonListAndMrList(persons, mrs);
-				
-				FloodDTO floodDTO = new FloodDTO();
-				floodDTO.setAddress(address);
-				floodDTO.setFirestation(station.getStationNumber());
-				floodDTO.setFloodPersonDTO(fpDTO);
-				
-				floods.add(floodDTO);
-			}
-		}*/
+		for(Firestation station : firestations) {
 	
-	}
+			List<Person> persons =  listFoyers.get(station.getAddress());
+			//Ce que ça retourne, c'est la liste de personnes ! On stocke dans la variable de List<Person>. 
+
+		
+			List<MedicalRecords> mrs = medicalRecordsService.getMedicalrecordsByPersons(persons);
+			List<FloodPersonDTO> fpDTO = getFloodPersonDTOByPersonListAndMrList(persons, mrs);
+			
+			FloodDTO floodDTO = new FloodDTO();
+			floodDTO.setAddress(addresses);
+			floodDTO.setFirestation(station.getStationNumber());
+			floodDTO.setFloodPersonDTO(fpDTO);
+			
+			floods.add(floodDTO);
+			
+		}
+		
+		
+		return floods;
+		
+		}
 	
-	private Map<String, List<Person>> returnFoyerMap(List<Person> persons) {
+	
+	private Map<String, List<Person>> returnHomesMap(List<Person> persons) {
 		
 		Map<String, List<Person>> listFoyers = new HashMap();
 		
@@ -164,3 +169,30 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 	}
 
 }
+
+
+
+/*List<Firestation> firestations = firestationRepository.findByStationNumberIn(stationNumber);
+
+List<String> address = new ArrayList<>();
+List<FloodDTO> floods = new ArrayList<FloodDTO>();
+
+for(Firestation station : firestations) {
+	
+		
+		
+		address.add(p.getAddress());
+		
+		
+		List<Person> persons = personRepository.findListOfPersonByAddress(address);
+		List<MedicalRecords> mrs = medicalRecordsService.getMedicalrecordsByPersons(persons);
+		List<FloodPersonDTO> fpDTO = getFloodPersonDTOByPersonListAndMrList(persons, mrs);
+		
+		FloodDTO floodDTO = new FloodDTO();
+		floodDTO.setAddress(address);
+		floodDTO.setFirestation(station.getStationNumber());
+		floodDTO.setFloodPersonDTO(fpDTO);
+		
+		floods.add(floodDTO);
+	}
+}*/
