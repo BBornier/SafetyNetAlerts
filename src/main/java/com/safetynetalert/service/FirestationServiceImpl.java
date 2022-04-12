@@ -93,7 +93,7 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 		List<Firestation> firestations = firestationRepository.findByStationNumberIn(stationNumber);
 			
 		for(Firestation station : firestations) {
-	
+			//for(String address : station.getAddresses()) { // où alimenter les addresses
 			List<Person> persons =  listFoyers.get(station.getAddress());
 			//Ce que ça retourne, c'est la liste de personnes ! On stocke dans la variable de List<Person>. 
 
@@ -107,6 +107,8 @@ public class FirestationServiceImpl implements IFlood, IPersonInfo {
 			floodDTO.setFloodPersonDTO(fpDTO);
 			
 			floods.add(floodDTO);
+			
+			//}
 			
 		}
 		

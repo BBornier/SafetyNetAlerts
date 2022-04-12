@@ -8,7 +8,9 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -94,18 +96,34 @@ public class JsonHelper {
 
 		JSONObject jsonObject = JsonHelper.readJsonFromUrl(JsonHelper.URL);
 		JSONArray jsonArray = jsonObject.getJSONArray("firestations");
-
+		//List<Firestation> ft = new ArrayList<>();
+		HashMap<Firestation, List<String>> stationMap = new HashMap<>();
+		
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObj = jsonArray.getJSONObject(i);
+			Firestation firestation = new Firestation(jsonObj.getString("station"));
 			
-			Firestation firestation = new Firestation(jsonObj.getString("address"), jsonObj.getString("station"));
-			//Address address = new Address(jsonObj.getString("address"));
+			String stationNumber = jsonObj.getString("station");
 			
-			//firestation.getAddress().add(address);
+			for(Map.Entry<Firestation, List<String>> entry : stationMap.entrySet()) {
+				if(entry.getKey().getStationNumber().equals(stationNumber)) {
+					stationMap.get(entry).add(jsonObj.getString("address"));
+				}
+			}
+			
+			if(stationMap.containsKey(firestation)) {
+				
+			} else {
+				List<String> addresses = new ArrayList<>();
+				addresses.add(jsonObj.getString("address"));
+				stationMap.put(firestation, addresses);
+			}
+
+
 			firestationService.saveFirestation(firestation);
 			//LOGGER.info("firestation is here: " + firestation);
 		}
-
+	
 	}
 
 	public List<MedicalRecords> parseJsonMedicalRecordsFromUrl() throws JSONException, IOException {

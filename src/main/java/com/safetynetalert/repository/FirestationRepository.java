@@ -15,5 +15,7 @@ public interface FirestationRepository extends JpaRepository<Firestation, Long> 
 	Firestation findByStationNumber(String stationNumber);
 	
 	List<Firestation> findByStationNumberIn(List<String> stationNumber);
+	
+	
 
 }

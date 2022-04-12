@@ -1,6 +1,7 @@
 package com.safetynetalert.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -23,12 +24,8 @@ public class Firestation {
 		super();
 	}
 
-	public Firestation(String address, String stationNumber) {
-		super();
-		this.address = address;
-		this.stationNumber = stationNumber;
-	}
 
+	
 	public Firestation(String stationNumber) {
 		super();
 		this.stationNumber = stationNumber;
@@ -42,8 +39,8 @@ public class Firestation {
 	 * @ElementCollection private Set<Address> address = new HashSet<>();
 	 */
 
-	@Column(name = "address")
-	private String address;
+	@Column(name = "addresses")
+	private List<String> addresses;
 
 	@Column(name = "station_number")
 	private String stationNumber;
@@ -56,12 +53,12 @@ public class Firestation {
 		this.firestationId = firestationId;
 	}
 
-	public String getAddress() {
-		return address;
+	public List<String> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddresses(List<String> addresses) {
+		this.addresses = addresses;
 	}
 
 	public String getStationNumber() {
@@ -74,7 +71,7 @@ public class Firestation {
 
 	@Override
 	public String toString() {
-		return "Firestation [firestationId=" + firestationId + ", address=" + address + ", stationNumber="
+		return "Firestation [firestationId=" + firestationId + ", stationNumber="
 				+ stationNumber + "]";
 	}
 
